@@ -20,7 +20,7 @@ export default function Login() {
         setLoading(true)
         signIn('credentials', {
           redirect: false,
-          email: e.currentTarget.email.value,
+          username: e.currentTarget.username.value,
           password: e.currentTarget.password.value
           // @ts-ignore
         }).then(({ error }) => {
@@ -36,22 +36,22 @@ export default function Login() {
     >
       <div className='flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-2 flex-col'>
         <label
-          htmlFor='email'
+          htmlFor='username'
           className='block text-xs text-light-onSurface dark:text-dark-onSurface uppercase'
         >
-          Correo electrónico
+          Nombre de usuario
         </label>
         <Input
-          id='email'
-          name='email'
+          id='username'
+          name='username'
           size='sm'
           isRequired
-          type='email'
-          autoComplete='email'
-          placeholder='correo@ejemplo.com'
+          type='text'
+          autoComplete='username'
+          placeholder='Escribe tu nombre de usuario'
           endContent={
             <Icon
-              icon='mdi:email'
+              icon='mdi:user'
               width='28'
               height='28'
               className='text-2xl text-default-400 pointer-events-none flex-shrink-0'
@@ -123,30 +123,16 @@ export default function Login() {
             </div>
           )}
         </button>
-
-        <button
-          className={`${
-            loading
-              ? 'cursor-not-allowed border-light-outlineVariant dark:border-dark-outlineVariant'
-              : 'w-fit border-light-outlineVariant dark:border-dark-outlineVariant bg-light-surface text-light-primary hover:bg-dark-surfaceVariant hover:text-dark-primary'
-          } min-w-[197px] w-fit h-10 bg-light-surface hover:bg-light-surfaceVariant hover:text-dark-primary rounded-[100px] shadow flex-col justify-center items-center gap-2 inline-flex`}
-        >
-          {loading ? (
-            <Icon
-              icon='eos-icons:bubble-loading'
-              height={18}
-              width={18}
-              color='#41484f'
-            />
-          ) : (
-            <div className='self-stretch grow shrink basis-0 pl-4 pr-6 py-2.5 justify-center items-center gap-2 inline-flex'>
-              <Icon icon='logos:google-icon' height={18} width={18} />
-              <div className='text-center text-sm font-medium leading-tight tracking-tight'>
-                Ingresar con Google
-              </div>
-            </div>
-          )}
-        </button>
+        <p className='text-center text-sm text-light-onSurface dark:text-dark-onSurface'>
+          No tienes cuenta? {''}
+          <Link
+            href='/demo'
+            className='font-semibold text-light-primary dark:text-dark-primary'
+          >
+            Solicita una demo
+          </Link>{' '}
+          gratis.
+        </p>
       </div>
     </form>
   )

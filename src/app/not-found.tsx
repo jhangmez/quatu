@@ -31,7 +31,7 @@ export default function NotFound() {
                   href='/'
                   as={Link}
                   className='text-light-primary dark:text-dark-primary bg-light-onPrimary dark:bg-dark-onPrimary'
-                  variant='bordered'
+                  variant='flat'
                 >
                   Retornar
                 </Button>

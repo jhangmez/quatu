@@ -1,17 +1,18 @@
 'use client'
 
 import Form from '@components/Form'
-import Link from 'next/link'
+import { Link } from '@nextui-org/link'
 import { Icon } from '@iconify/react'
+import { VercelHarkaysoft } from '@routes'
 
 export default function Login() {
   return (
     <main className='flex flex-col md:flex-row-reverse md:h-screen bg-light-surface dark:bg-dark-surface h-screen'>
       <section className='flex items-start w-full px-4 mx-auto md:px-0 md:items-center md:w-1/3'>
-        <div className=' relative md:-left-2 bg-light-surface dark:bg-dark-surface pt-5 py-5'>
+        <div className=' relative md:-left-2 bg-light-surface dark:bg-dark-surface py-5'>
           <Link
             href='/'
-            className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'
+            className='w-fit h-14 justify-start items-center gap-[5px] inline-flex lg:pb-10 sm:pb-4'
           >
             <Icon
               icon='material-symbols:store'
@@ -21,13 +22,30 @@ export default function Login() {
             />
             <div>
               <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-                ronal
+                tu
               </span>
               <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
-                Tienda
+                Ti
               </span>
             </div>
           </Link>
+          <div className='md:flex items-start'>
+            <section className='w-fit h-8 justify-start items-center gap-[5px] inline-flex'>
+              <span className='self-center whitespace-nowrapont-semibold dark:text-white'>
+                by{' '}
+              </span>
+              <Link
+                href={VercelHarkaysoft}
+                className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'
+              >
+                Harkay
+                <span className='text-2xl text-[0.8em] font-normal'>
+                  {' '}
+                  S O F T
+                </span>
+              </Link>
+            </section>
+          </div>
         </div>
       </section>
       <section className='justify-center px-4 md:px-0 md:flex md:w-2/3 md:border-r'>
@@ -36,7 +54,7 @@ export default function Login() {
             Ingresar
           </h2>
           <p className='text-sm text-light-onSurface dark:text-dark-onSurface pb-2'>
-            Usa tu correo electrónico y contraseña para ingresar.
+            Usa tu nombre de usuario y contraseña para ingresar.
           </p>
 
           <Form type='login' />

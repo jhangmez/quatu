@@ -156,9 +156,9 @@ export default function LayoutHome({
                         name={data?.me?.name || ''}
                         description={
                           <>
-                            {data?.me?.email}
+                            @{data?.me?.username}
                             <br />
-                            Ronal tienda
+                            {data?.me?.company?.name}
                           </>
                         }
                         avatarProps={{

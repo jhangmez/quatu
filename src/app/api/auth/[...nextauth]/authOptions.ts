@@ -12,12 +12,12 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { label: 'Email', type: 'email' },
+        username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        const { email, password } = credentials ?? {}
-        if (!email || !password) {
+        const { username, password } = credentials ?? {}
+        if (!username || !password) {
           throw new Error('Falta nombre de usuario o contraseña')
         }
 
@@ -29,20 +29,20 @@ export const authOptions: NextAuthOptions = {
         }
         const response = await axios.post(graphqlUrl, {
           query: `
-      mutation Login($loginEmail: String!, $loginPassword: String!) {
-        login(email: $loginEmail, password: $loginPassword) {
-          token
-          user {
-            id
-            name
-            email
+          mutation Login($username: String!, $password: String!) {
+            login(username: $username, password: $password) {
+              token
+              user {
+                id
+                name
+                username
+              }
+            }
           }
-        }
-      }
     `,
           variables: {
-            loginEmail: email,
-            loginPassword: password
+            username: username,
+            password: password
           }
         })
 
@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
         }
         if (data.data.login) {
           return {
-            email: data.data.login.user.email,
+            username: data.data.login.user.username,
             name: data.data.login.user.name,
             id: data.data.login.user.id,
             accessToken: data.data.login.token

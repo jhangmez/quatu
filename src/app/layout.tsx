@@ -9,8 +9,8 @@ import { Suspense } from 'react'
 
 const myFont = localFont({ src: './LexendDeca-VariableFont_wght.ttf' })
 
-const title = 'Ronal | Tienda virtual'
-const description = 'Tienda virtual'
+const title = 'tuTi | Tu tienda virtual'
+const description = 'Tu tienda virtual'
 
 export const metadata: Metadata = {
   title,

@@ -13,7 +13,6 @@ import {
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
 import { Icon } from '@iconify/react'
-import { Input } from '@nextui-org/input'
 import {
   Dropdown,
   DropdownTrigger,
@@ -50,10 +49,10 @@ export default function Header() {
             className='text-light-onSurface dark:text-dark-onSurface'
           />
           <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-            ronal
+            tu
           </span>
           <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
-            Tienda
+            Ti
           </span>
         </NavbarBrand>
       </NavbarContent>
@@ -138,27 +137,31 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify='end'>
+        <NavbarItem className='hidden lg:flex'>
+          <Link
+            className='text-light-primary dark:text-dark-primary'
+            href='/login'
+          >
+            Ingresar
+          </Link>
+        </NavbarItem>
+        <NavbarItem className='flex lg:hidden'>
+          <Link
+            className='text-light-primary dark:text-dark-primary'
+            href='/login'
+          >
+            <Icon icon='mdi:arrow-collapse-right' height={22} width={22} />
+          </Link>
+        </NavbarItem>
         <NavbarItem>
-          <Input
-            classNames={{
-              base: 'max-w-full sm:max-w-[10rem] h-10',
-              mainWrapper: 'h-full',
-              input: 'text-small',
-              inputWrapper:
-                'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20'
-            }}
-            placeholder='Buscar...'
-            size='sm'
-            startContent={
-              <Icon
-                icon='mdi:magnify'
-                width='18'
-                height='18'
-                className='text-light-onSurface dark:text-dark-onSurface'
-              />
-            }
-            type='search'
-          />
+          <Button
+            as={Link}
+            className='bg-light-primary dark:bg-dark-primary text-light-onPrimary dark:text-dark-onPrimary'
+            href='/demo'
+            variant='flat'
+          >
+            Demo
+          </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

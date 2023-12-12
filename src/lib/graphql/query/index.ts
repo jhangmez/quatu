@@ -5,10 +5,13 @@ export const Myself = gql(/* GraphQL */ `
     me {
       id
       name
-      email
+      username
       profile {
         id
         bio
+      }
+      company {
+        name
       }
     }
   }
