@@ -125,7 +125,6 @@ export default function Header() {
               <DropdownMenu aria-label='Profile Actions' variant='flat'>
                 <DropdownItem className='h-14 gap-2'>
                   <p className='font-semibold'>Ingresado como</p>
-                  <p className='font-semibold'>{data?.me?.email}</p>
                 </DropdownItem>
                 <DropdownItem key='configurations'>
                   Configuraciones

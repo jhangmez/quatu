@@ -4,7 +4,6 @@ import './globals.css'
 import { Providers } from './providers'
 import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from 'react-hot-toast'
-import AuthStatus from '@components/Auth/auth-status'
 import { Suspense } from 'react'
 
 const myFont = localFont({ src: './LexendDeca-VariableFont_wght.ttf' })
