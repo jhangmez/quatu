@@ -36,13 +36,18 @@ export default function Login() {
               </span>
               <Link
                 href={VercelHarkaysoft}
-                className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'
+                className='hover:underline'
+                target='_blank'
               >
-                Harkay
-                <span className='text-2xl text-[0.8em] font-normal'>
-                  {' '}
-                  S O F T
-                </span>
+                <div>
+                  <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
+                    Harkay
+                    <span className='text-2xl text-[0.8em] font-normal'>
+                      {' '}
+                      S O F T
+                    </span>
+                  </span>
+                </div>
               </Link>
             </section>
           </div>

@@ -34,8 +34,6 @@ export const authOptions: NextAuthOptions = {
               token
               user {
                 id
-                name
-                username
               }
             }
           }
@@ -53,8 +51,6 @@ export const authOptions: NextAuthOptions = {
         }
         if (data.data.login) {
           return {
-            username: data.data.login.user.username,
-            name: data.data.login.user.name,
             id: data.data.login.user.id,
             accessToken: data.data.login.token
           }

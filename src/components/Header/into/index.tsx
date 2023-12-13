@@ -8,42 +8,32 @@ import {
   NavbarMenuItem,
   NavbarMenu,
   NavbarContent,
-  NavbarItem,
   Link,
-  Input,
   DropdownItem,
   DropdownTrigger,
   Dropdown,
-  DropdownMenu,
-  Avatar
+  DropdownMenu
 } from '@nextui-org/react'
-import { Icon } from '@iconify/react'
+import { User } from '@nextui-org/user'
 import { Skeleton } from '@nextui-org/skeleton'
 import { useQuery } from '@apollo/client'
 import { Myself } from '@lib/graphql/query'
 import { signOut } from 'next-auth/react'
-import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { loading, error, data, refetch } = useQuery(Myself)
 
-  const menuItems = [
-    'Profile',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out'
-  ]
+  const menuItems = ['Agregar Producto', 'Agregar categoria']
 
   return (
     <Navbar
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className='bg-light-onTertiary dark:bg-dark-onTertiary'
+      className='bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface flex lg:hidden md:hidden'
     >
-      <NavbarContent className='sm:hidden' justify='start'>
+      <NavbarContent className='' justify='start'>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         />
@@ -51,22 +41,14 @@ export default function Header() {
 
       <NavbarContent className='sm:hidden pr-3' justify='center'>
         <NavbarBrand>
-          <Link
-            href='/home'
-            className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'
-          >
-            <Icon
-              icon='icon-park-outline:sport'
-              width='28'
-              height='28'
-              className='text-light-onSurface dark:text-dark-onSurface'
-            />
+          <Link className='hover:underline' target='_blank'>
             <div>
-              <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-                In
-              </span>
-              <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
-                Deportiva
+              <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
+                Harkay
+                <span className='text-2xl text-[0.8em] font-normal'>
+                  {' '}
+                  S O F T
+                </span>
               </span>
             </div>
           </Link>
@@ -75,22 +57,14 @@ export default function Header() {
 
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         <NavbarBrand>
-          <Link
-            href='/home'
-            className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'
-          >
-            <Icon
-              icon='icon-park-outline:sport'
-              width='28'
-              height='28'
-              className='text-light-onSurface dark:text-dark-onSurface'
-            />
+          <Link className='hover:underline' target='_blank'>
             <div>
-              <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-                In
-              </span>
-              <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
-                Deportiva
+              <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
+                Harkay
+                <span className='text-2xl text-[0.8em] font-normal'>
+                  {' '}
+                  S O F T
+                </span>
               </span>
             </div>
           </Link>
@@ -112,19 +86,20 @@ export default function Header() {
           <>
             <Dropdown placement='bottom-end'>
               <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as='button'
-                  showFallback
-                  className='transition-transform'
+                <User
                   name={data?.me?.name || ''}
-                  size='sm'
-                  src='/user_picture.jpg'
+                  avatarProps={{
+                    src: '/user_picture.jpg',
+                    size: 'sm'
+                  }}
                 />
               </DropdownTrigger>
               <DropdownMenu aria-label='Profile Actions' variant='flat'>
                 <DropdownItem className='h-14 gap-2'>
                   <p className='font-semibold'>Ingresado como</p>
+                  <p>
+                    @{data?.me?.username} - {data?.me?.company?.name}
+                  </p>
                 </DropdownItem>
                 <DropdownItem key='configurations'>
                   Configuraciones
@@ -151,13 +126,14 @@ export default function Header() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               className='w-full'
-              color={
-                index === 2
-                  ? 'warning'
-                  : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
-              }
+              // color={
+              //   index === 2
+              //     ? 'warning'
+              //     : index === menuItems.length - 1
+              //     ? 'danger'
+              //     : 'foreground'
+              // }
+              color='foreground'
               href='#'
               size='lg'
             >

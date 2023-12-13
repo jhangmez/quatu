@@ -3,9 +3,8 @@
 import Header from '@components/Header/into'
 import { Listbox, ListboxItem } from '@nextui-org/react'
 import { Link } from '@nextui-org/link'
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
 import { usePathname } from 'next/navigation'
-import { useSession, getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { User } from '@nextui-org/user'
 import { Icon } from '@iconify/react'
 import { Spinner } from '@nextui-org/react'
@@ -17,7 +16,6 @@ import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
-  DropdownSection,
   DropdownItem
 } from '@nextui-org/dropdown'
 
@@ -83,32 +81,10 @@ export default function LayoutHome({
   }
   return (
     <main>
-      {/* <Header /> */}
-      {/* <div className='flex'>
-        <aside className='h-screen lg:max-w-[20%] md:max-w-[25%] max-w-[30%] bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface'>
-          <Listbox className=''>
-            <ListboxItem key='home' href='/producto'>
-              Agregar producto
-            </ListboxItem>
-            <ListboxItem key='about' href='/categoria'>
-              Agregar categoriaaaaaaaaaaaaaaaaaaaaaaaaa
-            </ListboxItem>
-            <ListboxItem key='user' className=''>
-              <User
-                name='Jane Doe'
-                description='Product Designer'
-                avatarProps={{
-                  src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
-                }}
-              />
-            </ListboxItem>
-          </Listbox>
-        </aside>
+      <Header />
 
-        <div className='w-full p-4'>{children}</div>
-      </div> */}
       <div className='flex dark:bg-dark-inverseSurface'>
-        <aside className='flex h-screen lg:w-[15%] md:w-[25%] w-[45%] flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface'>
+        <aside className='flex h-screen lg:w-[15%] md:w-[25%] w-[45%] flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>
           <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>
             <section className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'>
               <div>
