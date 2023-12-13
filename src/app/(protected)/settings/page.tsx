@@ -57,7 +57,7 @@ export default function Home() {
                   <p>Nombre: {data?.me?.name}</p>
                   <p>Tienes Permisos de {data?.me?.typeuser?.name}</p>
                   <p>Tienes permisos como:</p>
-                  <p>"AGREGAR LOS PERMISOS SEGUN CADA USUARIO"</p>
+                  <p>AGREGAR LOS PERMISOS SEGUN CADA USUARIO</p>
                 </CardBody>
               </Card>
               <Card className='w-full h-fit'>
