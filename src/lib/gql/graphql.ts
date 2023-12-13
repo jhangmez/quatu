@@ -26,10 +26,10 @@ export type AuthPayload = {
 
 export type Company = {
   __typename?: 'Company';
-  Suscription: Scalars['Int']['output'];
   email: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+  suscription?: Maybe<Suscription>;
 };
 
 export type CompanyName = {
@@ -40,10 +40,10 @@ export type CompanyName = {
 export type Mutation = {
   __typename?: 'Mutation';
   addProfileForUser?: Maybe<Profile>;
+  createAdmin?: Maybe<AuthPayload>;
   deletePost?: Maybe<Post>;
   incrementPostViewCount?: Maybe<Post>;
   login?: Maybe<AuthPayload>;
-  signup?: Maybe<AuthPayload>;
   togglePublishPost?: Maybe<Post>;
 };
 
@@ -51,6 +51,15 @@ export type Mutation = {
 export type MutationAddProfileForUserArgs = {
   bio?: InputMaybe<Scalars['String']['input']>;
   userUniqueInput: UserUniqueInput;
+};
+
+
+export type MutationCreateAdminArgs = {
+  companyId: Scalars['Int']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  password: Scalars['String']['input'];
+  typeUserID: Scalars['Int']['input'];
+  username: Scalars['String']['input'];
 };
 
 
@@ -65,14 +74,6 @@ export type MutationIncrementPostViewCountArgs = {
 
 
 export type MutationLoginArgs = {
-  password: Scalars['String']['input'];
-  username: Scalars['String']['input'];
-};
-
-
-export type MutationSignupArgs = {
-  companyId: Scalars['Int']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
 };
@@ -114,6 +115,7 @@ export type Query = {
   allUsers: Array<User>;
   feed: Array<Post>;
   getCompanyName?: Maybe<CompanyName>;
+  getSuscriptionCompany?: Maybe<SuscriptionbyCompany>;
   me?: Maybe<User>;
   postById?: Maybe<Post>;
 };
@@ -132,6 +134,11 @@ export type QueryGetCompanyNameArgs = {
 };
 
 
+export type QueryGetSuscriptionCompanyArgs = {
+  companyId: Scalars['Int']['input'];
+};
+
+
 export type QueryPostByIdArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -141,18 +148,35 @@ export enum SortOrder {
   Desc = 'desc'
 }
 
+export type Status = {
+  __typename?: 'Status';
+  status: Scalars['Boolean']['output'];
+};
+
 export type Suscription = {
   __typename?: 'Suscription';
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
 };
 
+export type SuscriptionbyCompany = {
+  __typename?: 'SuscriptionbyCompany';
+  name: Scalars['String']['output'];
+};
+
+export type TypeUser = {
+  __typename?: 'TypeUser';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type User = {
   __typename?: 'User';
-  company?: Maybe<CompanyName>;
+  company?: Maybe<Company>;
   id: Scalars['Int']['output'];
   name?: Maybe<Scalars['String']['output']>;
   profile?: Maybe<Profile>;
+  typeuser?: Maybe<TypeUser>;
   username: Scalars['String']['output'];
 };
 
@@ -161,10 +185,19 @@ export type UserUniqueInput = {
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type LoginMutationVariables = Exact<{
+  username: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'AuthPayload', token?: string | null } | null };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, name?: string | null, username: string, profile?: { __typename?: 'Profile', id: number, bio?: string | null } | null, company?: { __typename?: 'CompanyName', name: string } | null } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'User', id: number, name?: string | null, username: string, company?: { __typename?: 'Company', id: number, name: string, suscription?: { __typename?: 'Suscription', name: string } | null } | null, typeuser?: { __typename?: 'TypeUser', id: number, name: string } | null } | null };
 
 
-export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}}]}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"company"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"suscription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"typeuser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;

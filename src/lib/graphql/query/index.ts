@@ -6,11 +6,15 @@ export const Myself = gql(/* GraphQL */ `
       id
       name
       username
-      profile {
-        id
-        bio
-      }
       company {
+        id
+        name
+        suscription {
+          name
+        }
+      }
+      typeuser {
+        id
         name
       }
     }

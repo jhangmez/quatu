@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query Me {\n    me {\n      id\n      name\n      username\n      profile {\n        id\n        bio\n      }\n      company {\n        name\n      }\n    }\n  }\n": types.MeDocument,
+    "\n  mutation Login($username: String!, $password: String!) {\n  login(username: $username, password: $password) {\n    token\n  }\n}\n": types.LoginDocument,
+    "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n      username\n      profile {\n        id\n        bio\n      }\n      company {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query Me {\n    me {\n      id\n      name\n      username\n      profile {\n        id\n        bio\n      }\n      company {\n        name\n      }\n    }\n  }\n"];
+export function gql(source: "\n  mutation Login($username: String!, $password: String!) {\n  login(username: $username, password: $password) {\n    token\n  }\n}\n"): (typeof documents)["\n  mutation Login($username: String!, $password: String!) {\n  login(username: $username, password: $password) {\n    token\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -155,7 +155,7 @@ export default function LayoutHome({
                       @{data?.me?.username} - {data?.me?.company?.name}
                     </p>
                   </DropdownItem>
-                  <DropdownItem key='configurations'>
+                  <DropdownItem key='configurations' href='/settings'>
                     Configuraciones
                   </DropdownItem>
                   <DropdownItem key='help_and_feedback'>
@@ -267,7 +267,7 @@ export default function LayoutHome({
                       />
                     </DropdownTrigger>
                     <DropdownMenu aria-label='Static Actions'>
-                      <DropdownItem key='configurations'>
+                      <DropdownItem key='configurations' href='/settings'>
                         Configuraciones
                       </DropdownItem>
                       <DropdownItem key='help_and_feedback'>
