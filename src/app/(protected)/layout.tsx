@@ -74,7 +74,12 @@ export default function LayoutHome({
           <p className='text-light-onErrorContainer dark:text-dark-onErrorContainer mt-4'>
             Acceso Denegado.
           </p>
-          <Link href='/login'>Ingresar</Link>
+          <Link
+            className='text-light-primary dark:text-dark-primary'
+            href='/login'
+          >
+            Ingresar
+          </Link>
         </div>
       </div>
     )
@@ -82,7 +87,6 @@ export default function LayoutHome({
   return (
     <main>
       <Header />
-
       <div className='flex dark:bg-dark-inverseSurface'>
         <aside className='flex h-screen lg:w-[15%] md:w-[25%] w-[45%] flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>
           <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>

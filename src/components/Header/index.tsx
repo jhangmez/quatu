@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import {
   Navbar,
   NavbarBrand,
@@ -19,15 +19,21 @@ import {
   DropdownMenu,
   DropdownItem
 } from '@nextui-org/dropdown'
+import { isLogin } from '@utils/authLink'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const menuItems = [
-    'Categorías',
-    'Ayuda & Feedback',
-    'Contactar con HarkaySoft'
-  ]
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    isLogin().then(setIsLoggedIn)
+  }, [])
+
+  const menuItems = useMemo(
+    () => ['Categorías', 'Ayuda & Feedback', 'Contactar con HarkaySoft'],
+    []
+  )
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -140,7 +146,7 @@ export default function Header() {
         <NavbarItem className='hidden lg:flex'>
           <Link
             className='text-light-primary dark:text-dark-primary'
-            href='/login'
+            href={isLoggedIn ? '/home' : '/login'}
           >
             Ingresar
           </Link>
@@ -148,7 +154,7 @@ export default function Header() {
         <NavbarItem className='flex lg:hidden'>
           <Link
             className='text-light-primary dark:text-dark-primary'
-            href='/login'
+            href={isLoggedIn ? '/home' : '/login'}
           >
             <Icon icon='mdi:arrow-collapse-right' height={22} width={22} />
           </Link>

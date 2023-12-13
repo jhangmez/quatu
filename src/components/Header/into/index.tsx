@@ -1,30 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem
+} from '@nextui-org/dropdown'
 import {
   Navbar,
   NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenuItem,
-  NavbarMenu,
   NavbarContent,
-  Link,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu
-} from '@nextui-org/react'
-import { User } from '@nextui-org/user'
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem
+} from '@nextui-org/navbar'
+import { Link } from '@nextui-org/link'
 import { Skeleton } from '@nextui-org/skeleton'
 import { useQuery } from '@apollo/client'
 import { Myself } from '@lib/graphql/query'
 import { signOut } from 'next-auth/react'
+import { Avatar } from '@nextui-org/avatar'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { loading, error, data, refetch } = useQuery(Myself)
 
-  const menuItems = ['Agregar Producto', 'Agregar categoria']
+  const menuItems = useMemo(() => ['Agregar Producto', 'Agregar categoria'], [])
 
   return (
     <Navbar
@@ -86,18 +88,21 @@ export default function Header() {
           <>
             <Dropdown placement='bottom-end'>
               <DropdownTrigger>
-                <User
+                <Avatar
+                  isBordered
+                  as='button'
+                  showFallback
+                  className='transition-transform'
                   name={data?.me?.name || ''}
-                  avatarProps={{
-                    src: '/user_picture.jpg',
-                    size: 'sm'
-                  }}
+                  size='sm'
+                  src='/user_picture.jpg'
                 />
               </DropdownTrigger>
               <DropdownMenu aria-label='Profile Actions' variant='flat'>
-                <DropdownItem className='h-14 gap-2'>
+                <DropdownItem className='h-16 gap-2'>
                   <p className='font-semibold'>Ingresado como</p>
-                  <p>
+                  <p>{data?.me?.name || ''}</p>
+                  <p className='text-sm text-light-onPrimaryFixed'>
                     @{data?.me?.username} - {data?.me?.company?.name}
                   </p>
                 </DropdownItem>
