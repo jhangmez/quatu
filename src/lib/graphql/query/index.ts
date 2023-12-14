@@ -20,3 +20,24 @@ export const Myself = gql(/* GraphQL */ `
     }
   }
 `)
+
+export const AllUsers = gql(`
+query AllUsers {
+  allUsers {
+    id
+    name
+    typeuser {
+      id
+      name
+    }
+  }
+}
+`)
+
+export const AllTypeUsers = gql(`
+query AllTypeUser {
+  allTypeUser {
+    id
+    name
+  }
+}`)

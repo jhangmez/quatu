@@ -16,3 +16,11 @@ mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
   }
 }
 `)
+
+export const RootChangePassword = gql(`
+mutation RootchangePassword($idUser: Int!, $newPassword: String!) {
+  rootchangePassword(idUser: $idUser, newPassword: $newPassword) {
+    message
+    status
+  }
+}`)

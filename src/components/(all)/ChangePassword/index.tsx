@@ -8,6 +8,7 @@ import { Button } from '@nextui-org/button'
 import { ChangePassword } from '@lib/graphql/mutation'
 import { Input } from '@nextui-org/input'
 import { Icon } from '@iconify/react'
+import { Spinner } from '@nextui-org/spinner'
 import { toast } from 'react-hot-toast'
 import { FormData } from './types'
 
@@ -151,9 +152,11 @@ export default function Home() {
           <Button
             className='bg-light-primary text-light-onPrimary'
             type='submit'
-            isDisabled={!dataINITIAL.newPassword || !dataINITIAL.oldPassword}
+            isDisabled={
+              !dataINITIAL.newPassword || !dataINITIAL.oldPassword || status
+            }
           >
-            Cambiar
+            {status ? <Spinner /> : 'Cambiar'}
           </Button>
         </CardFooter>
       </Card>
