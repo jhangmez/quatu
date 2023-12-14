@@ -109,7 +109,7 @@ export default function LayoutHome({
 
         <NavbarContent className=' pr-3' justify='center'>
           <NavbarBrand>
-            <Link className='hover:underline' target='_blank'>
+            <Link className='hover:underline' href='/home'>
               <div>
                 <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
                   Harkay
@@ -204,8 +204,8 @@ export default function LayoutHome({
         </NavbarMenu>
       </Navbar>
 
-      <div className='flex dark:bg-dark-inverseSurface'>
-        <aside className='flex h-screen lg:w-[15%] md:w-[25%] w-[45%] flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>
+      <div className='flex h-screen dark:bg-dark-inverseSurface'>
+        <aside className='flex h-full lg:w-2/12 md:w-4/12 w-1/12 flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>
           <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>
             <section className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'>
               <div>

@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { useMutation } from '@apollo/client'
 import axios from 'axios'
 
 export async function POST(req: Request) {

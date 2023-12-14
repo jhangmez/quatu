@@ -6,6 +6,7 @@ import { Skeleton } from '@nextui-org/skeleton'
 import { Divider } from '@nextui-org/divider'
 import { useQuery } from '@apollo/client'
 import { Myself } from '@lib/graphql/query'
+import ChangePassword from '@components/ChangePassword'
 
 export default function Home() {
   const { loading, error, data, refetch } = useQuery(Myself)
@@ -14,7 +15,7 @@ export default function Home() {
     <>
       <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3'>
         <h2 className='text-4xl mb-3'>Configuraciones</h2>
-        <section className='flex flex-col gap-5'>
+        <section className='flex flex-col gap-5 '>
           {loading ? (
             <>
               <Card className='w-auto h-fit' radius='lg'>
@@ -55,14 +56,16 @@ export default function Home() {
                 <Divider />
                 <CardBody>
                   <p>Nombre: {data?.me?.name}</p>
+                  <p>Nombre de usuario: @{data?.me?.username}</p>
                   <p>Tienes Permisos de {data?.me?.typeuser?.name}</p>
                   <p>Tienes permisos como:</p>
                   <p>AGREGAR LOS PERMISOS SEGUN CADA USUARIO</p>
                 </CardBody>
               </Card>
-              <Card className='w-full h-fit'>
+              <ChangePassword />
+              <Card className='w-full h-fit border border-light-error mb-5'>
                 <CardHeader className='text-2xl text-light-error'>
-                  Danger zone
+                  Zona Peligrosa
                 </CardHeader>
                 <Divider />
                 <CardBody>
@@ -72,13 +75,15 @@ export default function Home() {
                       Luego de cancelar su suscripcion usted tendra 7 dias para
                       descargar todo su contenido subido a la plataforma de tuTi
                     </p>
-                    <Button className='bg-light-error text-light-onError'>
-                      Cancelar Suscripcion
-                    </Button>
+                    <p>Esta accion es irrevocable</p>
                   </div>
                 </CardBody>
                 <Divider />
-                <CardFooter>Esta accion es irrevocable</CardFooter>
+                <CardFooter>
+                  <Button className='bg-light-error text-light-onError'>
+                    Cancelar Suscripcion
+                  </Button>
+                </CardFooter>
               </Card>
             </>
           )}
