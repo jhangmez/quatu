@@ -100,6 +100,7 @@ export default function Home() {
               {(typeUsersData?.allTypeUser ?? []).map(
                 (typeUser, index, array) => (
                   <SelectSection
+                    key={`${typeUser.id}-`}
                     showDivider={index !== array.length - 1}
                     title={typeUser.name}
                   >
