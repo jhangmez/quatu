@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react'
 import { Link } from '@nextui-org/link'
 import { useSession } from 'next-auth/react'
@@ -92,6 +92,7 @@ export default function LayoutHome({
       </div>
     )
   }
+
   return (
     <main>
       <Navbar
@@ -147,7 +148,7 @@ export default function LayoutHome({
                     src='/user_picture.jpg'
                   />
                 </DropdownTrigger>
-                <DropdownMenu aria-label='Profile Actions' variant='flat'>
+                <DropdownMenu aria-label='Navigation' variant='flat'>
                   <DropdownItem className='h-16 gap-2'>
                     <p className='font-semibold'>Ingresado como</p>
                     <p>{data?.me?.name || ''}</p>
@@ -155,8 +156,14 @@ export default function LayoutHome({
                       @{data?.me?.username} - {data?.me?.company?.name}
                     </p>
                   </DropdownItem>
-                  <DropdownItem key='configurations' href='/settings'>
-                    Configuraciones
+                  <DropdownItem key='configurations'>
+                    <Link
+                      href='/settings'
+                      color='foreground'
+                      className='text-sm'
+                    >
+                      <a>Configuraciones</a>
+                    </Link>
                   </DropdownItem>
                   <DropdownItem key='help_and_feedback'>
                     Ayuda & Feedback
@@ -165,7 +172,7 @@ export default function LayoutHome({
                     key='logout'
                     color='danger'
                     className='text-danger'
-                    onPress={() => signOut()}
+                    onPress={() => signOut({ callbackUrl: '/' })}
                   >
                     Cerrar sesión
                   </DropdownItem>
@@ -267,8 +274,14 @@ export default function LayoutHome({
                       />
                     </DropdownTrigger>
                     <DropdownMenu aria-label='Static Actions'>
-                      <DropdownItem key='configurations' href='/settings'>
-                        Configuraciones
+                      <DropdownItem key='configurations'>
+                        <Link
+                          href='/settings'
+                          color='foreground'
+                          className='text-sm'
+                        >
+                          <a>Configuraciones</a>
+                        </Link>
                       </DropdownItem>
                       <DropdownItem key='help_and_feedback'>
                         Ayuda & Feedback
@@ -277,7 +290,7 @@ export default function LayoutHome({
                         key='logout'
                         color='danger'
                         className='text-danger'
-                        onPress={() => signOut()}
+                        onPress={() => signOut({ callbackUrl: '/' })}
                       >
                         Cerrar sesión
                       </DropdownItem>
