@@ -26,7 +26,7 @@ export default function DangerZone() {
           <p>Cancelar Suscripcion</p>
           <p>
             Luego de cancelar su suscripcion usted tendra 7 dias para descargar
-            todo su contenido subido a la plataforma de tuTi
+            todo su contenido subido a la plataforma de qaTu
           </p>
           <p>Esta accion es irrevocable</p>
         </div>

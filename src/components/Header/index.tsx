@@ -55,10 +55,10 @@ export default function Header() {
             className='text-light-onSurface dark:text-dark-onSurface'
           />
           <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-            tu
+            qa
           </span>
           <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
-            Ti
+            Tu
           </span>
         </NavbarBrand>
       </NavbarContent>
@@ -86,7 +86,7 @@ export default function Header() {
             </DropdownTrigger>
           </NavbarItem>
           <DropdownMenu
-            aria-label='ACME features'
+            aria-label='qaTu features'
             className='w-[340px]'
             itemClasses={{
               base: 'gap-4'

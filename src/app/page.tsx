@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className='w-screen h-screen '>
       <Header />
-      HOla esto es tuti
+      HOla esto es qaTu
       <Footer />
     </main>
   )
