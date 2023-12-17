@@ -10,7 +10,7 @@ import ChangePassword from '@components/(all)/ChangePassword'
 import RootChangePassword from '@components/(root)/ChangePassword'
 import DangerZone from '@components/(admin)/DangerZone'
 
-export default function Home() {
+export default function Settings() {
   const { loading, error, data, refetch } = useQuery(Myself)
 
   return (

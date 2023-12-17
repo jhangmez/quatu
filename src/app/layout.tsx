@@ -5,20 +5,16 @@ import { Providers } from './providers'
 import { Analytics } from '@vercel/analytics/react'
 import { Toaster } from 'react-hot-toast'
 import { Suspense } from 'react'
+import Loading from './loading'
 
 const myFont = localFont({ src: './LexendDeca-VariableFont_wght.ttf' })
 
-const title = 'quTu | Tu tienda virtual'
+const title = 'quaTu | Tu tienda virtual'
 const description = 'Tu tienda virtual'
 
 export const metadata: Metadata = {
   title,
   description
-  // twitter: {
-  //   card: 'summary_large_image',
-  //   title,
-  //   description
-  // }
 }
 
 export default function RootLayout({
@@ -29,12 +25,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${myFont.className} selection:bg-light-primary selection:text-light-onPrimary dark:selection:bg-dark-primary dark:selection:text-dark-onPrimary`}
+        className={`${myFont.className} min-h-screen selection:bg-light-primary selection:text-light-onPrimary dark:selection:bg-dark-primary dark:selection:text-dark-onPrimary`}
       >
         <Providers>
           <Toaster />
           <noscript>Página realizada por @jhangmez de HarkaySoft</noscript>
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
           <Analytics />
         </Providers>
       </body>

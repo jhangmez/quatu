@@ -31,7 +31,7 @@ export default function Header() {
   }, [])
 
   const menuItems = useMemo(
-    () => ['Categorías', 'Ayuda & Feedback', 'Contactar con HarkaySoft'],
+    () => ['Ayuda & Feedback', 'Contactar con HarkaySoft'],
     []
   )
   return (
@@ -55,7 +55,7 @@ export default function Header() {
             className='text-light-onSurface dark:text-dark-onSurface'
           />
           <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
-            qa
+            qua
           </span>
           <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
             Tu
@@ -64,82 +64,82 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-        <Dropdown>
-          <NavbarItem>
-            <DropdownTrigger>
-              <Button
-                disableRipple
-                className='p-0 bg-transparent data-[hover=true]:bg-transparent text-light-onSurface dark:text-dark-onSurface text-base'
-                endContent={
+        {/* <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className='p-0 bg-transparent data-[hover=true]:bg-transparent text-light-onSurface dark:text-dark-onSurface text-base'
+                  endContent={
+                    <Icon
+                      icon='icon-park-outline:down'
+                      width='16'
+                      height='16'
+                      className='text-light-onSurface dark:text-dark-onSurface'
+                    />
+                  }
+                  radius='sm'
+                  variant='light'
+                >
+                  Features
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label='qaTu features'
+              className='w-[340px]'
+              itemClasses={{
+                base: 'gap-4'
+              }}
+            >
+              <DropdownItem
+                key='autoscaling'
+                description='ACME scales apps to meet user demand, automagically, based on load.'
+                startContent={
                   <Icon
-                    icon='icon-park-outline:down'
+                    icon='material-symbols:store'
                     width='16'
                     height='16'
                     className='text-light-onSurface dark:text-dark-onSurface'
                   />
                 }
-                radius='sm'
-                variant='light'
               >
-                Features
-              </Button>
-            </DropdownTrigger>
-          </NavbarItem>
-          <DropdownMenu
-            aria-label='qaTu features'
-            className='w-[340px]'
-            itemClasses={{
-              base: 'gap-4'
-            }}
-          >
-            <DropdownItem
-              key='autoscaling'
-              description='ACME scales apps to meet user demand, automagically, based on load.'
-              startContent={
-                <Icon
-                  icon='material-symbols:store'
-                  width='16'
-                  height='16'
-                  className='text-light-onSurface dark:text-dark-onSurface'
-                />
-              }
-            >
-              Autoscaling
-            </DropdownItem>
-            <DropdownItem
-              key='supreme_support'
-              description='Overcome any challenge with a supporting team ready to respond.'
-              startContent={
-                <Icon
-                  icon='material-symbols:store'
-                  width='16'
-                  height='16'
-                  className='text-light-onSurface dark:text-dark-onSurface'
-                />
-              }
-            >
-              +Supreme Support
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+                Autoscaling
+              </DropdownItem>
+              <DropdownItem
+                key='supreme_support'
+                description='Overcome any challenge with a supporting team ready to respond.'
+                startContent={
+                  <Icon
+                    icon='material-symbols:store'
+                    width='16'
+                    height='16'
+                    className='text-light-onSurface dark:text-dark-onSurface'
+                  />
+                }
+              >
+                +Supreme Support
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown> */}
 
         <NavbarItem isActive>
           <Link
-            href='#'
+            href='/precios'
             aria-current='page'
             className='text-light-primary dark:text-dark-primary'
           >
-            Customers
+            Precios
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link
-            href='#'
-            className='text-light-onSurface dark:text-dark-onSurface'
-          >
-            Integrations
-          </Link>
-        </NavbarItem>
+        {/* <NavbarItem>
+            <Link
+              href='#'
+              className='text-light-onSurface dark:text-dark-onSurface'
+            >
+              Integrations
+            </Link>
+          </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent justify='end'>
