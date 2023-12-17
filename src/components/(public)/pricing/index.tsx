@@ -12,13 +12,13 @@ export default function Precios() {
         <div>
           <div className='text-center'>
             <h1 className='text-4xl font-bold tracking-tight text-light-secondary dark:text-dark-secondary sm:text-6xl'>
-              Presenta tu negocio al mundo, <br></br>
+              Presenta tu negocio al mundo de manera <br></br>
               <span className='text-light-primary dark:text-dark-primary'>
-                facil, rápido y barato.
+                fácil, rápida y económica.
               </span>
             </h1>
             <p className='mt-6 text-lg leading-8 text-muted-foreground text-light-secondary dark:text-dark-secondary'>
-              Olvidate de comprar paginas caras, antiguas y dificiles de usar,
+              Olvídate de comprar páginas caras, antiguas y difíciles de usar;
               <span className='text-light-primary dark:text-dark-tertiary'>
                 {' '}
                 nosotros te simplificamos todo.
@@ -46,7 +46,11 @@ export default function Precios() {
                   /mes
                 </span>
               </p>
-              <Button className='bg-light-primaryContainer text-light-primary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'>
+              <Button
+                as={Link}
+                href='/demo'
+                className='bg-light-primaryContainer text-light-primary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'
+              >
                 Solicitar demo
               </Button>
               <div className='flex grow flex-col justify-between'>
@@ -66,14 +70,14 @@ export default function Precios() {
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    1 Admin
+                    1 administrador
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    Todas las Herramientas de quaTu
+                    Todas las herramientas de quaTu
                   </li>
                 </ul>
               </div>
@@ -102,7 +106,11 @@ export default function Precios() {
                   /mes
                 </span>
               </p>
-              <Button className='bg-light-primary text-light-onPrimary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'>
+              <Button
+                as={Link}
+                href='/demo'
+                className='bg-light-primary text-light-onPrimary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'
+              >
                 Solicitar demo
               </Button>
               <div className='flex grow flex-col justify-between'>
@@ -122,14 +130,14 @@ export default function Precios() {
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    1 Admin + 1 Trabajador
+                    1 administrador + 1 trabajador
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    Todas las Herramientas de quaTu
+                    Todas las herramientas de quaTu
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon
@@ -162,7 +170,11 @@ export default function Precios() {
                   /mes
                 </span>
               </p>
-              <Button className='bg-light-primaryContainer text-light-primary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'>
+              <Button
+                as={Link}
+                href='/demo'
+                className='bg-light-primaryContainer text-light-primary ring-1 ring-inset ring-light-tertiary-200 hover:ring-light-tertiary-300 mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-light-primary'
+              >
                 Solicitar demo
               </Button>
               <div className='flex grow flex-col justify-between'>
@@ -175,21 +187,21 @@ export default function Precios() {
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    1GB de almacenamiento
+                    1 GB de almacenamiento
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    2 Admin + 3 Trabajador
+                    2 administradores + 3 trabajadores
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon
                       icon='material-symbols:check'
                       className='h-6 w-5 flex-none text-light-primary'
                     />
-                    Todas las Herramientas de quaTu
+                    Todas las herramientas de quaTu
                   </li>
                   <li className='flex gap-x-3'>
                     <Icon

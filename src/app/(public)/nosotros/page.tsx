@@ -5,7 +5,7 @@ import { Link } from '@nextui-org/link'
 import { Icon } from '@iconify/react'
 import { VercelHarkaysoft } from '@routes'
 
-export default function Precios() {
+export default function Nosotros() {
   return (
     <main className='flex flex-col md:flex-row-reverse md:h-screen bg-light-surface dark:bg-dark-surface h-screen'>
       <section className='flex items-start w-full px-4 mx-auto md:px-0 md:items-center md:w-1/3'>
