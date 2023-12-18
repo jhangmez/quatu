@@ -12,6 +12,7 @@ import { useQuery } from '@apollo/client'
 import { Myself } from '@lib/graphql/query'
 import { Suspense } from 'react'
 import Loading from './loading'
+import { Icon } from '@iconify/react'
 import { signOut } from 'next-auth/react'
 import {
   Dropdown,
@@ -26,6 +27,34 @@ import {
   NavbarMenuToggle,
   NavbarMenu
 } from '@nextui-org/navbar'
+
+const listadomenu = [
+  {
+    key: 'addproduct',
+    label: 'Productos',
+    href: '/producto'
+  },
+  {
+    key: 'addcategory',
+    label: 'Categorias',
+    href: '/categoria'
+  },
+  {
+    key: 'addcategory',
+    label: 'Subcategorias',
+    href: '/categoria'
+  },
+  {
+    key: 'addlist',
+    label: 'Listados',
+    href: '/listado'
+  },
+  {
+    key: 'addprice',
+    label: 'Precios',
+    href: '/precio'
+  }
+]
 
 export default function LayoutHome({
   children
@@ -110,15 +139,18 @@ export default function LayoutHome({
         <NavbarContent className=' pr-3' justify='center'>
           <NavbarBrand>
             <Link className='hover:underline' href='/home'>
-              <div>
-                <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
-                  Harkay
-                  <span className='text-2xl text-[0.8em] font-normal'>
-                    {' '}
-                    S O F T
-                  </span>
-                </span>
-              </div>
+              <Icon
+                icon='material-symbols:store'
+                width='28'
+                height='28'
+                className='text-light-onSurface dark:text-dark-onSurface'
+              />
+              <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
+                qua
+              </span>
+              <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
+                Tu
+              </span>
             </Link>
           </NavbarBrand>
         </NavbarContent>
@@ -184,22 +216,11 @@ export default function LayoutHome({
 
         <NavbarMenu>
           <Listbox className='flex flex-1 flex-col gap-y-4 pt-2'>
-            <ListboxSection title='Producto' showDivider>
-              <ListboxItem key='listarproductos' href='/producto'>
-                Listar productos
+            {listadomenu.map((submenu) => (
+              <ListboxItem key={submenu.key} href={submenu.href} className=''>
+                {submenu.label}
               </ListboxItem>
-              <ListboxItem key='agregarproducto' href='/categoria'>
-                Agregar producto
-              </ListboxItem>
-            </ListboxSection>
-            <ListboxSection title='Categoria' showDivider>
-              <ListboxItem key='agregarcategoria' href='/producto'>
-                Agregar categoria
-              </ListboxItem>
-              <ListboxItem key='agregarsubcategoria' href='/categoria'>
-                Agregar subcategoria
-              </ListboxItem>
-            </ListboxSection>
+            ))}
           </Listbox>
         </NavbarMenu>
       </Navbar>
@@ -207,36 +228,30 @@ export default function LayoutHome({
       <div className='flex h-max dark:bg-dark-inverseSurface'>
         <aside className='flex h-screen lg:w-2/12 md:w-4/12 w-1/12 flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>
           <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>
-            <section className='w-fit h-14 justify-start items-center gap-[5px] inline-flex'>
-              <div>
-                <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-dark'>
-                  Harkay
-                  <span className='text-2xl text-[0.8em] font-normal'>
-                    {' '}
-                    S O F T
-                  </span>
+            <section className='w-fit h-14 justify-start items-center inline-flex'>
+              <Link className='hover:underline' href='/home'>
+                <Icon
+                  icon='material-symbols:store'
+                  width='28'
+                  height='28'
+                  className='text-light-onSurface dark:text-dark-onSurface'
+                />
+                <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
+                  qua
                 </span>
-              </div>
+                <span className='text-light-primary dark:text-dark-primary text-2xl font-bold leading-[44px]'>
+                  Tu
+                </span>
+              </Link>
             </section>
           </div>
 
           <Listbox className='flex flex-1 flex-col gap-y-4 pt-2'>
-            <ListboxSection title='Producto' showDivider>
-              <ListboxItem key='listarproductos' href='/producto'>
-                Listar productos
+            {listadomenu.map((submenu) => (
+              <ListboxItem key={submenu.key} href={submenu.href}>
+                {submenu.label}
               </ListboxItem>
-              <ListboxItem key='agregarproducto' href='/categoria'>
-                Agregar producto
-              </ListboxItem>
-            </ListboxSection>
-            <ListboxSection title='Categoria' showDivider>
-              <ListboxItem key='agregarcategoria' href='/producto'>
-                Agregar categoria
-              </ListboxItem>
-              <ListboxItem key='agregarsubcategoria' href='/categoria'>
-                Agregar subcategoria
-              </ListboxItem>
-            </ListboxSection>
+            ))}
           </Listbox>
 
           {loading ? (

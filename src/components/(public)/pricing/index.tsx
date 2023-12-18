@@ -80,6 +80,11 @@ export default function Precios() {
                     Todas las herramientas de quaTu
                   </li>
                 </ul>
+                <ul className='mt-6'>
+                  <li className='flex gap-x-3 text-xs text-gray-600'>
+                    * No incluye dominio personalizado
+                  </li>
+                </ul>
               </div>
             </Card>
             <Card className='ring-2 ring-light-primary dark:bg-light-surface flex w-full flex-col justify-between rounded-3xl bg-white p-8 shadow-lg lg:w-1/3 xl:p-10'>
@@ -147,7 +152,11 @@ export default function Precios() {
                     Atención personalizada
                   </li>
                 </ul>
-                <ul className='mt-6'></ul>
+                <ul className='mt-6'>
+                  <li className='flex gap-x-3 text-xs text-gray-600'>
+                    * No incluye dominio personalizado
+                  </li>
+                </ul>
               </div>
             </Card>
             <Card className='ring-1 ring-gray-200 flex dark:bg-light-surface w-full flex-col justify-between rounded-3xl bg-white p-8 shadow-lg lg:w-1/3 xl:p-10'>
@@ -211,7 +220,11 @@ export default function Precios() {
                     Atención personalizada
                   </li>
                 </ul>
-                <ul className='mt-6'></ul>
+                <ul className='mt-6'>
+                  <li className='flex gap-x-3 text-xs text-gray-600'>
+                    * No incluye dominio personalizado
+                  </li>
+                </ul>
               </div>
             </Card>
           </div>

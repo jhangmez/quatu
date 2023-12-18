@@ -16,12 +16,6 @@ import {
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
 import { Icon } from '@iconify/react'
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem
-} from '@nextui-org/dropdown'
 import { isLogin } from '@utils/authLink'
 import { GithubJhan, LinkedinJhan, VercelHarkaysoft } from '@routes'
 import localFont from 'next/font/local'
