@@ -42,6 +42,19 @@ query AllTypeUser {
   }
 }`)
 
+export const AllCategoriesByCompany = gql(`
+query AllCategoriesByCompany($companyId: Int!) {
+  allCategoriesByCompany(companyId: $companyId) {
+    id
+    name
+    visible
+    linkImageCategory {
+      link
+    }
+  }
+}
+`)
+
 export const Borrar = gql(`
 query AllListsByCompany($companyId: Int!) {
   allListsByCompany(companyId: $companyId) {

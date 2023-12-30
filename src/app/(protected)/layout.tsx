@@ -215,7 +215,10 @@ export default function LayoutHome({
         </NavbarContent>
 
         <NavbarMenu>
-          <Listbox className='flex flex-1 flex-col gap-y-4 pt-2'>
+          <Listbox
+            className='flex flex-1 flex-col gap-y-4 pt-2'
+            aria-label='Listado de items'
+          >
             {listadomenu.map((submenu) => (
               <ListboxItem key={submenu.key} href={submenu.href} className=''>
                 {submenu.label}
@@ -246,7 +249,10 @@ export default function LayoutHome({
             </section>
           </div>
 
-          <Listbox className='flex flex-1 flex-col gap-y-4 pt-2'>
+          <Listbox
+            className='flex flex-1 flex-col gap-y-4 pt-2'
+            aria-label='Listado de items'
+          >
             {listadomenu.map((submenu) => (
               <ListboxItem key={submenu.key} href={submenu.href}>
                 {submenu.label}
@@ -270,8 +276,11 @@ export default function LayoutHome({
             </p>
           ) : (
             <>
-              <Listbox className='flex flex-col items-center gap-y-4 '>
-                <ListboxItem key='user'>
+              <Listbox
+                className='flex flex-col items-center gap-y-4'
+                aria-label='Listado de opciones'
+              >
+                <ListboxItem key='user' aria-label='listado de opciones v2'>
                   <Dropdown>
                     <DropdownTrigger>
                       <User
@@ -283,13 +292,17 @@ export default function LayoutHome({
                             {data?.me?.company?.name}
                           </>
                         }
+                        aria-label='usuario'
                         avatarProps={{
                           src: '/user_picture.jpg'
                         }}
                       />
                     </DropdownTrigger>
                     <DropdownMenu aria-label='Static Actions'>
-                      <DropdownItem key='configurations'>
+                      <DropdownItem
+                        key='configurations'
+                        aria-label='configuraciones'
+                      >
                         <Link
                           href='/settings'
                           color='foreground'
@@ -298,13 +311,14 @@ export default function LayoutHome({
                           <a>Configuraciones</a>
                         </Link>
                       </DropdownItem>
-                      <DropdownItem key='help_and_feedback'>
+                      <DropdownItem key='help_and_feedback' aria-label='ayuda'>
                         Ayuda & Feedback
                       </DropdownItem>
                       <DropdownItem
                         key='logout'
                         color='danger'
                         className='text-danger'
+                        aria-label='cerrar sesion'
                         onPress={() => signOut({ callbackUrl: '/' })}
                       >
                         Cerrar sesión

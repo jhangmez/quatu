@@ -17,6 +17,15 @@ mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
 }
 `)
 
+export const CreateCategory = gql(`
+mutation CreateCategory($name: String!, $visible: Boolean) {
+  createCategory(name: $name, visible: $visible) {
+    id
+    name
+    visible
+  }
+}`)
+
 export const RootChangePassword = gql(`
 mutation RootchangePassword($idUser: Int!, $newPassword: String!) {
   rootchangePassword(idUser: $idUser, newPassword: $newPassword) {
