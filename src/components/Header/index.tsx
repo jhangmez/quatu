@@ -1,26 +1,31 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem
+  NavbarMenu
 } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import { Icon } from '@iconify/react'
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem
-} from '@nextui-org/dropdown'
 import { isLogin } from '@utils/authLink'
+import { Listbox, ListboxItem } from '@nextui-org/react'
 
+const listadomenu = [
+  {
+    key: 'ayuda',
+    label: 'Ayuda & Feedback',
+    href: '/ayuda'
+  },
+  {
+    key: 'contacto',
+    label: 'Contactar con HarkaySoft',
+    href: '/contacto'
+  }
+]
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -30,10 +35,6 @@ export default function Header() {
     isLogin().then(setIsLoggedIn)
   }, [])
 
-  const menuItems = useMemo(
-    () => ['Ayuda & Feedback', 'Contactar con HarkaySoft'],
-    []
-  )
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -48,12 +49,18 @@ export default function Header() {
           className='sm:hidden'
         />
         <NavbarBrand as={Link} href='/'>
-          <Icon
-            icon='material-symbols:store'
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
             width='28'
             height='28'
-            className='text-light-onSurface dark:text-dark-onSurface'
-          />
+            className='text-light-primary dark:text-dark-primary'
+            viewBox='0 0 24 24'
+          >
+            <path
+              fill='currentColor'
+              d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+            />
+          </svg>
           <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
             qua
           </span>
@@ -156,7 +163,17 @@ export default function Header() {
             className='text-light-primary dark:text-dark-primary'
             href={isLoggedIn ? '/home' : '/login'}
           >
-            <Icon icon='mdi:arrow-collapse-right' height={22} width={22} />
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path
+                fill='currentColor'
+                d='M12.08 4.08L20 12l-7.92 7.92l-1.41-1.42l5.5-5.5H2v-2h14.17l-5.5-5.5zM20 12v10h2V2h-2z'
+              />
+            </svg>
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -171,24 +188,21 @@ export default function Header() {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? 'primary'
-                  : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
-              }
-              className='w-full'
-              href='#'
-              size='lg'
+        <Listbox
+          className='flex flex-1 flex-col gap-y-4 pt-2'
+          aria-label='Listado de items'
+        >
+          {listadomenu.map((submenu) => (
+            <ListboxItem
+              key={submenu.key}
+              href={submenu.href}
+              className=''
+              onClick={() => setIsMenuOpen(false)}
             >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+              {submenu.label}
+            </ListboxItem>
+          ))}
+        </Listbox>
       </NavbarMenu>
     </Navbar>
   )

@@ -10,17 +10,29 @@ import {
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem
+  NavbarMenu
 } from '@nextui-org/navbar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import { Icon } from '@iconify/react'
 import { isLogin } from '@utils/authLink'
 import { GithubJhan, LinkedinJhan, VercelHarkaysoft } from '@routes'
 import localFont from 'next/font/local'
 import { Divider } from '@nextui-org/divider'
 const myFont = localFont({ src: './Poppins-SemiBold.ttf' })
+import { Listbox, ListboxItem } from '@nextui-org/react'
+
+const listadomenu = [
+  {
+    key: 'ayuda',
+    label: 'Ayuda & Feedback',
+    href: '/ayuda'
+  },
+  {
+    key: 'contacto',
+    label: 'Contactar con HarkaySoft',
+    href: '/contacto'
+  }
+]
 
 export default function Public({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,10 +43,6 @@ export default function Public({ children }: { children: React.ReactNode }) {
     isLogin().then(setIsLoggedIn)
   }, [])
 
-  const menuItems = useMemo(
-    () => ['Ayuda & Feedback', 'Contactar con HarkaySoft'],
-    []
-  )
   return (
     <main>
       <Navbar
@@ -50,12 +58,18 @@ export default function Public({ children }: { children: React.ReactNode }) {
             className='sm:hidden'
           />
           <NavbarBrand as={Link} href='/'>
-            <Icon
-              icon='material-symbols:store'
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
               width='28'
               height='28'
-              className='text-light-onSurface dark:text-dark-onSurface'
-            />
+              viewBox='0 0 24 24'
+              className='text-light-primary dark:text-dark-primary'
+            >
+              <path
+                fill='currentColor'
+                d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+              />
+            </svg>
             <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
               qua
             </span>
@@ -158,7 +172,17 @@ export default function Public({ children }: { children: React.ReactNode }) {
               className='text-light-primary dark:text-dark-primary'
               href={isLoggedIn ? '/home' : '/login'}
             >
-              <Icon icon='mdi:arrow-collapse-right' height={22} width={22} />
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  fill='currentColor'
+                  d='M12.08 4.08L20 12l-7.92 7.92l-1.41-1.42l5.5-5.5H2v-2h14.17l-5.5-5.5zM20 12v10h2V2h-2z'
+                />
+              </svg>
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -173,24 +197,21 @@ export default function Public({ children }: { children: React.ReactNode }) {
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? 'primary'
-                    : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
-                }
-                className='w-full'
-                href='#'
-                size='lg'
+          <Listbox
+            className='flex flex-1 flex-col gap-y-4 pt-2'
+            aria-label='Listado de items'
+          >
+            {listadomenu.map((submenu) => (
+              <ListboxItem
+                key={submenu.key}
+                href={submenu.href}
+                className=''
+                onClick={() => setIsMenuOpen(false)}
               >
-                {item}
-              </Link>
-            </NavbarMenuItem>
-          ))}
+                {submenu.label}
+              </ListboxItem>
+            ))}
+          </Listbox>
         </NavbarMenu>
       </Navbar>
       <Suspense fallback={<Loading />}>{children}</Suspense>
@@ -203,12 +224,18 @@ export default function Public({ children }: { children: React.ReactNode }) {
                 href='/'
                 className='w-[230px] h-14 justify-start items-center gap-[5px] inline-flex'
               >
-                <Icon
-                  icon='material-symbols:store'
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
                   width='28'
                   height='28'
-                  className='text-light-onSurface dark:text-dark-onSurface'
-                />
+                  className='text-light-primary dark:text-dark-primary'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+                  />
+                </svg>
                 <div>
                   <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
                     qua
@@ -303,7 +330,17 @@ export default function Public({ children }: { children: React.ReactNode }) {
                   isExternal
                   className='text-light-onSurface dark:text-dark-onSurface'
                 >
-                  <Icon icon='mdi:github' width='24' />
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      fill='currentColor'
+                      d='M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2'
+                    />
+                  </svg>
                 </Link>
               </div>
               <div className='text-light-onSurface dark:text-dark-onSurface hover:text-gray-900 dark:hover:text-white'>
@@ -312,7 +349,17 @@ export default function Public({ children }: { children: React.ReactNode }) {
                   isExternal
                   className='text-light-onSurface dark:text-dark-onSurface'
                 >
-                  <Icon icon='mdi:linkedin' width='24' />
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      fill='currentColor'
+                      d='M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z'
+                    />
+                  </svg>
                 </Link>
               </div>
             </div>

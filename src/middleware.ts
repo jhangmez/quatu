@@ -2,7 +2,13 @@ import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const config = {
-  matcher: ['/home/:path*', '/producto/:path*', '/categoria/:path*']
+  matcher: [
+    '/home/:path*',
+    '/producto/:path*',
+    '/categoria/:path*',
+    '/listado/:path*',
+    '/settings/:path*'
+  ]
 }
 
 export default async function middleware(req: NextRequest) {
@@ -21,7 +27,7 @@ export default async function middleware(req: NextRequest) {
 
   if (!session && config) {
     return NextResponse.redirect(new URL('/login', req.url))
-  } else if (session && (path === '/login' || path === '/register')) {
+  } else if (session && path === '/login') {
     return NextResponse.redirect(new URL('/home', req.url))
   }
   return NextResponse.next()

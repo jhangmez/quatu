@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Listbox, ListboxItem, ListboxSection } from '@nextui-org/react'
+import { Listbox, ListboxItem } from '@nextui-org/react'
 import { Link } from '@nextui-org/link'
 import { useSession } from 'next-auth/react'
 import { User } from '@nextui-org/user'
@@ -220,7 +220,12 @@ export default function LayoutHome({
             aria-label='Listado de items'
           >
             {listadomenu.map((submenu) => (
-              <ListboxItem key={submenu.key} href={submenu.href} className=''>
+              <ListboxItem
+                key={submenu.key}
+                href={submenu.href}
+                className=''
+                onClick={() => setIsMenuOpen(false)}
+              >
                 {submenu.label}
               </ListboxItem>
             ))}
@@ -254,7 +259,11 @@ export default function LayoutHome({
             aria-label='Listado de items'
           >
             {listadomenu.map((submenu) => (
-              <ListboxItem key={submenu.key} href={submenu.href}>
+              <ListboxItem
+                key={submenu.key}
+                href={submenu.href}
+                onClick={() => setIsMenuOpen(false)}
+              >
                 {submenu.label}
               </ListboxItem>
             ))}
