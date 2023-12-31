@@ -42,7 +42,7 @@ const listadomenu = [
   {
     key: 'addcategory',
     label: 'Subcategorias',
-    href: '/categoria'
+    href: '/subcategoria'
   },
   {
     key: 'addlist',
@@ -262,6 +262,7 @@ export default function LayoutHome({
               <ListboxItem
                 key={submenu.key}
                 href={submenu.href}
+                className=''
                 onClick={() => setIsMenuOpen(false)}
               >
                 {submenu.label}

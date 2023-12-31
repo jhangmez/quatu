@@ -18,7 +18,10 @@ const documents = {
     "\nmutation CreateCategory($name: String!, $visible: Boolean) {\n  createCategory(name: $name, visible: $visible) {\n    id\n    name\n    visible\n  }\n}": types.CreateCategoryDocument,
     "\nmutation RootchangePassword($idUser: Int!, $newPassword: String!) {\n  rootchangePassword(idUser: $idUser, newPassword: $newPassword) {\n    message\n    status\n  }\n}": types.RootchangePasswordDocument,
     "\nmutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {\n  allProductsByCompany(companyId: $CompanyId, filter: $filter) {\n    id\n    name\n    createdAt\n    price {\n      unitPrice\n      currency {\n        abbreviation\n      }\n    }\n    image {\n      link\n    }\n  }\n}\n": types.AllProductsByCompanyDocument,
+    "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!) {\n  updateCategory(id: $id, name: $name, visible: $visible) {\n    name\n    visible\n  }\n}\n": types.UpdateCategoryDocument,
+    "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
+    "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.GetCategoryDocument,
     "\nquery AllUsers {\n  allUsers {\n    id\n    name\n    typeuser {\n      id\n      name\n    }\n  }\n}\n": types.AllUsersDocument,
     "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}": types.AllTypeUserDocument,
     "\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllCategoriesByCompanyDocument,
@@ -62,7 +65,19 @@ export function gql(source: "\nmutation AllProductsByCompany($CompanyId: Int, $f
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!) {\n  updateCategory(id: $id, name: $name, visible: $visible) {\n    name\n    visible\n  }\n}\n"): (typeof documents)["\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!) {\n  updateCategory(id: $id, name: $name, visible: $visible) {\n    name\n    visible\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n"): (typeof documents)["\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

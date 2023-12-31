@@ -52,3 +52,28 @@ mutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {
   }
 }
 `)
+
+export const UpdateCategory = gql(`
+mutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!) {
+  updateCategory(id: $id, name: $name, visible: $visible) {
+    name
+    visible
+  }
+}
+`)
+
+export const DeleteCategory = gql(`
+mutation DeleteCategory($id: Int!) {
+  deleteCategory(id: $id) {
+    id
+  }
+}
+`)
+
+export const GetCategoryId = gql(`
+mutation DeleteCategory($id: Int!) {
+  deleteCategory(id: $id) {
+    id
+  }
+}
+`)

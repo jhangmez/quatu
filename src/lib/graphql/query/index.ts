@@ -21,6 +21,18 @@ export const Myself = gql(/* GraphQL */ `
   }
 `)
 
+export const GetCategoryId = gql(`query GetCategory($getCategoryId: Int!) {
+  getCategory(id: $getCategoryId) {
+    id
+    name
+    visible
+    linkImageCategory {
+      link
+    }
+  }
+}
+`)
+
 export const AllUsers = gql(`
 query AllUsers {
   allUsers {
