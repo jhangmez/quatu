@@ -21,7 +21,7 @@ const documents = {
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
     "\nquery AllUsers {\n  allUsers {\n    id\n    name\n    typeuser {\n      id\n      name\n    }\n  }\n}\n": types.AllUsersDocument,
     "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}": types.AllTypeUserDocument,
-    "\nquery AllCategoriesByCompany($companyId: Int!) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllCategoriesByCompanyDocument,
+    "\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllCategoriesByCompanyDocument,
     "\nquery AllListsByCompany($companyId: Int!) {\n  allListsByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    company {\n      name\n    }\n    product {\n      id\n      name\n      SKU\n      UPC\n      visible\n      image {\n        link\n      }\n    }\n    linkImageList {\n      link\n    }\n  }\n}": types.AllListsByCompanyDocument,
 };
 
@@ -74,7 +74,7 @@ export function gql(source: "\nquery AllTypeUser {\n  allTypeUser {\n    id\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery AllCategoriesByCompany($companyId: Int!) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["\nquery AllCategoriesByCompany($companyId: Int!) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
+export function gql(source: "\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

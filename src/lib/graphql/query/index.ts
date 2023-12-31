@@ -43,7 +43,7 @@ query AllTypeUser {
 }`)
 
 export const AllCategoriesByCompany = gql(`
-query AllCategoriesByCompany($companyId: Int!) {
+query AllCategoriesByCompany($companyId: Int) {
   allCategoriesByCompany(companyId: $companyId) {
     id
     name

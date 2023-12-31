@@ -37,9 +37,7 @@ const columns = [
 ]
 
 export default function Categorias() {
-  const { loading, error, data, refetch } = useQuery(AllCategoriesByCompany, {
-    variables: { companyId: Number(process.env.NEXT_PUBLIC_COMPANYID) }
-  })
+  const { loading, error, data, refetch } = useQuery(AllCategoriesByCompany)
 
   const [page, setPage] = useState(1)
   const rowsPerPage = 10

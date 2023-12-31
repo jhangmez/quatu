@@ -6,7 +6,7 @@ import Header from '@components/Header'
 import Footer from '@components/Footer'
 import type { Metadata } from 'next'
 
-const title = 'jhangmez | Skills'
+const title = 'jhangmez | No encontrado 🤔'
 const description = 'Pagina de jhangmez'
 
 export const metadata: Metadata = {
