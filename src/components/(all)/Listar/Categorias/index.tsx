@@ -291,6 +291,7 @@ export default function Categorias() {
         </TableBody>
       </Table>
       <Modal
+        placement='center'
         isOpen={isDetailOpen}
         onOpenChange={onDetailOpenChange}
         isDismissable={false}
@@ -324,6 +325,7 @@ export default function Categorias() {
         </ModalContent>
       </Modal>
       <Modal
+        placement='center'
         isOpen={isEditOpen}
         onOpenChange={onEditOpenChange}
         isDismissable={false}
@@ -356,6 +358,7 @@ export default function Categorias() {
         </ModalContent>
       </Modal>
       <Modal
+        placement='center'
         isOpen={isDeleteOpen}
         onOpenChange={onDeleteOpenChange}
         backdrop='opaque'

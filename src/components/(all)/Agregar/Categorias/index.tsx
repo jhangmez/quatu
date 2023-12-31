@@ -83,6 +83,7 @@ export default function Categorias() {
         Agregar Categoria
       </Button>
       <Modal
+        placement='center'
         backdrop='opaque'
         isOpen={isOpen}
         onOpenChange={onOpenChange}
