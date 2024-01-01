@@ -36,12 +36,12 @@ const listadomenu = [
   },
   {
     key: 'addcategory',
-    label: 'Categorias',
+    label: 'Categorías',
     href: '/categoria'
   },
   {
     key: 'addcategory',
-    label: 'Subcategorias',
+    label: 'Subcategorías',
     href: '/subcategoria'
   },
   {

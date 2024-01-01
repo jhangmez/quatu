@@ -23,32 +23,9 @@ const INITIAL_DATA: FormData = {
 }
 
 export default function Categorias() {
-  const [createCategory, { data: dataCreate, loading, error }] = useMutation(
-    CreateCategory,
-    {
-      refetchQueries: ['AllCategoriesByCompany']
-      //VERIFICAR QUE ESTO SEA LUEGO POR CACHE PARA EVITAR QUE SE ACTUALICEN TODOS LOS DATOS NUEVAMENTE
-      // update(cache, { data }) {
-      //   cache.modify({
-      //     fields: {
-      //       categories(existingCategories = []) {
-      //         const newCategoryRef = cache.writeFragment({
-      //           data: data?.createCategory,
-      //           fragment: gql`
-      //             fragment NewCategory on Category {
-      //               id
-      //               name
-      //               visible
-      //             }
-      //           `
-      //         })
-      //         return [...existingCategories, newCategoryRef]
-      //       }
-      //     }
-      //   })
-      // }
-    }
-  )
+  const [createCategory] = useMutation(CreateCategory, {
+    refetchQueries: ['AllCategoriesByCompany']
+  })
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const [status, setStatus] = useState(false)
@@ -63,10 +40,14 @@ export default function Categorias() {
   function onSubmit(e: FormEvent) {
     e.preventDefault()
     setStatus(true)
-    createCategory({ variables: dataINITIAL })
+    toast
+      .promise(createCategory({ variables: dataINITIAL }), {
+        loading: 'Creando categoría...',
+        success: 'Categoría creada exitosamente.',
+        error: (err) => `Error: ${err.message}`
+      })
       .then(() => {
         setStatus(false)
-        toast.success('Categoria creada exitosamente.')
         setDataINITIAL({ name: '', visible: false })
       })
       .catch((error) => {
@@ -80,7 +61,7 @@ export default function Categorias() {
         onPress={onOpen}
         className='bg-light-primary text-light-onPrimary'
       >
-        Agregar Categoria
+        Agregar Categoría
       </Button>
       <Modal
         placement='center'
@@ -94,16 +75,16 @@ export default function Categorias() {
             {(onClose) => (
               <>
                 <ModalHeader className='flex flex-col gap-1'>
-                  Agregar Categoria
+                  Agregar Categoría
                 </ModalHeader>
                 <ModalBody>
                   <Input
                     id='name'
                     name='name'
                     autoFocus
-                    label='Categoria'
+                    label='Categoría'
                     isRequired
-                    placeholder='Nombre de la categoria'
+                    placeholder='Nombre de la categoría'
                     value={dataINITIAL.name}
                     variant='bordered'
                     onChange={(e) => updateFields({ name: e.target.value })}

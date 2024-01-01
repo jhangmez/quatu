@@ -1,7 +1,7 @@
 'use client'
 import React, { useCallback, FormEvent, useState, Key, useMemo } from 'react'
 import { useQuery } from '@apollo/client'
-import { AllCategoriesByCompany } from '@lib/graphql/query'
+import { AllCategoriesByCompany, GetCategoryId } from '@lib/graphql/query'
 import { Input } from '@nextui-org/input'
 import {
   Table,
@@ -18,8 +18,10 @@ import { CircularProgress } from '@nextui-org/progress'
 import { Skeleton } from '@nextui-org/skeleton'
 import { Button } from '@nextui-org/react'
 import { toast } from 'react-hot-toast'
-import { DeleteCategory } from '@lib/graphql/mutation'
+import { DeleteCategory, UpdateCategory } from '@lib/graphql/mutation'
 import { useMutation } from '@apollo/client'
+import { Checkbox } from '@nextui-org/checkbox'
+import { FormData } from './types'
 
 import {
   Modal,
@@ -51,25 +53,49 @@ const columns = [
   }
 ]
 
+const INITIAL_DATA: FormData = {
+  name: '',
+  visible: false
+}
+
 export default function Categorias() {
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  )
+  const [dataINITIAL, setDataINITIAL] = useState(INITIAL_DATA)
+
   const [deleteCategory] = useMutation(DeleteCategory, {
     refetchQueries: ['AllCategoriesByCompany']
+  })
+
+  const [updateCategory] = useMutation(UpdateCategory, {
+    refetchQueries: ['AllCategoriesByCompany']
+  })
+
+  const updateFields = useCallback((fields: Partial<FormData>) => {
+    setDataINITIAL((prev) => {
+      return { ...prev, ...fields }
+    })
+  }, [])
+
+  const {
+    loading: loadingGet,
+    error: errorGet,
+    data: dataGet,
+    refetch: refGet
+  } = useQuery(GetCategoryId, {
+    variables: { getCategoryId: Number(selectedCategoryId) }
   })
 
   const { loading, error, data, refetch } = useQuery(AllCategoriesByCompany)
   const [inputValue, setInputValue] = useState('')
   const [status, setStatus] = useState(false)
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
-    null
-  )
-
   const [page, setPage] = useState(1)
   const rowsPerPage = 10
   const pages = Math.ceil(
     (data?.allCategoriesByCompany?.length || 0) / rowsPerPage
   )
-  // const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   const {
     isOpen: isDetailOpen,
@@ -146,8 +172,11 @@ export default function Categorias() {
                   isIconOnly
                   variant='light'
                   size='sm'
-                  // onPress={onEditOpen}
                   onPress={() => {
+                    updateFields({
+                      name: category.name,
+                      visible: category.visible
+                    })
                     onEditOpen()
                     setSelectedCategoryId(category.id)
                   }}
@@ -204,13 +233,45 @@ export default function Categorias() {
   function onSubmit(e: FormEvent) {
     e.preventDefault()
     setStatus(true)
-    deleteCategory({ variables: { id: Number(selectedCategoryId) } })
+    toast
+      .promise(
+        deleteCategory({ variables: { id: Number(selectedCategoryId) } }),
+        {
+          loading: `Borrando categoría ${dataGet?.getCategory?.name}...`,
+          success: `Categoría ${dataGet?.getCategory?.name} borrada exitosamente.`,
+          error: (err) => `Error: ${err.message}`
+        }
+      )
       .then(() => {
         setStatus(false)
-        toast.success('Categoria borrada exitosamente.')
       })
-      .catch((error) => {
-        toast.error(`Error: ${error.message}`)
+      .catch(() => {
+        console.log('Hubo error')
+      })
+  }
+
+  function onSubmitEdit(e: FormEvent) {
+    e.preventDefault()
+    setStatus(true)
+    toast
+      .promise(
+        updateCategory({
+          variables: {
+            id: Number(selectedCategoryId),
+            name: dataINITIAL.name,
+            visible: dataINITIAL.visible
+          }
+        }),
+        {
+          loading: `Modificando categoria categoría ${dataGet?.getCategory?.name}...`,
+          success: `Categoría modificada exitosamente.`,
+          error: (err) => `Error: ${err.message}`
+        }
+      )
+      .then(() => {
+        setStatus(false)
+      })
+      .catch(() => {
         console.log('Hubo error')
       })
   }
@@ -302,22 +363,30 @@ export default function Categorias() {
           {(onClose) => (
             <>
               <ModalHeader className='flex flex-col gap-1'>
-                Visualizar categoria
+                Visualizar categoría:{' '}
+                {errorGet
+                  ? 'Error'
+                  : loadingGet
+                  ? '...'
+                  : dataGet?.getCategory?.name}
               </ModalHeader>
               <ModalBody>
-                {selectedCategoryId}
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                  Aca se podra visualizar a detalle el contenido de la
+                  categoria:{' '}
+                  {errorGet
+                    ? 'Error'
+                    : loadingGet
+                    ? '...'
+                    : dataGet?.getCategory?.name}
                 </p>
               </ModalBody>
               <ModalFooter>
                 <Button color='danger' variant='light' onPress={onClose}>
-                  Close
+                  Cerrar
                 </Button>
                 <Button color='primary' onPress={onClose}>
-                  Action
+                  Realizar
                 </Button>
               </ModalFooter>
             </>
@@ -331,31 +400,65 @@ export default function Categorias() {
         isDismissable={false}
         backdrop='opaque'
       >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className='flex flex-col gap-1'>
-                Editar categoria
-              </ModalHeader>
-              <ModalBody>
-                {selectedCategoryId}
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='light' onPress={onClose}>
-                  Close
-                </Button>
-                <Button color='primary' onPress={onClose}>
-                  Action
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
+        <form onSubmit={onSubmitEdit}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                {errorGet ? (
+                  'Error'
+                ) : loadingGet ? (
+                  <section className='flex h-72 justify-center items-center'>
+                    <Spinner />
+                  </section>
+                ) : (
+                  <>
+                    <ModalHeader className='flex flex-col gap-1'>
+                      Editar categoría:{' '}
+                      {errorGet
+                        ? 'Error'
+                        : loadingGet
+                        ? '...'
+                        : dataGet?.getCategory?.name}
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        id='name'
+                        name='name'
+                        autoFocus
+                        label='Categoría'
+                        isRequired
+                        placeholder='Nombre de la categoría'
+                        value={dataINITIAL.name}
+                        variant='bordered'
+                        onChange={(e) => updateFields({ name: e.target.value })}
+                      />
+                      <Checkbox
+                        isSelected={dataINITIAL.visible}
+                        onChange={(e) =>
+                          updateFields({ visible: e.target.checked })
+                        }
+                      >
+                        Visible
+                      </Checkbox>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color='danger' variant='light' onPress={onClose}>
+                        Cerrar
+                      </Button>
+                      <Button
+                        className='bg-light-primary text-light-onPrimary'
+                        onPress={onClose}
+                        type='submit'
+                      >
+                        Editar
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </>
+            )}
+          </ModalContent>
+        </form>
       </Modal>
       <Modal
         placement='center'
@@ -367,65 +470,87 @@ export default function Categorias() {
           <ModalContent>
             {(onClose) => (
               <>
-                <ModalHeader className='flex flex-col gap-1 text-light-error'>
-                  Eliminar categoria
-                </ModalHeader>
-                <ModalBody>
-                  {selectedCategoryId}
-                  <p className='text-sm select-none'>
-                    Escriba{' '}
-                    <span className='italic font-medium'>Borrar categoría</span>
-                  </p>
-                  <Input
-                    isRequired
-                    className='max-w-xs'
-                    label='Escriba &#34;Borrar categoría&#34;'
-                    value={inputValue}
-                    labelPlacement='inside'
-                    size='sm'
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                  <Chip
-                    startContent={
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='18'
-                        height='18'
-                        viewBox='0 0 20 20'
+                {errorGet ? (
+                  'Error'
+                ) : loadingGet ? (
+                  <section className='flex h-72 justify-center items-center'>
+                    <Spinner />
+                  </section>
+                ) : (
+                  <>
+                    <ModalHeader className='flex flex-col gap-1 text-light-error'>
+                      Eliminar categoría: {dataGet?.getCategory?.name}
+                    </ModalHeader>
+                    <ModalBody>
+                      <p className='text-sm select-none'>
+                        Escriba{' '}
+                        <span className='italic font-medium'>
+                          Borrar {dataGet?.getCategory?.name}
+                        </span>
+                      </p>
+                      <Input
+                        isRequired
+                        className='max-w-xs'
+                        label={
+                          <>
+                            Escriba{' '}
+                            <span className='italic font-medium'>
+                              &#34;Borrar {dataGet?.getCategory?.name}
+                              &#34;
+                            </span>
+                          </>
+                        }
+                        value={inputValue}
+                        labelPlacement='inside'
+                        size='sm'
+                        onChange={(e) => setInputValue(e.target.value)}
+                      />
+                      <Chip
+                        startContent={
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='18'
+                            height='18'
+                            viewBox='0 0 20 20'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07m12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32M9 5h2v6H9zm0 8h2v2H9z'
+                            />
+                          </svg>
+                        }
+                        className='bg-light-error text-light-onError select-none'
                       >
-                        <path
-                          fill='currentColor'
-                          d='M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07m12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32M9 5h2v6H9zm0 8h2v2H9z'
-                        />
-                      </svg>
-                    }
-                    className='bg-light-error text-light-onError select-none'
-                  >
-                    Esta accion es irreversible
-                  </Chip>
-                </ModalBody>
-                <ModalFooter>
-                  <Button
-                    className='bg-light-primary/10 text-light-primary font-semibold'
-                    onPress={() => {
-                      onClose()
-                      setInputValue('')
-                    }}
-                  >
-                    Cerrar
-                  </Button>
-                  <Button
-                    className='bg-light-error text-light-onError font-semibold'
-                    type='submit'
-                    onPress={() => {
-                      onClose()
-                      setInputValue('')
-                    }}
-                    isDisabled={inputValue !== 'Borrar categoría' || status}
-                  >
-                    {status ? <Spinner /> : 'Borrar'}
-                  </Button>
-                </ModalFooter>
+                        Esta accion es irreversible
+                      </Chip>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        className='bg-light-primary/10 text-light-primary font-semibold'
+                        onPress={() => {
+                          onClose()
+                          setInputValue('')
+                        }}
+                      >
+                        Cerrar
+                      </Button>
+                      <Button
+                        className='bg-light-error text-light-onError font-semibold'
+                        type='submit'
+                        onPress={() => {
+                          onClose()
+                          setInputValue('')
+                        }}
+                        isDisabled={
+                          inputValue !==
+                            `Borrar ${dataGet?.getCategory?.name}` || status
+                        }
+                      >
+                        {status ? <Spinner /> : 'Borrar'}
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
               </>
             )}
           </ModalContent>

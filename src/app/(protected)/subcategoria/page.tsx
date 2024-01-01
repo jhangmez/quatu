@@ -4,7 +4,7 @@ import ListarProductos from '@components/(all)/Listar'
 export default function Subcategoria() {
   return (
     <>
-      <p>SOY subcategoria</p>
+      <p>SOY subcategoría</p>
     </>
   )
 }

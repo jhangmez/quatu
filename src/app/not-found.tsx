@@ -21,7 +21,7 @@ export default function NotFound() {
         <Header />
       </div>
       <div className='bg-light-surface  dark:bg-dark-surface'>
-        <div className='flex flex-col justify-center items-center  h-screen'>
+        <div className='flex flex-col justify-center items-center h-screen'>
           <p className='text-light-onSurface dark:text-dark-onSurface'>
             <h1 className='lg:text-6xl font-bold text-2xl'>Oops!</h1>
             <h2 className='lg:text-6xl font-bold text-2xl'>No encontrado</h2>
