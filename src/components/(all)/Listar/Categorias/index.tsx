@@ -230,7 +230,7 @@ export default function Categorias() {
     }
   }, [])
 
-  function onSubmit(e: FormEvent) {
+  function onSubmitDelete(e: FormEvent) {
     e.preventDefault()
     setStatus(true)
     toast
@@ -362,33 +362,33 @@ export default function Categorias() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className='flex flex-col gap-1'>
-                Visualizar categoría:{' '}
-                {errorGet
-                  ? 'Error'
-                  : loadingGet
-                  ? '...'
-                  : dataGet?.getCategory?.name}
-              </ModalHeader>
-              <ModalBody>
-                <p>
-                  Aca se podra visualizar a detalle el contenido de la
-                  categoria:{' '}
-                  {errorGet
-                    ? 'Error'
-                    : loadingGet
-                    ? '...'
-                    : dataGet?.getCategory?.name}
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button color='danger' variant='light' onPress={onClose}>
-                  Cerrar
-                </Button>
-                <Button color='primary' onPress={onClose}>
-                  Realizar
-                </Button>
-              </ModalFooter>
+              {errorGet ? (
+                'Error'
+              ) : loadingGet ? (
+                <section className='flex h-72 justify-center items-center'>
+                  <Spinner />
+                </section>
+              ) : (
+                <>
+                  <ModalHeader className='flex flex-col gap-1'>
+                    Visualizar categoría: {dataGet?.getCategory?.name}
+                  </ModalHeader>
+                  <ModalBody>
+                    <p>
+                      Aca se podra visualizar a detalle el contenido de la
+                      categoria: {dataGet?.getCategory?.name}
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color='danger' variant='light' onPress={onClose}>
+                      Cerrar
+                    </Button>
+                    <Button color='primary' onPress={onClose}>
+                      Realizar
+                    </Button>
+                  </ModalFooter>
+                </>
+              )}
             </>
           )}
         </ModalContent>
@@ -466,7 +466,7 @@ export default function Categorias() {
         onOpenChange={onDeleteOpenChange}
         backdrop='opaque'
       >
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmitDelete}>
           <ModalContent>
             {(onClose) => (
               <>
