@@ -374,6 +374,7 @@ export default function Categorias() {
                     Visualizar categoría: {dataGet?.getCategory?.name}
                   </ModalHeader>
                   <ModalBody>
+                    {dataGet?.getCategory?.id}
                     <p>
                       Aca se podra visualizar a detalle el contenido de la
                       categoria: {dataGet?.getCategory?.name}

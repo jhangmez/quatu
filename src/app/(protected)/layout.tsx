@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Listbox, ListboxItem } from '@nextui-org/react'
+import { Listbox, ListboxItem } from '@nextui-org/listbox'
+import { Divider } from '@nextui-org/divider'
 import { Link } from '@nextui-org/link'
 import { useSession } from 'next-auth/react'
 import { User } from '@nextui-org/user'
@@ -53,6 +54,11 @@ const listadomenu = [
     key: 'addprice',
     label: 'Precios',
     href: '/precio'
+  },
+  {
+    key: 'ayuda',
+    label: 'Como funciona',
+    href: '/funcionamiento'
   }
 ]
 
@@ -223,8 +229,22 @@ export default function LayoutHome({
               <ListboxItem
                 key={submenu.key}
                 href={submenu.href}
-                className=''
                 onClick={() => setIsMenuOpen(false)}
+                startContent={
+                  submenu.key === 'ayuda' ? (
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        fill='currentColor'
+                        d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16m-1-5h2v2h-2zm2-1.645V14h-2v-1.5a1 1 0 0 1 1-1a1.5 1.5 0 1 0-1.471-1.794l-1.962-.393A3.501 3.501 0 1 1 13 13.355'
+                      />
+                    </svg>
+                  ) : null
+                }
               >
                 {submenu.label}
               </ListboxItem>
@@ -262,8 +282,22 @@ export default function LayoutHome({
               <ListboxItem
                 key={submenu.key}
                 href={submenu.href}
-                className=''
                 onClick={() => setIsMenuOpen(false)}
+                startContent={
+                  submenu.key === 'ayuda' ? (
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        fill='currentColor'
+                        d='M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16m-1-5h2v2h-2zm2-1.645V14h-2v-1.5a1 1 0 0 1 1-1a1.5 1.5 0 1 0-1.471-1.794l-1.962-.393A3.501 3.501 0 1 1 13 13.355'
+                      />
+                    </svg>
+                  ) : null
+                }
               >
                 {submenu.label}
               </ListboxItem>

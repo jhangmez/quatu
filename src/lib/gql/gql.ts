@@ -22,6 +22,7 @@ const documents = {
     "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
     "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.GetCategoryDocument,
+    "query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllSubcategoriesByCategoryDocument,
     "\nquery AllUsers {\n  allUsers {\n    id\n    name\n    typeuser {\n      id\n      name\n    }\n  }\n}\n": types.AllUsersDocument,
     "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}": types.AllTypeUserDocument,
     "\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllCategoriesByCompanyDocument,
@@ -78,6 +79,10 @@ export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n   
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -33,6 +33,19 @@ export const GetCategoryId = gql(`query GetCategory($getCategoryId: Int!) {
 }
 `)
 
+export const AllSubcategoriesByCategory =
+  gql(`query AllSubcategoriesByCategory($categoryId: Int!) {
+  allSubcategoriesByCategory(categoryId: $categoryId) {
+    id
+    name
+    visible
+    linkImageCategory {
+      link
+    }
+  }
+}
+`)
+
 export const AllUsers = gql(`
 query AllUsers {
   allUsers {
