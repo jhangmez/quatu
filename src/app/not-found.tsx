@@ -28,7 +28,7 @@ export default function NotFound() {
             <div className='flex flex-col gap-2 mt-3'>
               <div>
                 <Button
-                  href='/'
+                  href='/home'
                   as={Link}
                   className='text-light-primary dark:text-dark-primary bg-light-onPrimary dark:bg-dark-onPrimary'
                   variant='flat'

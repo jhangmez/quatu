@@ -183,7 +183,7 @@ export default function LayoutHome({
                     className='transition-transform'
                     name={data?.me?.name || ''}
                     size='sm'
-                    src='/user_picture.jpg'
+                    src='/user_picture.webp'
                   />
                 </DropdownTrigger>
                 <DropdownMenu aria-label='Navigation' variant='flat'>
@@ -277,6 +277,10 @@ export default function LayoutHome({
           <Listbox
             className='flex flex-1 flex-col gap-y-4 pt-2'
             aria-label='Listado de items'
+            itemClasses={{
+              base: 'p-2.5 data-[hover=true]:bg-default-100/80',
+              title: 'text-lg '
+            }}
           >
             {listadomenu.map((submenu) => (
               <ListboxItem
@@ -338,7 +342,7 @@ export default function LayoutHome({
                         }
                         aria-label='usuario'
                         avatarProps={{
-                          src: '/user_picture.jpg'
+                          src: '/user_picture.webp'
                         }}
                       />
                     </DropdownTrigger>

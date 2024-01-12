@@ -150,42 +150,57 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
-          <Link
-            className='text-light-primary dark:text-dark-primary'
-            href={isLoggedIn ? '/home' : '/login'}
-          >
-            Ingresar
-          </Link>
-        </NavbarItem>
-        <NavbarItem className='flex lg:hidden'>
-          <Link
-            className='text-light-primary dark:text-dark-primary'
-            href={isLoggedIn ? '/home' : '/login'}
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
+        {isLoggedIn ? (
+          <NavbarItem>
+            <Button
+              as={Link}
+              className='bg-light-primary dark:bg-dark-primary text-light-onPrimary dark:text-dark-onPrimary'
+              href='/home'
+              variant='flat'
             >
-              <path
-                fill='currentColor'
-                d='M12.08 4.08L20 12l-7.92 7.92l-1.41-1.42l5.5-5.5H2v-2h14.17l-5.5-5.5zM20 12v10h2V2h-2z'
-              />
-            </svg>
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            className='bg-light-primary dark:bg-dark-primary text-light-onPrimary dark:text-dark-onPrimary'
-            href='/demo'
-            variant='flat'
-          >
-            Demo
-          </Button>
-        </NavbarItem>
+              Ingresar
+            </Button>
+          </NavbarItem>
+        ) : (
+          <>
+            <NavbarItem className='hidden lg:flex'>
+              <Link
+                className='text-light-primary dark:text-dark-primary'
+                href={isLoggedIn ? '/home' : '/login'}
+              >
+                Ingresar
+              </Link>
+            </NavbarItem>
+            <NavbarItem className='flex lg:hidden'>
+              <Link
+                className='text-light-primary dark:text-dark-primary'
+                href={isLoggedIn ? '/home' : '/login'}
+              >
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M12.08 4.08L20 12l-7.92 7.92l-1.41-1.42l5.5-5.5H2v-2h14.17l-5.5-5.5zM20 12v10h2V2h-2z'
+                  />
+                </svg>
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button
+                as={Link}
+                className='bg-light-primary dark:bg-dark-primary text-light-onPrimary dark:text-dark-onPrimary'
+                href='/demo'
+                variant='flat'
+              >
+                Demo
+              </Button>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
       <NavbarMenu>
         <Listbox

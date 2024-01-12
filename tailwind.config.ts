@@ -123,6 +123,26 @@ const config: Config = {
       }
     }
   },
-  plugins: [nextui()]
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          // ...
+          colors: {
+            primary: '#353efd',
+            secondary: '#5c5d72'
+          }
+        },
+        dark: {
+          // ...
+          colors: {
+            primary: '#bfc2ff',
+            secondary: '#c5c4dd'
+          }
+        }
+        // ... custom themes
+      }
+    })
+  ]
 }
 export default config

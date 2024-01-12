@@ -22,7 +22,8 @@ import { DeleteCategory, UpdateCategory } from '@lib/graphql/mutation'
 import { useMutation } from '@apollo/client'
 import { Checkbox } from '@nextui-org/checkbox'
 import { FormData } from './types'
-
+import NextImage from 'next/image'
+import { Image } from '@nextui-org/image'
 import {
   Modal,
   ModalContent,
@@ -32,6 +33,7 @@ import {
   ModalFooter
 } from '@nextui-org/modal'
 import { Spinner } from '@nextui-org/spinner'
+import { Link } from '@nextui-org/link'
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   true: 'success',
@@ -42,6 +44,10 @@ const columns = [
   {
     key: 'name',
     label: 'NOMBRE'
+  },
+  {
+    key: 'linkImageCategory',
+    label: 'IMAGEN'
   },
   {
     key: 'visible',
@@ -126,6 +132,21 @@ export default function Categorias() {
     switch (columnKey) {
       case 'name':
         return cellValue
+      case 'linkImageCategory':
+        return (
+          <Chip
+            className='capitalize select-none'
+            color={cellValue ? statusColorMap['true'] : statusColorMap['false']}
+            size='sm'
+            variant='flat'
+            as={Link}
+            href={cellValue?.link || ''}
+            isDisabled={!cellValue}
+            isExternal={!!cellValue}
+          >
+            {cellValue ? 'Ver imagen' : 'No existe'}
+          </Chip>
+        )
       case 'visible':
         return (
           <Chip
@@ -302,6 +323,10 @@ export default function Categorias() {
                   page={page}
                   total={pages}
                   onChange={(page) => setPage(page)}
+                  classNames={{
+                    item: 'text-light-secondary',
+                    cursor: 'text-light-onPrimary'
+                  }}
                 />
               </div>
             )}
@@ -375,6 +400,24 @@ export default function Categorias() {
                   </ModalHeader>
                   <ModalBody>
                     {dataGet?.getCategory?.id}
+                    {dataGet?.getCategory?.linkImageCategory?.link ? (
+                      <Image
+                        as={NextImage}
+                        width={150}
+                        height={150}
+                        src={dataGet?.getCategory?.linkImageCategory?.link}
+                        fallbackSrc='/loadingImage.webp'
+                        alt='Imagen de la categoria'
+                      />
+                    ) : (
+                      <Image
+                        width={150}
+                        height={150}
+                        alt='No existe Imagen'
+                        className='bg-opacity-50'
+                        src='/noImage.webp'
+                      />
+                    )}
                     <p>
                       Aca se podra visualizar a detalle el contenido de la
                       categoria: {dataGet?.getCategory?.name}
@@ -384,7 +427,10 @@ export default function Categorias() {
                     <Button color='danger' variant='light' onPress={onClose}>
                       Cerrar
                     </Button>
-                    <Button color='primary' onPress={onClose}>
+                    <Button
+                      className='bg-light-primary text-light-onPrimary'
+                      onPress={onClose}
+                    >
                       Realizar
                     </Button>
                   </ModalFooter>
