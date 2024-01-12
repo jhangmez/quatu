@@ -59,8 +59,18 @@ const columns = [
   }
 ]
 
+interface Category {
+  id: number
+  name: string
+  visible: boolean
+  linkImageCategory: {
+    link: string
+  }
+}
+
 const INITIAL_DATA: FormData = {
   name: '',
+  link: '',
   visible: false
 }
 
@@ -140,7 +150,11 @@ export default function Categorias() {
             size='sm'
             variant='flat'
             as={Link}
-            href={cellValue?.link || ''}
+            href={
+              typeof cellValue === 'object' && cellValue !== null
+                ? cellValue.link || ''
+                : ''
+            }
             isDisabled={!cellValue}
             isExternal={!!cellValue}
           >
@@ -196,6 +210,7 @@ export default function Categorias() {
                   onPress={() => {
                     updateFields({
                       name: category.name,
+                      link: category.linkImageCategory?.link,
                       visible: category.visible
                     })
                     onEditOpen()
@@ -478,6 +493,17 @@ export default function Categorias() {
                         value={dataINITIAL.name}
                         variant='bordered'
                         onChange={(e) => updateFields({ name: e.target.value })}
+                      />
+                      <Input
+                        id='link'
+                        name='link'
+                        autoFocus
+                        label='Link de la imagen'
+                        isRequired
+                        placeholder='Link de la imagen'
+                        value={dataINITIAL.link}
+                        variant='bordered'
+                        onChange={(e) => updateFields({ link: e.target.value })}
                       />
                       <Checkbox
                         isSelected={dataINITIAL.visible}
