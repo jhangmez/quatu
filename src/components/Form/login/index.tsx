@@ -3,9 +3,10 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { Icon } from '@iconify/react'
+import { Button } from '@nextui-org/button'
 import { Input } from '@nextui-org/input'
-import Link from 'next/link'
+import { Spinner } from '@nextui-org/spinner'
+import { Link } from '@nextui-org/link'
 
 export default function Login() {
   const [loading, setLoading] = useState(false)
@@ -50,12 +51,18 @@ export default function Login() {
           autoComplete='username'
           placeholder='Escribe tu nombre de usuario'
           endContent={
-            <Icon
-              icon='mdi:user'
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
               width='28'
               height='28'
               className='text-2xl text-default-400 pointer-events-none flex-shrink-0'
-            />
+              viewBox='0 0 24 24'
+            >
+              <path
+                fill='currentColor'
+                d='M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4'
+              />
+            </svg>
           }
         />
       </div>
@@ -72,29 +79,43 @@ export default function Login() {
           size='sm'
           required
           placeholder='Escribe tu contraseña'
-          // errorMessage='Escriba su contraseña'
           endContent={
-            <button
+            <Button
               className='focus:outline-none'
               type='button'
+              isIconOnly
+              size='sm'
+              variant='light'
               onClick={toggleVisibility}
             >
               {isVisible ? (
-                <Icon
-                  icon='mdi:eye'
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
                   width='28'
                   height='28'
+                  viewBox='0 0 24 24'
                   className='text-2xl text-default-400 pointer-events-none'
-                />
+                >
+                  <path
+                    fill='currentColor'
+                    d='M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5'
+                  />
+                </svg>
               ) : (
-                <Icon
-                  icon='mdi:eye-closed'
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
                   width='28'
                   height='28'
                   className='text-2xl text-default-400 pointer-events-none'
-                />
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M12 17.5c-3.8 0-7.2-2.1-8.8-5.5H1c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5h-2.2c-1.6 3.4-5 5.5-8.8 5.5'
+                  />
+                </svg>
               )}
-            </button>
+            </Button>
           }
           type={isVisible ? 'text' : 'password'}
         />
@@ -102,27 +123,17 @@ export default function Login() {
       <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
 
       <div className='w-fill flex-col justify-center gap-5 items-center inline-flex'>
-        <button
-          disabled={loading}
-          className={`${
-            loading
-              ? 'cursor-not-allowed border-light-outline border'
-              : 'w-fit border-light-outline text-light-onPrimary hover:bg-dark-primary hover:text-dark-onPrimary'
-          } min-w-[197px] w-fit h-10 bg-light-primary rounded-[100px] shadow flex-col justify-center items-center inline-flex`}
+        <Button
+          isDisabled={loading}
+          color='primary'
+          className=' p-5 rounded-full'
         >
           {loading ? (
-            <Icon
-              icon='eos-icons:bubble-loading'
-              height={18}
-              width={18}
-              color='#41484f'
-            />
+            <Spinner />
           ) : (
-            <div className='self-stretch grow  shrink basis-0 pl-4 pr-6 py-2.5 justify-center items-center  inline-flex'>
-              Ingresar
-            </div>
+            <p className='text-light-onPrimary'>Ingresar</p>
           )}
-        </button>
+        </Button>
         <p className='text-center text-sm text-light-onSurface dark:text-dark-onSurface'>
           No tienes cuenta? {''}
           <Link
