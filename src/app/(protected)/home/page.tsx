@@ -3,6 +3,13 @@
 import { Myself } from '@lib/graphql/query'
 import { useQuery } from '@apollo/client'
 import { Skeleton } from '@nextui-org/skeleton'
+import { Input } from '@nextui-org/input'
+import { toast } from 'react-hot-toast'
+import {
+  UploadButton,
+  UploadDropzone,
+  useUploadThing
+} from '@utils/uploadthing'
 
 export default function Home() {
   const {
@@ -11,6 +18,7 @@ export default function Home() {
     data: dataMe,
     refetch: refetchMe
   } = useQuery(Myself)
+
   return (
     <section>
       <p>
@@ -34,7 +42,24 @@ export default function Home() {
       ) : (
         <p>{dataMe?.me?.name || ''}</p>
       )}
-      <h1></h1>
+      {/* <UploadButton
+        endpoint='imageUploader'
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log('Files: ', res)
+          // toast.success('Successfully toasted!')
+          let uploadedFileUrls = res.map((file) => file.url).join(', ')
+          toast.success(`Successfully uploaded! File URLs: ${uploadedFileUrls}`)
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          toast.error(`ERROR! ${error.message}`)
+        }}
+        onUploadBegin={(name) => {
+          // Do something once upload begins
+          console.log('Uploading: ', name)
+        }}
+      /> */}
     </section>
   )
 }

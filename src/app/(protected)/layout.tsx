@@ -144,7 +144,11 @@ export default function LayoutHome({
 
         <NavbarContent className=' pr-3' justify='center'>
           <NavbarBrand>
-            <Link className='hover:underline' href='/home'>
+            <Link
+              className='hover:underline'
+              href='/home'
+              onClick={() => setIsMenuOpen(false)}
+            >
               <Icon
                 icon='material-symbols:store'
                 width='28'
@@ -220,7 +224,7 @@ export default function LayoutHome({
           )}
         </NavbarContent>
 
-        <NavbarMenu>
+        <NavbarMenu className='bg-transparent'>
           <Listbox
             className='flex flex-1 flex-col gap-y-4 pt-2'
             aria-label='Listado de items'

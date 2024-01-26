@@ -1,9 +1,9 @@
 'use client'
 
 import { Link } from '@nextui-org/link'
-import { Icon } from '@iconify/react'
 import { Card } from '@nextui-org/card'
 import { Button } from '@nextui-org/react'
+import { Icon } from '@iconify/react'
 
 export default function Precios() {
   return (

@@ -123,13 +123,9 @@ export default function Login() {
       <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
 
       <div className='w-fill flex-col justify-center gap-5 items-center inline-flex'>
-        <Button
-          isDisabled={loading}
-          color='primary'
-          className=' p-5 rounded-full'
-        >
+        <Button isDisabled={loading} color='primary' type='submit'>
           {loading ? (
-            <Spinner />
+            <Spinner color='warning' />
           ) : (
             <p className='text-light-onPrimary'>Ingresar</p>
           )}

@@ -18,11 +18,14 @@ mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
 `)
 
 export const CreateCategory = gql(`
-mutation CreateCategory($name: String!, $visible: Boolean) {
-  createCategory(name: $name, visible: $visible) {
+mutation CreateCategory($name: String!, $visible: Boolean, $link: String!, $namefile: String) {
+  createCategory(name: $name, visible: $visible, link: $link, namefile: $namefile) {
     id
     name
     visible
+    linkImageCategory {
+      link
+    }
   }
 }`)
 
@@ -54,10 +57,13 @@ mutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {
 `)
 
 export const UpdateCategory = gql(`
-mutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!) {
-  updateCategory(id: $id, name: $name, visible: $visible) {
+mutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {
+  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {
     name
     visible
+    linkImageCategory {
+      link
+    }
   }
 }
 `)

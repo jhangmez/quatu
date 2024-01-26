@@ -214,7 +214,7 @@ export default function PublicLayout({
             </>
           )}
         </NavbarContent>
-        <NavbarMenu>
+        <NavbarMenu className='bg-transparent'>
           <Listbox
             className='flex flex-1 flex-col gap-y-4 pt-2'
             aria-label='Listado de items'

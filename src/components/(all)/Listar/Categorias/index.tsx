@@ -146,7 +146,9 @@ export default function Categorias() {
         return (
           <Chip
             className='capitalize select-none'
-            color={cellValue ? statusColorMap['true'] : statusColorMap['false']}
+            color={
+              cellValue?.link ? statusColorMap['true'] : statusColorMap['false']
+            }
             size='sm'
             variant='flat'
             as={Link}
@@ -155,10 +157,10 @@ export default function Categorias() {
                 ? cellValue.link || ''
                 : ''
             }
-            isDisabled={!cellValue}
+            isDisabled={!cellValue?.link}
             isExternal={!!cellValue}
           >
-            {cellValue ? 'Ver imagen' : 'No existe'}
+            {cellValue?.link ? 'Ver imagen' : 'No existe'}
           </Chip>
         )
       case 'visible':
@@ -294,8 +296,7 @@ export default function Categorias() {
         updateCategory({
           variables: {
             id: Number(selectedCategoryId),
-            name: dataINITIAL.name,
-            visible: dataINITIAL.visible
+            ...dataINITIAL
           }
         }),
         {
@@ -414,7 +415,7 @@ export default function Categorias() {
                     Visualizar categoría: {dataGet?.getCategory?.name}
                   </ModalHeader>
                   <ModalBody>
-                    {dataGet?.getCategory?.id}
+                    {/* {dataGet?.getCategory?.id} */}
                     {dataGet?.getCategory?.linkImageCategory?.link ? (
                       <Image
                         as={NextImage}
