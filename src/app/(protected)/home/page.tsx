@@ -3,13 +3,6 @@
 import { Myself } from '@lib/graphql/query'
 import { useQuery } from '@apollo/client'
 import { Skeleton } from '@nextui-org/skeleton'
-import { Input } from '@nextui-org/input'
-import { toast } from 'react-hot-toast'
-import {
-  UploadButton,
-  UploadDropzone,
-  useUploadThing
-} from '@utils/uploadthing'
 
 export default function Home() {
   const {

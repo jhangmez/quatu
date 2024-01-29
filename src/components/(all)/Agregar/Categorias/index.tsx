@@ -22,10 +22,6 @@ import { generateClientDropzoneAccept } from 'uploadthing/client'
 
 import { useUploadThing } from '@utils/uploadthing'
 
-import { UploadDropzone } from '@uploadthing/react'
-
-import { OurFileRouter } from '@api/uploadthing/core'
-
 const INITIAL_DATA: FormData = {
   name: '',
   visible: false,

@@ -34,10 +34,6 @@ import {
 } from '@nextui-org/modal'
 import { Spinner } from '@nextui-org/spinner'
 import { Link } from '@nextui-org/link'
-import {
-  AllCategoriesByCompanyQuery,
-  AllCategoriesByCompanyQueryVariables
-} from '@lib/gql/graphql'
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   true: 'success',
