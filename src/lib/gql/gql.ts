@@ -17,7 +17,6 @@ const documents = {
     "\nmutation ChangePassword($oldPassword: String!, $newPassword: String!) {\n  changePassword(oldPassword: $oldPassword, newPassword: $newPassword) {\n    message\n    status\n  }\n}\n": types.ChangePasswordDocument,
     "\nmutation CreateCategory($name: String!, $visible: Boolean, $link: String!, $namefile: String) {\n  createCategory(name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}": types.CreateCategoryDocument,
     "\nmutation RootchangePassword($idUser: Int!, $newPassword: String!) {\n  rootchangePassword(idUser: $idUser, newPassword: $newPassword) {\n    message\n    status\n  }\n}": types.RootchangePasswordDocument,
-    "\nmutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {\n  allProductsByCompany(companyId: $CompanyId, filter: $filter) {\n    id\n    name\n    createdAt\n    price {\n      unitPrice\n      currency {\n        abbreviation\n      }\n    }\n    image {\n      link\n    }\n  }\n}\n": types.AllProductsByCompanyDocument,
     "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.UpdateCategoryDocument,
     "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
@@ -25,6 +24,7 @@ const documents = {
     "query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllSubcategoriesByCategoryDocument,
     "\nquery AllUsers {\n  allUsers {\n    id\n    name\n    typeuser {\n      id\n      name\n    }\n  }\n}\n": types.AllUsersDocument,
     "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}": types.AllTypeUserDocument,
+    "\nquery AllProductsByCompany {\n  allProductsByCompany {\n    id\n    name\n    visible\n    SKU\n    UPC\n  }\n}\n": types.AllProductsByCompanyDocument,
     "\nquery AllCategoriesByCompany($companyId: Int) {\n  allCategoriesByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllCategoriesByCompanyDocument,
     "\nquery AllListsByCompany($companyId: Int!) {\n  allListsByCompany(companyId: $companyId) {\n    id\n    name\n    visible\n    company {\n      name\n    }\n    product {\n      id\n      name\n      SKU\n      UPC\n      visible\n      image {\n        link\n      }\n    }\n    linkImageList {\n      link\n    }\n  }\n}": types.AllListsByCompanyDocument,
 };
@@ -62,10 +62,6 @@ export function gql(source: "\nmutation RootchangePassword($idUser: Int!, $newPa
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nmutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {\n  allProductsByCompany(companyId: $CompanyId, filter: $filter) {\n    id\n    name\n    createdAt\n    price {\n      unitPrice\n      currency {\n        abbreviation\n      }\n    }\n    image {\n      link\n    }\n  }\n}\n"): (typeof documents)["\nmutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {\n  allProductsByCompany(companyId: $CompanyId, filter: $filter) {\n    id\n    name\n    createdAt\n    price {\n      unitPrice\n      currency {\n        abbreviation\n      }\n    }\n    image {\n      link\n    }\n  }\n}\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -91,6 +87,10 @@ export function gql(source: "\nquery AllUsers {\n  allUsers {\n    id\n    name\
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}"): (typeof documents)["\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery AllProductsByCompany {\n  allProductsByCompany {\n    id\n    name\n    visible\n    SKU\n    UPC\n  }\n}\n"): (typeof documents)["\nquery AllProductsByCompany {\n  allProductsByCompany {\n    id\n    name\n    visible\n    SKU\n    UPC\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

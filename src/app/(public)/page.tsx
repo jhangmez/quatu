@@ -7,7 +7,7 @@ import ListarProducto from '@components/(public)/Listar/Producto'
 const quatu = ' | quatu'
 const title = `Página principal${quatu}`
 const description = 'Bienvenidos a quatu'
-const imageUrl = `https://quatu.vercel.app/api/og?title=Pagina Principal de quatu&description=${description}`
+const imageUrl = `https://quatu.vercel.app/api/og?title=Página Principal de quatu&description=${description}`
 
 export const metadata = {
   title,
@@ -29,8 +29,8 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
+    <section className='space-y-4'>
       <Pricing />
-    </>
+    </section>
   )
 }

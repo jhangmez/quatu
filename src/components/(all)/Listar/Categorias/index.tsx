@@ -34,6 +34,10 @@ import {
 } from '@nextui-org/modal'
 import { Spinner } from '@nextui-org/spinner'
 import { Link } from '@nextui-org/link'
+import {
+  AllCategoriesByCompanyQuery,
+  AllCategoriesByCompanyQueryVariables
+} from '@lib/gql/graphql'
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   true: 'success',
@@ -59,13 +63,18 @@ const columns = [
   }
 ]
 
-interface Category {
+type CategoryType = {
+  __typename?: 'Category' | undefined
   id: number
   name: string
-  visible: boolean
-  linkImageCategory: {
-    link: string
-  }
+  visible?: boolean | null | undefined
+  linkImageCategory?:
+    | {
+        __typename?: 'LinkImageCategory' | undefined
+        link: string
+      }
+    | null
+    | undefined
 }
 
 const INITIAL_DATA: FormData = {

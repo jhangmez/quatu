@@ -37,25 +37,6 @@ mutation RootchangePassword($idUser: Int!, $newPassword: String!) {
   }
 }`)
 
-export const AllProductsByCompany = gql(`
-mutation AllProductsByCompany($CompanyId: Int, $filter: ProductFilterInput) {
-  allProductsByCompany(companyId: $CompanyId, filter: $filter) {
-    id
-    name
-    createdAt
-    price {
-      unitPrice
-      currency {
-        abbreviation
-      }
-    }
-    image {
-      link
-    }
-  }
-}
-`)
-
 export const UpdateCategory = gql(`
 mutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {
   updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {

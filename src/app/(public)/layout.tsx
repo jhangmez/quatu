@@ -47,9 +47,10 @@ export default function PublicLayout({
   }, [])
 
   return (
-    <>
+    <main className='min-h-screen bg-light-surface dark:bg-dark-surface'>
       <Navbar
         onMenuOpenChange={setIsMenuOpen}
+        isMenuOpen={isMenuOpen}
         isBordered
         shouldHideOnScroll
         isBlurred={false}
@@ -214,16 +215,20 @@ export default function PublicLayout({
             </>
           )}
         </NavbarContent>
-        <NavbarMenu className='bg-transparent'>
+
+        <NavbarMenu className='bg-white/90'>
           <Listbox
             className='flex flex-1 flex-col gap-y-4 pt-2'
             aria-label='Listado de items'
+            itemClasses={{
+              base: 'p-2.5 data-[hover=true]:bg-default-100/80',
+              title: 'text-lg'
+            }}
           >
             {listadomenu.map((submenu) => (
               <ListboxItem
                 key={submenu.key}
                 href={submenu.href}
-                className=''
                 onClick={() => setIsMenuOpen(false)}
               >
                 {submenu.label}
@@ -384,6 +389,6 @@ export default function PublicLayout({
           </div>
         </div>
       </footer>
-    </>
+    </main>
   )
 }

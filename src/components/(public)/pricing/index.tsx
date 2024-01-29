@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react'
 
 export default function Precios() {
   return (
-    <main className='flex items-center justify-center overflow-auto bg-light-surface dark:bg-dark-surface    '>
+    <section className='flex items-center justify-center overflow-auto bg-light-surface dark:bg-dark-surface    '>
       <section className='relative isolate w-full max-w-6xl px-6 py-14 lg:px-8'>
         <div>
           <div className='text-center'>
@@ -25,7 +25,7 @@ export default function Precios() {
               </span>
             </p>
           </div>
-          <div className='mt-10 flex flex-col gap-y-6 sm:gap-x-6 lg:flex-row'>
+          {/* <div className='mt-10 flex flex-col gap-y-6 sm:gap-x-6 lg:flex-row'>
             <Card className='ring-1 ring-gray-200 flex dark:bg-light-surface w-full flex-col justify-between rounded-3xl bg-white p-8 shadow-lg lg:w-1/3 xl:p-10'>
               <div className='flex items-center justify-between gap-x-4'>
                 <h1
@@ -227,9 +227,9 @@ export default function Precios() {
                 </ul>
               </div>
             </Card>
-          </div>
+          </div> */}
         </div>
       </section>
-    </main>
+    </section>
   )
 }

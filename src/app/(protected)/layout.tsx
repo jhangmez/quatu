@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Listbox, ListboxItem } from '@nextui-org/listbox'
-import { Divider } from '@nextui-org/divider'
 import { Link } from '@nextui-org/link'
 import { useSession } from 'next-auth/react'
 import { User } from '@nextui-org/user'
@@ -13,7 +12,6 @@ import { useQuery } from '@apollo/client'
 import { Myself } from '@lib/graphql/query'
 import { Suspense } from 'react'
 import Loading from './loading'
-import { Icon } from '@iconify/react'
 import { signOut } from 'next-auth/react'
 import {
   Dropdown,
@@ -149,12 +147,18 @@ export default function LayoutHome({
               href='/home'
               onClick={() => setIsMenuOpen(false)}
             >
-              <Icon
-                icon='material-symbols:store'
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
                 width='28'
                 height='28'
-                className='text-light-onSurface dark:text-dark-onSurface'
-              />
+                viewBox='0 0 24 24'
+                className='text-light-primary dark:text-dark-primary'
+              >
+                <path
+                  fill='currentColor'
+                  d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+                />
+              </svg>
               <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
                 qua
               </span>
@@ -228,6 +232,10 @@ export default function LayoutHome({
           <Listbox
             className='flex flex-1 flex-col gap-y-4 pt-2'
             aria-label='Listado de items'
+            itemClasses={{
+              base: 'p-2.5 data-[hover=true]:bg-default-100/80',
+              title: 'text-lg'
+            }}
           >
             {listadomenu.map((submenu) => (
               <ListboxItem
@@ -262,12 +270,18 @@ export default function LayoutHome({
           <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>
             <section className='w-fit h-14 justify-start items-center inline-flex'>
               <Link className='hover:underline' href='/home'>
-                <Icon
-                  icon='material-symbols:store'
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
                   width='28'
                   height='28'
-                  className='text-light-onSurface dark:text-dark-onSurface'
-                />
+                  viewBox='0 0 24 24'
+                  className='text-light-primary dark:text-dark-primary'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+                  />
+                </svg>
                 <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
                   qua
                 </span>
@@ -279,11 +293,11 @@ export default function LayoutHome({
           </div>
 
           <Listbox
-            className='flex flex-1 flex-col gap-y-4 pt-2'
+            className='flex flex-1 flex-col gap-y-4 pt-2 bg-transparent'
             aria-label='Listado de items'
             itemClasses={{
               base: 'p-2.5 data-[hover=true]:bg-default-100/80',
-              title: 'text-lg '
+              title: 'text-lg'
             }}
           >
             {listadomenu.map((submenu) => (

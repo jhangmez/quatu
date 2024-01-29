@@ -16,11 +16,15 @@ import React, { FormEvent, useState, useCallback } from 'react'
 import { CreateCategory } from '@lib/graphql/mutation'
 import { useMutation } from '@apollo/client'
 import { Spinner } from '@nextui-org/spinner'
-import {
-  UploadButton,
-  UploadDropzone,
-  useUploadThing
-} from '@utils/uploadthing'
+
+import { useDropzone } from '@uploadthing/react'
+import { generateClientDropzoneAccept } from 'uploadthing/client'
+
+import { useUploadThing } from '@utils/uploadthing'
+
+import { UploadDropzone } from '@uploadthing/react'
+
+import { OurFileRouter } from '@api/uploadthing/core'
 
 const INITIAL_DATA: FormData = {
   name: '',
@@ -36,34 +40,41 @@ export default function Categorias() {
   const [status, setStatus] = useState(false)
   const [dataINITIAL, setDataINITIAL] = useState(INITIAL_DATA)
 
-  // const { startUpload } = useUploadThing('imageUploader', {
-  //   onClientUploadComplete: (res) => {
-  //     console.log('Upload Completed')
-  //     // let uploadedFileUrls = res.map((file) => file.url).join(', ')
-  //     // toast.success(`Successfully uploaded! File URLs: ${uploadedFileUrls}`)
-  //     // toast.success('Archivo subido correctamente!')
-  //     let firstFileUrl = res[0].url
-  //     updateFields({ link: firstFileUrl })
-  //     console.log('Se subio correctamente la imagen')
-  //   }
-  // })
-
-  const { startUpload } = useUploadThing('imageUploader', {
-    onClientUploadComplete: (res) => {
-      console.log('Upload Completed')
-      let firstFileUrl = res[0].url
-      updateFields({ link: firstFileUrl })
-      console.log(`Se subió correctamente la imagen:${firstFileUrl}`)
-    }
-  })
-
   const updateFields = useCallback((fields: Partial<FormData>) => {
     setDataINITIAL((prev) => {
       return { ...prev, ...fields }
     })
   }, [])
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [files, setFiles] = useState<File[]>([])
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setFiles(acceptedFiles)
+  }, [])
+
+  const { startUpload, permittedFileInfo } = useUploadThing('imageUploader', {
+    onClientUploadComplete: (res) => {
+      toast.success('uploaded successfully!')
+      let firstFileUrl = res[0].url
+      updateFields({ link: firstFileUrl })
+    },
+    onUploadError: (error) => {
+      toast.error(error.message)
+    },
+    onUploadBegin: () => {
+      toast('Comenzado a subir.', {
+        icon: '⏳'
+      })
+    }
+  })
+
+  const fileTypes = permittedFileInfo?.config
+    ? Object.keys(permittedFileInfo?.config)
+    : []
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined
+  })
 
   function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -96,7 +107,6 @@ export default function Categorias() {
             <path fill='currentColor' d='M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z' />
           </svg>
         }
-        // onPress={onOpen}
         onPress={() => {
           onOpen()
           setDataINITIAL(INITIAL_DATA)
@@ -139,89 +149,26 @@ export default function Categorias() {
                   >
                     Visible
                   </Checkbox>
-                  <UploadDropzone
-                    endpoint='imageUploader'
-                    className='bg-light-primaryContainer ut-label:text-lg ut-allowed-content:ut-uploading:text-red-300'
-                    content={{
-                      button({ ready, isUploading }) {
-                        const buttonClasses = `custom-button ${
-                          ready
-                            ? 'custom-button-ready'
-                            : 'custom-button-not-ready'
-                        } ${
-                          isUploading ? 'custom-button-uploadin text-white' : ''
-                        }`
 
-                        return (
-                          <div className={buttonClasses}>
-                            {ready ? 'Subir archivos' : 'Preparando subida...'}
-                          </div>
-                        )
-                      },
-                      label: () => (
-                        <span className='text-light-onSurface'>
-                          Seleccione la imagen o arrástrela y suéltela
-                        </span>
-                      ),
-                      allowedContent({ ready, fileTypes, isUploading }) {
-                        if (!ready) return 'Verificando'
-                        if (isUploading) return 'Subiendo imagen...'
-                        return `Tipo de archivo que puedes subir: ${fileTypes.join(
-                          ', '
-                        )}`
-                      }
-                    }}
-                    onUploadBegin={() => {
-                      toast('Comenzado a subir.', {
-                        icon: '⏳'
-                      })
-                    }}
-                    onClientUploadComplete={(res) => {
-                      console.log(`onClientUploadComplete`, res.map)
-                      let uploadedFileUrls = res
-                        .map((file) => file.url)
-                        .join(', ')
-                      toast.success(
-                        `Successfully uploaded! File URLs: ${uploadedFileUrls}`
-                      )
-                      toast.success('Archivo subido correctamente!')
-                      let firstFileUrl = res[0].url
-                      updateFields({ link: firstFileUrl })
-                      console.log('Se subio correctamente la imagen')
-                    }}
-                    onUploadError={(error: Error) => {
-                      toast.error(`ERROR! ${error.message}`)
-                    }}
-                  />
-                  {/* <Input
-                    type='file'
-                    onChange={async (e) => {
-                      const file = e.target.files?.[0]
-                      if (!file) return
-
-                      // Do something with files
-
-                      // Then start the upload
-                      await startUpload([file])
-                      toast.promise(startUpload([file]), {
-                        loading: 'Subiendo archivo...',
-                        success: <b>¡Subida completa!</b>,
-                        error: <b>No se pudo subir el archivo.</b>
-                      })
-                    }}
-                  />*/}
-                  {/* <Input
-                    type='file'
-                    onChange={(e) => {
-                      const file = e.target.files?.[0]
-                      if (file) {
-                        setSelectedFile(file)
-                        console.log('Archivo seleccionado:', file)
-                      } else {
-                        console.log('No se seleccionó ningún archivo.')
-                      }
-                    }}
-                  /> */}
+                  <div
+                    {...getRootProps()}
+                    className='h-32 rounded-xl bg-light-primaryContainer max-w-full gap-3 max-h-full flex flex-col-reverse items-center justify-center'
+                  >
+                    <input {...getInputProps()} />
+                    <div>
+                      {files.length > 0 && (
+                        <Button
+                          className='bg-light-secondary text-light-onSecondary'
+                          onClick={() => startUpload(files)}
+                        >
+                          Subir {files.length} archivo
+                        </Button>
+                      )}
+                    </div>
+                    Suelta o selecciona el archivo aquí!
+                    <span className='text-light-error'>*</span>
+                  </div>
+                  <p className='text-sm'>Subir primero la imagen</p>
                 </ModalBody>
                 <ModalFooter>
                   <Button

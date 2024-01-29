@@ -67,6 +67,18 @@ query AllTypeUser {
   }
 }`)
 
+export const AllProductsByCompany = gql(`
+query AllProductsByCompany {
+  allProductsByCompany {
+    id
+    name
+    visible
+    SKU
+    UPC
+  }
+}
+`)
+
 export const AllCategoriesByCompany = gql(`
 query AllCategoriesByCompany($companyId: Int) {
   allCategoriesByCompany(companyId: $companyId) {
