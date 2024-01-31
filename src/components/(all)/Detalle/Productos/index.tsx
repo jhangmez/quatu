@@ -1,9 +1,7 @@
-import { notFound } from 'next/navigation'
 import { GetProductId } from '@lib/graphql/query'
 import { useQuery } from '@apollo/client'
 import Loading from '../loading'
-import NextImage from 'next/image'
-import { Image } from '@nextui-org/image'
+import ListarImagenes from '@components/(all)/Imagenes'
 
 export default function Producto({ slug }: { slug: string }) {
   const {
@@ -40,26 +38,7 @@ export default function Producto({ slug }: { slug: string }) {
               </div>
             ))}
           </div>
-          <div>
-            Images:
-            {(dataGet?.getProduct?.image?.length ?? 0) > 0 ? (
-              dataGet?.getProduct?.image?.map((img, index) => (
-                <p key={index}>
-                  Image Link: {img?.link}
-                  <Image
-                    as={NextImage}
-                    width={150}
-                    height={150}
-                    src={img?.link}
-                    fallbackSrc='/loadingImage.webp'
-                    alt='Imagen de la categoria'
-                  />
-                </p>
-              ))
-            ) : (
-              <p>No hay imágenes asociadas a este producto.</p>
-            )}
-          </div>
+          <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
           <div>
             Prices:
             {dataGet?.getProduct?.price?.map((price, index) => (
