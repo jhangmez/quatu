@@ -171,11 +171,10 @@ export default function LayoutHome({
 
         <NavbarContent as='div' className='items-center' justify='end'>
           {loading ? (
-            <div className='max-w-[300px] w-full flex items-center gap-3'>
-              <div>
-                <Skeleton className='flex rounded-full w-12 h-12' />
-              </div>
-            </div>
+            <Skeleton
+              aria-label='Skeleton para la carga de imagen del usuario'
+              className='flex rounded-full w-10 h-10'
+            />
           ) : error ? (
             <p className='text-light-onSurface dark:text-dark-onSurface'>
               Error {error.message}
@@ -188,6 +187,7 @@ export default function LayoutHome({
                     isBordered
                     as='button'
                     showFallback
+                    aria-label='avatar'
                     className='transition-transform'
                     name={data?.me?.name || ''}
                     size='sm'
@@ -195,14 +195,14 @@ export default function LayoutHome({
                   />
                 </DropdownTrigger>
                 <DropdownMenu aria-label='Navigation' variant='flat'>
-                  <DropdownItem className='h-16 gap-2'>
+                  <DropdownItem aria-label='item-1' className='h-16 gap-2'>
                     <p className='font-semibold'>Ingresado como</p>
                     <p>{data?.me?.name || ''}</p>
                     <p className='text-sm text-light-onPrimaryFixed'>
                       @{data?.me?.username} - {data?.me?.company?.name}
                     </p>
                   </DropdownItem>
-                  <DropdownItem key='configurations'>
+                  <DropdownItem aria-label='item-2' key='configurations'>
                     <Link
                       href='/settings'
                       color='foreground'
@@ -211,7 +211,7 @@ export default function LayoutHome({
                       <a>Configuraciones</a>
                     </Link>
                   </DropdownItem>
-                  <DropdownItem key='help_and_feedback'>
+                  <DropdownItem aria-label='item-3' key='help_and_feedback'>
                     Ayuda & Feedback
                   </DropdownItem>
                   <DropdownItem
