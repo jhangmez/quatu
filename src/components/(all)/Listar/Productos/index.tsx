@@ -14,15 +14,12 @@ import { useQuery } from '@apollo/client'
 import { AllProductsByCompany } from '@lib/graphql/query'
 import { Pagination } from '@nextui-org/pagination'
 import { Tooltip } from '@nextui-org/tooltip'
-import { Chip, ChipProps } from '@nextui-org/chip'
+import { Chip } from '@nextui-org/chip'
 import { CircularProgress } from '@nextui-org/progress'
 import { Skeleton } from '@nextui-org/skeleton'
 import { Button } from '@nextui-org/react'
-
-const statusColorMap: Record<string, ChipProps['color']> = {
-  true: 'success',
-  false: 'danger'
-}
+import { statusColorMap } from '@utils/auxiliars'
+import { Link } from '@nextui-org/link'
 
 const columns = [
   {
@@ -85,11 +82,8 @@ export default function Productos() {
                 <Button
                   size='sm'
                   className='bg-light-tertiary text-light-onTertiary'
-                  // onPress={onDetailOpen}
-                  onPress={() => {
-                    // onDetailOpen()
-                    // setSelectedCategoryId(category.id)
-                  }}
+                  as={Link}
+                  href={`/producto/detalle/${product.id}`}
                   startContent={
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

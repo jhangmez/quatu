@@ -7,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client'
 import { Button } from '@nextui-org/button'
 import { RootChangePassword } from '@lib/graphql/mutation'
 import { Input } from '@nextui-org/input'
-import { Icon } from '@iconify/react'
 import { toast } from 'react-hot-toast'
 import { FormData } from './types'
 import { Select, SelectSection, SelectItem } from '@nextui-org/select'
@@ -138,19 +137,31 @@ export default function Home() {
                   onClick={toggleVisibility}
                 >
                   {isVisible ? (
-                    <Icon
-                      icon='mdi:eye'
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
                       width='28'
                       height='28'
+                      viewBox='0 0 24 24'
                       className='text-2xl text-default-400 pointer-events-none'
-                    />
+                    >
+                      <path
+                        fill='currentColor'
+                        d='M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5'
+                      />
+                    </svg>
                   ) : (
-                    <Icon
-                      icon='mdi:eye-closed'
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
                       width='28'
                       height='28'
+                      viewBox='0 0 24 24'
                       className='text-2xl text-default-400 pointer-events-none'
-                    />
+                    >
+                      <path
+                        fill='currentColor'
+                        d='M12 17.5c-3.8 0-7.2-2.1-8.8-5.5H1c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5h-2.2c-1.6 3.4-5 5.5-8.8 5.5'
+                      />
+                    </svg>
                   )}
                 </Button>
               }

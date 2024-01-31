@@ -34,11 +34,7 @@ import {
 } from '@nextui-org/modal'
 import { Spinner } from '@nextui-org/spinner'
 import { Link } from '@nextui-org/link'
-
-const statusColorMap: Record<string, ChipProps['color']> = {
-  true: 'success',
-  false: 'danger'
-}
+import { statusColorMap } from '@utils/auxiliars'
 
 const columns = [
   {

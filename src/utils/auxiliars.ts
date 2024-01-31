@@ -1,3 +1,10 @@
+import { ChipProps } from '@nextui-org/chip'
+
+export const statusColorMap: Record<string, ChipProps['color']> = {
+  true: 'success',
+  false: 'danger'
+}
+
 export const displayDate = (date: Date | null): string => {
   return date ? date.toISOString().split('T')[0] : ''
 }

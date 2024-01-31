@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { Providers } from './providers'
@@ -8,14 +7,6 @@ import { Suspense } from 'react'
 import Loading from './loading'
 
 const myFont = localFont({ src: './LexendDeca-VariableFont_wght.ttf' })
-
-const title = 'quaTu | Tu tienda virtual'
-const description = 'Tu tienda virtual'
-
-export const metadata: Metadata = {
-  title,
-  description
-}
 
 export default function RootLayout({
   children

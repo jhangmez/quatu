@@ -21,6 +21,7 @@ const documents = {
     "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
     "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.GetCategoryDocument,
+    "\nquery GetProduct($getProductId: Int!) {\n  getProduct(id: $getProductId) {\n    SKU\n    UPC\n    category {\n      subcategory {\n        name\n      }\n    }\n    id\n    image {\n      link\n    }\n    name\n    price {\n      bulkPrice\n      bulkQuantity\n      unitPrice\n      onSale\n      visible\n    }\n    visible\n  }\n}\n": types.GetProductDocument,
     "query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllSubcategoriesByCategoryDocument,
     "\nquery AllUsers {\n  allUsers {\n    id\n    name\n    typeuser {\n      id\n      name\n    }\n  }\n}\n": types.AllUsersDocument,
     "\nquery AllTypeUser {\n  allTypeUser {\n    id\n    name\n  }\n}": types.AllTypeUserDocument,
@@ -75,6 +76,10 @@ export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n   
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery GetProduct($getProductId: Int!) {\n  getProduct(id: $getProductId) {\n    SKU\n    UPC\n    category {\n      subcategory {\n        name\n      }\n    }\n    id\n    image {\n      link\n    }\n    name\n    price {\n      bulkPrice\n      bulkQuantity\n      unitPrice\n      onSale\n      visible\n    }\n    visible\n  }\n}\n"): (typeof documents)["\nquery GetProduct($getProductId: Int!) {\n  getProduct(id: $getProductId) {\n    SKU\n    UPC\n    category {\n      subcategory {\n        name\n      }\n    }\n    id\n    image {\n      link\n    }\n    name\n    price {\n      bulkPrice\n      bulkQuantity\n      unitPrice\n      onSale\n      visible\n    }\n    visible\n  }\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

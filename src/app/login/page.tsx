@@ -2,7 +2,6 @@
 
 import Form from '@components/Form'
 import { Link } from '@nextui-org/link'
-import { Icon } from '@iconify/react'
 import { VercelHarkaysoft } from '@routes'
 
 export default function Login() {
@@ -14,12 +13,18 @@ export default function Login() {
             href='/'
             className='w-fit h-14 justify-start items-center gap-[5px] inline-flex lg:pb-10 sm:pb-4'
           >
-            <Icon
-              icon='material-symbols:store'
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
               width='28'
               height='28'
-              className='text-light-onSurface dark:text-dark-onSurface'
-            />
+              viewBox='0 0 24 24'
+              className='text-light-primary dark:text-dark-primary'
+            >
+              <path
+                fill='currentColor'
+                d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'
+              />
+            </svg>
             <div>
               <span className='text-light-onSurface dark:text-dark-onSurface text-2xl font-bold leading-[44px]'>
                 qua
