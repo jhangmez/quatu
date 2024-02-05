@@ -30,6 +30,22 @@ export default function Producto({ slug }: { slug: string }) {
         <section className='w-full grid gap-y-3'>
           <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
             <div className='w-full'>
+              <p className='text-light-onSurface'>Nombre</p>
+              <Input
+                label='Nombre del producto'
+                isRequired
+                value={dataGet?.getProduct?.name}
+                isReadOnly={true}
+                className='max-w-full'
+                classNames={{
+                  input: ['sm:text-xl text-normal'],
+                  inputWrapper: ['py-1']
+                }}
+              />
+            </div>
+          </div>
+          <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
+            <div className='w-full'>
               <p className='text-light-onSurface'>ID</p>
               <Input
                 label='ID'
@@ -39,18 +55,6 @@ export default function Producto({ slug }: { slug: string }) {
                 className='max-w-full'
               />
             </div>
-            <div className='w-full'>
-              <p className='text-light-onSurface'>Nombre</p>
-              <Input
-                label='Nombre del producto'
-                isRequired
-                value={dataGet?.getProduct?.name}
-                isReadOnly={true}
-                className='max-w-full'
-              />
-            </div>
-          </div>
-          <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
             <div className='w-full'>
               <p className='text-light-onSurface'>SKU</p>
               <Input
