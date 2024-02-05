@@ -1,6 +1,8 @@
 // Primero, asegúrate de importar GetProductQuery
 import { GetProductQuery } from '@lib/gql/graphql'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
+import { statusColorMap } from '@utils/auxiliars'
+import { Chip } from '@nextui-org/chip'
 
 // Luego, extrae el tipo de los precios usando Utility Types
 type Price = NonNullable<
@@ -9,25 +11,42 @@ type Price = NonNullable<
 
 export default function ListarPrecios({ prices }: { prices: Price[] }) {
   return (
-    <section className='flex flex-wrap gap-5'>
-      {prices.length > 0 &&
-        prices.map((price, index) => (
-          <Card key={index} className='p-3'>
-            <p>Moneda: {price?.currency?.name}</p>
-            <p>
-              Bulk Price: {price?.currency?.abbreviation} {price?.bulkPrice}
-            </p>
-            <p>
-              Bulk Quantity: {price?.currency?.abbreviation}{' '}
-              {price?.bulkQuantity}
-            </p>
-            <p>
-              Unit Price: {price?.currency?.abbreviation} {price?.unitPrice}
-            </p>
-            <p>On Sale: {price?.onSale ? 'Si' : 'No'}</p>
-            <p>Visible: {price?.visible ? 'Si' : 'No'}</p>
-          </Card>
-        ))}
-    </section>
+    <Card className='max-w-full'>
+      <CardHeader className='text-xl'>Precios</CardHeader>
+      <section className='flex flex-wrap gap-5'>
+        {prices.length > 0 &&
+          prices.map((price, index) => (
+            <div key={index} className='p-3 min-w-80'>
+              <p>Moneda: {price?.currency?.name}</p>
+              <p>
+                Al por mayor: {price?.currency?.abbreviation} {price?.bulkPrice}
+              </p>
+              <p>
+                Al por menor: {price?.currency?.abbreviation}{' '}
+                {price?.bulkQuantity}
+              </p>
+              <p>
+                Unitario: {price?.currency?.abbreviation} {price?.unitPrice}
+              </p>
+              <p>Ofera: {price?.onSale ? 'Si' : 'No'}</p>
+              <p>
+                Visible:{' '}
+                <Chip
+                  className='capitalize select-none'
+                  color={
+                    price?.visible
+                      ? statusColorMap['true']
+                      : statusColorMap['false']
+                  }
+                  size='sm'
+                  variant='flat'
+                >
+                  {price?.visible ? 'Visible' : 'No visible'}
+                </Chip>
+              </p>
+            </div>
+          ))}
+      </section>
+    </Card>
   )
 }
