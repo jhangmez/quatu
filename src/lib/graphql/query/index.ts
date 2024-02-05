@@ -39,9 +39,7 @@ query GetProduct($getProductId: Int!) {
     SKU
     UPC
     category {
-      subcategory {
-        name
-      }
+      name
     }
     id
     image {

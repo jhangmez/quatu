@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client'
 import Loading from '../loading'
 import ListarImagenes from '@components/(all)/Imagenes'
 import ListarPrecios from '@components/(all)/Precios'
+import ListarSubcategorias from '@components/(all)/Subcategorias'
 import { Input } from '@nextui-org/input'
 import { statusColorMap } from '@utils/auxiliars'
 import { Chip } from '@nextui-org/chip'
@@ -69,17 +70,10 @@ export default function Producto({ slug }: { slug: string }) {
               />
             </div>
           </div>
-          <div>
-            Categories and Subcategories:
-            {dataGet?.getProduct?.category?.map((category, index) => (
-              <div key={index}>
-                <p>Category: {category?.__typename}</p>
-                {category?.subcategory?.map((sub, subIndex) => (
-                  <p key={subIndex}>Subcategory: {sub?.name}</p>
-                ))}
-              </div>
-            ))}
-          </div>
+
+          <ListarSubcategorias
+            subcategories={dataGet?.getProduct?.category ?? []}
+          />
           <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
           <ListarPrecios prices={dataGet?.getProduct?.price ?? []} />
 
