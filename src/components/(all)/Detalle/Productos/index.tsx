@@ -28,6 +28,21 @@ export default function Producto({ slug }: { slug: string }) {
         </p>
       ) : (
         <section className='w-full grid gap-y-3'>
+          <p>
+            Producto visible:{' '}
+            <Chip
+              className='capitalize select-none'
+              color={
+                dataGet?.getProduct?.visible
+                  ? statusColorMap['true']
+                  : statusColorMap['false']
+              }
+              size='sm'
+              variant='flat'
+            >
+              {dataGet?.getProduct?.visible ? 'Visible' : 'No visible'}
+            </Chip>
+          </p>
           <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
             <div className='w-full'>
               <p className='text-light-onSurface'>Nombre</p>
@@ -80,22 +95,6 @@ export default function Producto({ slug }: { slug: string }) {
           />
           <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
           <ListarPrecios prices={dataGet?.getProduct?.price ?? []} />
-
-          <p>
-            Producto visible:{' '}
-            <Chip
-              className='capitalize select-none'
-              color={
-                dataGet?.getProduct?.visible
-                  ? statusColorMap['true']
-                  : statusColorMap['false']
-              }
-              size='sm'
-              variant='flat'
-            >
-              {dataGet?.getProduct?.visible ? 'Visible' : 'No visible'}
-            </Chip>
-          </p>
         </section>
       )}
     </>
