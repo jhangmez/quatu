@@ -16,6 +16,17 @@ export default function ListarPrecios({
 
       <CardBody>
         <section className='flex flex-wrap gap-5'>
+          <div className='p-2 w-56 flex flex-row gap-2 items-center justify-center border-dashed border-2 border-light-outline rounded-xl bg-light-surface text-light-onSurface select-none'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path fill='currentColor' d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z' />
+            </svg>
+            <p className='text-sm sm:text-normal'>Agregar</p>
+          </div>
           {subcategories &&
             subcategories.length > 0 &&
             subcategories.map((subcategory, index) => (

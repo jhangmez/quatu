@@ -15,6 +15,17 @@ export default function ListarPrecios({ prices }: { prices: Price[] }) {
       <CardHeader className='text-xl'>Precios</CardHeader>
       <CardBody>
         <section className='flex flex-wrap gap-5'>
+          <div className='h-[150px] w-[150px] flex flex-col gap-2 items-center justify-center border-dashed border-2 border-light-outline rounded-xl bg-light-surface text-light-onSurface select-none'>
+            <p className='text-sm sm:text-normal'>Crear precio</p>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+            >
+              <path fill='currentColor' d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z' />
+            </svg>
+          </div>
           {prices.length > 0 &&
             prices.map((price, index) => (
               <div
