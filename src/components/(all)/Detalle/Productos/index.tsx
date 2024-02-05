@@ -68,6 +68,10 @@ export default function Producto({ slug }: { slug: string }) {
                 value={String(dataGet?.getProduct?.id)}
                 isReadOnly={true}
                 className='max-w-full'
+                classNames={{
+                  input: ['sm:text-xl text-normal'],
+                  inputWrapper: ['py-1']
+                }}
               />
             </div>
             <div className='w-full'>
@@ -77,6 +81,10 @@ export default function Producto({ slug }: { slug: string }) {
                 value={dataGet?.getProduct?.SKU ?? ''}
                 isReadOnly={true}
                 className='max-w-full'
+                classNames={{
+                  input: ['sm:text-xl text-normal'],
+                  inputWrapper: ['py-1']
+                }}
               />
             </div>
             <div className='w-full'>
@@ -86,6 +94,10 @@ export default function Producto({ slug }: { slug: string }) {
                 value={dataGet?.getProduct?.UPC ?? ''}
                 isReadOnly={true}
                 className='max-w-full'
+                classNames={{
+                  input: ['sm:text-xl text-normal'],
+                  inputWrapper: ['py-1']
+                }}
               />
             </div>
           </div>
