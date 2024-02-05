@@ -2,6 +2,10 @@ import { GetProductId } from '@lib/graphql/query'
 import { useQuery } from '@apollo/client'
 import Loading from '../loading'
 import ListarImagenes from '@components/(all)/Imagenes'
+import ListarPrecios from '@components/(all)/Precios'
+import { Input } from '@nextui-org/input'
+import { statusColorMap } from '@utils/auxiliars'
+import { Chip } from '@nextui-org/chip'
 
 export default function Producto({ slug }: { slug: string }) {
   const {
@@ -18,15 +22,53 @@ export default function Producto({ slug }: { slug: string }) {
       {loadingGet ? (
         <Loading />
       ) : errorGet ? (
-        <p className='text-light-onSurface dark:text-dark-onSurface'>
+        <p className='text-light-onSurface'>
           No existe el producto seleccionado
         </p>
       ) : (
-        <>
-          <p>ID: {dataGet?.getProduct?.id}</p>
-          <p>Name: {dataGet?.getProduct?.name}</p>
-          <p>SKU: {dataGet?.getProduct?.SKU}</p>
-          <p>UPC: {dataGet?.getProduct?.UPC}</p>
+        <section className='w-full grid gap-y-3'>
+          <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
+            <div className='w-full'>
+              <p className='text-light-onSurface'>ID</p>
+              <Input
+                label='ID'
+                isRequired
+                value={String(dataGet?.getProduct?.id)}
+                isReadOnly={true}
+                className='max-w-full'
+              />
+            </div>
+            <div className='w-full'>
+              <p className='text-light-onSurface'>Nombre</p>
+              <Input
+                label='Nombre del producto'
+                isRequired
+                value={dataGet?.getProduct?.name}
+                isReadOnly={true}
+                className='max-w-full'
+              />
+            </div>
+          </div>
+          <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
+            <div className='w-full'>
+              <p className='text-light-onSurface'>SKU</p>
+              <Input
+                label='SKU'
+                value={dataGet?.getProduct?.SKU ?? ''}
+                isReadOnly={true}
+                className='max-w-full'
+              />
+            </div>
+            <div className='w-full'>
+              <p className='text-light-onSurface'>UPC</p>
+              <Input
+                label='UPC'
+                value={dataGet?.getProduct?.UPC ?? ''}
+                isReadOnly={true}
+                className='max-w-full'
+              />
+            </div>
+          </div>
           <div>
             Categories and Subcategories:
             {dataGet?.getProduct?.category?.map((category, index) => (
@@ -39,20 +81,24 @@ export default function Producto({ slug }: { slug: string }) {
             ))}
           </div>
           <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
-          <div>
-            Prices:
-            {dataGet?.getProduct?.price?.map((price, index) => (
-              <div key={index}>
-                <p>Bulk Price: {price?.bulkPrice}</p>
-                <p>Bulk Quantity: {price?.bulkQuantity}</p>
-                <p>Unit Price: {price?.unitPrice}</p>
-                <p>On Sale: {price?.onSale ? 'Si' : 'No'}</p>
-                <p>Visible: {price?.visible ? 'Si' : 'No'}</p>
-              </div>
-            ))}
-          </div>
-          <p>Product Visible: {dataGet?.getProduct?.visible ? 'Si' : 'No'}</p>
-        </>
+          <ListarPrecios prices={dataGet?.getProduct?.price ?? []} />
+
+          <p>
+            Producto visible:{' '}
+            <Chip
+              className='capitalize select-none'
+              color={
+                dataGet?.getProduct?.visible
+                  ? statusColorMap['true']
+                  : statusColorMap['false']
+              }
+              size='sm'
+              variant='flat'
+            >
+              {dataGet?.getProduct?.visible ? 'Visible' : 'No visible'}
+            </Chip>
+          </p>
+        </section>
       )}
     </>
   )

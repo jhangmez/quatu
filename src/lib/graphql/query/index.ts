@@ -54,6 +54,10 @@ query GetProduct($getProductId: Int!) {
       unitPrice
       onSale
       visible
+      currency {
+        abbreviation
+        name
+      }
     }
     visible
   }

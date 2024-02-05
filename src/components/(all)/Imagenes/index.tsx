@@ -1,5 +1,6 @@
 'use client'
 
+import { GetProductQuery } from '@lib/gql/graphql'
 import { useState } from 'react'
 import { Image } from '@nextui-org/image'
 import NextImage from 'next/image'
@@ -9,7 +10,9 @@ import { toast } from 'react-hot-toast'
 
 import { UploadDropzone } from '@utils/uploadthing'
 
-export type Image = { __typename?: 'LinkImageProduct'; link: string } | null
+type Image = NonNullable<
+  NonNullable<GetProductQuery['getProduct']>['image']
+>[number]
 
 export default function ListarImagenes({ images }: { images: Image[] }) {
   const [hoverText, setHoverText] = useState<{ [key: number]: string }>({})
@@ -24,14 +27,14 @@ export default function ListarImagenes({ images }: { images: Image[] }) {
           className='border-dashed border-light-outline rounded-xl border-2'
           appearance={{
             container:
-              'h-[150px] w-[150px] p-0 mt-0 bg-light-surface select-none',
+              'h-[150px] w-[150px] p-0 mt-0 bg-light-surface select-none hover:text-light-primary',
             label:
               'flex mt-0 w-fit text-light-onSurface text-sm sm:text-normal ut-uploading:hidden hover:text-light-primary',
             button:
               'flex w-fit h-fit px-2 py-1 rounded-xl bg-light-primary text-sm mt-2 ut-uploading:hidden',
             allowedContent:
               'ut-uploading:text-light-Error ut-uploading:text-sm',
-            uploadIcon: 'mb-2'
+            uploadIcon: 'mb-2 '
           }}
           content={{
             uploadIcon({ isUploading }) {
@@ -69,7 +72,7 @@ export default function ListarImagenes({ images }: { images: Image[] }) {
               return <>{ready ? 'Subir imagen' : 'Preparando subida...'}</>
             },
             label: ({}) => {
-              return <>Subir imagen</>
+              return 'Subir imagen'
             },
 
             allowedContent({ ready, fileTypes, isUploading }) {
