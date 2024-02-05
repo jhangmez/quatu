@@ -29,9 +29,9 @@ export default function ListarPrecios({
           </div>
           {subcategories &&
             subcategories.length > 0 &&
-            subcategories.map((subcategory, index) => (
+            subcategories.map((subcategory) => (
               <div className='bg-light-surface p-3 min-w-80 border-light-outline/10 rounded-xl border-2'>
-                <p key={index}>{subcategory ? subcategory.name : 'N/A'}</p>
+                <p>{subcategory ? subcategory.name : 'N/A'}</p>
               </div>
             ))}
         </section>
