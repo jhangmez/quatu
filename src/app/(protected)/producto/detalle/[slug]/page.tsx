@@ -4,10 +4,11 @@ import { Button } from '@nextui-org/button'
 
 export default function Productos({ params }: { params: { slug: string } }) {
   return (
-    <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3'>
+    <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
       <Button
         href='/producto'
         as={Link}
+        color='primary'
         startContent={
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -21,8 +22,8 @@ export default function Productos({ params }: { params: { slug: string } }) {
             />
           </svg>
         }
-        className='text-light-primary border-light-primary'
-        variant='bordered'
+        className='text-light-onPrimary border-light-onPrimary'
+        variant='solid'
       >
         Retornar
       </Button>
