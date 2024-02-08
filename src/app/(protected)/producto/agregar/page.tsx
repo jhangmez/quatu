@@ -4,7 +4,7 @@ import Agregar from '@components/(all)/Agregar'
 import { Button } from '@nextui-org/button'
 import { useRouter } from 'next/navigation'
 
-export default function Precio() {
+export default function Producto() {
   const router = useRouter()
 
   return (
@@ -14,6 +14,8 @@ export default function Precio() {
         onPress={() => {
           router.back()
         }}
+        color='primary'
+        className='text-light-onPrimary'
       >
         Regresar
       </Button>

@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/button'
 
 export default function Productos({ params }: { params: { slug: number } }) {
   return (
-    <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
+    <section className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
       <Button
         href='/producto'
         as={Link}
@@ -28,6 +28,6 @@ export default function Productos({ params }: { params: { slug: number } }) {
         Retornar
       </Button>
       <Agregar type='productos' slug={params.slug} />
-    </div>
+    </section>
   )
 }

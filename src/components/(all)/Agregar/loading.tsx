@@ -9,7 +9,7 @@ export default function Loading() {
         <span className='text-2xl text-[0.8em] font-normal'> S O F T</span>
       </p>
       <Spinner color='primary' />
-      <p className='mt-4 text-light-onBackground'>Cargando precio...</p>
+      <p className='mt-4 text-light-onBackground'>Cargando ...</p>
     </section>
   )
 }

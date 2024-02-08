@@ -6,7 +6,7 @@ import { Link } from '@nextui-org/link'
 
 export default function Producto() {
   return (
-    <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3'>
+    <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
       <h2 className='text-4xl mb-3'>Productos</h2>
       <Accordion
         variant='shadow'

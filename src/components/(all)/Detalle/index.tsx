@@ -1,5 +1,3 @@
-'use client'
-
 import Productos from './Productos'
 import Categorias from './Categorias'
 

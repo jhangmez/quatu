@@ -1,3 +1,5 @@
+'use client'
+
 import { GetProductId } from '@lib/graphql/query'
 import { useQuery } from '@apollo/client'
 import Loading from '../loading'

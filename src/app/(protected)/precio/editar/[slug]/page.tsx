@@ -14,6 +14,8 @@ export default function Precio({ params }: { params: { slug: number } }) {
         onPress={() => {
           router.back()
         }}
+        color='primary'
+        className='text-light-onPrimary'
       >
         Regresar
       </Button>
