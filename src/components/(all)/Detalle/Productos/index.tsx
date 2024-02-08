@@ -8,7 +8,7 @@ import { Input } from '@nextui-org/input'
 import { statusColorMap } from '@utils/auxiliars'
 import { Chip } from '@nextui-org/chip'
 
-export default function Producto({ slug }: { slug: string }) {
+export default function Producto({ slug }: { slug: number }) {
   const {
     loading: loadingGet,
     error: errorGet,
@@ -45,7 +45,9 @@ export default function Producto({ slug }: { slug: string }) {
           </p>
           <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
             <div className='w-full'>
-              <p className='text-light-onSurface'>Nombre</p>
+              <p className='text-light-onSurface'>
+                Nombre {dataGet?.getProduct?.id}
+              </p>
               <Input
                 label='Nombre del producto'
                 isRequired
@@ -106,7 +108,10 @@ export default function Producto({ slug }: { slug: string }) {
             subcategories={dataGet?.getProduct?.category ?? []}
           />
           <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
-          <ListarPrecios prices={dataGet?.getProduct?.price ?? []} />
+          <ListarPrecios
+            prices={dataGet?.getProduct?.price ?? []}
+            productId={dataGet?.getProduct?.id}
+          />
         </section>
       )}
     </>

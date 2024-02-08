@@ -49,6 +49,14 @@ mutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: St
 }
 `)
 
+export const CreateorUpdatePrice = gql(`
+mutation CreateOrUpdatePrice($unitPrice: Float!, $currencyId: Int!, $createOrUpdatePriceId: Int, $bulkPrice: Float, $bulkQuantity: Int, $onSale: Boolean, $visible: Boolean) {
+  createOrUpdatePrice(unitPrice: $unitPrice, currencyId: $currencyId, id: $createOrUpdatePriceId, bulkPrice: $bulkPrice, bulkQuantity: $bulkQuantity, onSale: $onSale, visible: $visible) {
+    id
+  }
+}
+`)
+
 export const DeleteCategory = gql(`
 mutation DeleteCategory($id: Int!) {
   deleteCategory(id: $id) {

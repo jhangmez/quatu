@@ -1,6 +1,8 @@
 'use client'
 import ListarProductos from '@components/(all)/Listar'
 import { Accordion, AccordionItem } from '@nextui-org/accordion'
+import { Button } from '@nextui-org/button'
+import { Link } from '@nextui-org/link'
 
 export default function Producto() {
   return (
@@ -19,6 +21,15 @@ export default function Producto() {
           </>
         </AccordionItem>
       </Accordion>
+      <Button
+        variant='solid'
+        color='primary'
+        className='text-light-onPrimary'
+        as={Link}
+        href='/producto/agregar'
+      >
+        Agregar producto
+      </Button>
       <section className='flex flex-col gap-5 pb-5'>
         <ListarProductos type='productos' />
       </section>

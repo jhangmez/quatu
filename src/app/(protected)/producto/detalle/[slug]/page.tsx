@@ -1,8 +1,8 @@
-import Detalle from '@components/(all)/Detalle'
+import Agregar from '@components/(all)/Agregar'
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
 
-export default function Productos({ params }: { params: { slug: string } }) {
+export default function Productos({ params }: { params: { slug: number } }) {
   return (
     <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
       <Button
@@ -27,7 +27,7 @@ export default function Productos({ params }: { params: { slug: string } }) {
       >
         Retornar
       </Button>
-      <Detalle type='productos' slug={params.slug} />
+      <Agregar type='productos' slug={params.slug} />
     </div>
   )
 }

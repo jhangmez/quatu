@@ -29,6 +29,11 @@ import {
 
 const listadomenu = [
   {
+    key: 'home',
+    label: 'Inicio',
+    href: '/home'
+  },
+  {
     key: 'addproduct',
     label: 'Productos',
     href: '/producto'

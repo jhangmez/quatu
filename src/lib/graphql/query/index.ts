@@ -47,6 +47,7 @@ query GetProduct($getProductId: Int!) {
     }
     name
     price {
+      id
       bulkPrice
       bulkQuantity
       unitPrice
@@ -61,6 +62,22 @@ query GetProduct($getProductId: Int!) {
   }
 }
 `)
+
+export const GetPrice = gql(`
+query GetPrice($getPriceId: Int!) {
+  getPrice(id: $getPriceId) {
+    bulkPrice
+    bulkQuantity
+    currency {
+      name
+      abbreviation
+    }
+    id
+    onSale
+    unitPrice
+    visible
+  }
+}`)
 
 export const AllSubcategoriesByCategory =
   gql(`query AllSubcategoriesByCategory($categoryId: Int!) {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Categorias({ slug }: { slug: string }) {
+export default function Categorias({ slug }: { slug: number }) {
   const id = slug
   return (
     <div>

@@ -8,7 +8,7 @@ export default function Detalle({
   slug
 }: {
   type: 'productos' | 'categorias'
-  slug: string
+  slug: number
 }) {
   return (
     <>
