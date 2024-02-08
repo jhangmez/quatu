@@ -11,12 +11,10 @@ import { statusColorMap } from '@utils/auxiliars'
 import { Chip } from '@nextui-org/chip'
 
 export default function Producto({ slug }: { slug?: number }) {
-  const productQuery = slug
-    ? useQuery(GetProductId, {
-        variables: { getProductId: Number(slug) },
-        skip: !slug // Omitir la consulta si no hay id
-      })
-    : { loading: false, error: null, data: null, refetch: null }
+  const productQuery = useQuery(GetProductId, {
+    variables: { getProductId: slug !== undefined ? Number(slug) : 0 },
+    skip: !slug // Omitir la consulta si no hay slug
+  })
 
   const {
     loading: loadingGet,
@@ -52,14 +50,12 @@ export default function Producto({ slug }: { slug?: number }) {
           </p>
           <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
             <div className='w-full'>
-              <p className='text-light-onSurface'>
-                Nombre {dataGet?.getProduct?.id}
-              </p>
+              <p className='text-light-onSurface'>Nombre</p>
               <Input
                 label='Nombre del producto'
                 isRequired
                 value={dataGet?.getProduct?.name}
-                isReadOnly={true}
+                isReadOnly={!!slug}
                 className='max-w-full'
                 classNames={{
                   input: ['sm:text-xl text-normal'],
