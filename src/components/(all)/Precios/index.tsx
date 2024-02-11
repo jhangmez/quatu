@@ -23,7 +23,9 @@ export default function ListarPrecios({
       <CardBody>
         <section className='flex flex-wrap gap-5'>
           <Link
-            href={`/precio/agregar/${productId}`}
+            href={
+              productId ? `/precio/agregar/${productId}` : '/precio/agregar'
+            }
             className='h-[150px] w-[150px] flex flex-col gap-2 items-center justify-center border-dashed border-2 border-light-outline rounded-xl bg-light-surface text-light-onSurface select-none'
           >
             <p className='text-sm sm:text-normal'>Crear precio</p>
@@ -40,7 +42,7 @@ export default function ListarPrecios({
             prices.map((price, index) => (
               <div
                 key={index}
-                className='bg-light-surface p-3 min-w-80 border-light-outline/10 rounded-xl border-2'
+                className='bg-light-surface p-3 w-60 border-light-outline/10 rounded-xl border-2'
               >
                 <p>Moneda: {price?.currency?.name}</p>
                 <p>
@@ -70,7 +72,11 @@ export default function ListarPrecios({
                     {price?.visible ? 'Visible' : 'No visible'}
                   </Chip>
                 </p>
-                <Button as={Link} href={`/precio/editar/${price?.id}`}>
+                <Button
+                  className='bg-light-secondary text-light-onSecondary'
+                  as={Link}
+                  href={`/precio/editar/${price?.id}`}
+                >
                   Editar
                 </Button>
               </div>

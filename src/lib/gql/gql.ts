@@ -18,6 +18,8 @@ const documents = {
     "\nmutation CreateCategory($name: String!, $visible: Boolean, $link: String!, $namefile: String) {\n  createCategory(name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}": types.CreateCategoryDocument,
     "\nmutation RootchangePassword($idUser: Int!, $newPassword: String!) {\n  rootchangePassword(idUser: $idUser, newPassword: $newPassword) {\n    message\n    status\n  }\n}": types.RootchangePasswordDocument,
     "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.UpdateCategoryDocument,
+    "\nmutation DeleteProduct($id: Int!) {\n  deleteProduct(id: $id) {\n    id\n  }\n}": types.DeleteProductDocument,
+    "\nmutation CreateOrUpdateProduct($id: Int, $name: String!, $sku: String, $upc: String, $visible: Boolean) {\n  createOrUpdateProduct(id: $id, name: $name, SKU: $sku, UPC: $upc, visible: $visible) {\n    id\n  }\n}": types.CreateOrUpdateProductDocument,
     "\nmutation CreateOrUpdatePrice($unitPrice: Float!, $currencyId: Int!, $createOrUpdatePriceId: Int, $bulkPrice: Float, $bulkQuantity: Int, $onSale: Boolean, $visible: Boolean) {\n  createOrUpdatePrice(unitPrice: $unitPrice, currencyId: $currencyId, id: $createOrUpdatePriceId, bulkPrice: $bulkPrice, bulkQuantity: $bulkQuantity, onSale: $onSale, visible: $visible) {\n    id\n  }\n}\n": types.CreateOrUpdatePriceDocument,
     "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
@@ -66,6 +68,14 @@ export function gql(source: "\nmutation RootchangePassword($idUser: Int!, $newPa
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["\nmutation UpdateCategory($id: Int!, $name: String!, $visible: Boolean!, $link: String!, $namefile: String) {\n  updateCategory(id: $id, name: $name, visible: $visible, link: $link, namefile: $namefile) {\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation DeleteProduct($id: Int!) {\n  deleteProduct(id: $id) {\n    id\n  }\n}"): (typeof documents)["\nmutation DeleteProduct($id: Int!) {\n  deleteProduct(id: $id) {\n    id\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation CreateOrUpdateProduct($id: Int, $name: String!, $sku: String, $upc: String, $visible: Boolean) {\n  createOrUpdateProduct(id: $id, name: $name, SKU: $sku, UPC: $upc, visible: $visible) {\n    id\n  }\n}"): (typeof documents)["\nmutation CreateOrUpdateProduct($id: Int, $name: String!, $sku: String, $upc: String, $visible: Boolean) {\n  createOrUpdateProduct(id: $id, name: $name, SKU: $sku, UPC: $upc, visible: $visible) {\n    id\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

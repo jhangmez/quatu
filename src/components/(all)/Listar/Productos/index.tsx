@@ -20,6 +20,20 @@ import { Skeleton } from '@nextui-org/skeleton'
 import { Button } from '@nextui-org/react'
 import { statusColorMap } from '@utils/auxiliars'
 import { Link } from '@nextui-org/link'
+import { toast } from 'react-hot-toast'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+  ModalFooter
+} from '@nextui-org/modal'
+import { DeleteProduct } from '@lib/graphql/mutation'
+import { useMutation } from '@apollo/client'
+import { GetProductId } from '@lib/graphql/query'
+import { Spinner } from '@nextui-org/spinner'
+import { Input } from '@nextui-org/input'
 
 const columns = [
   {
@@ -37,7 +51,34 @@ const columns = [
 ]
 
 export default function Productos() {
+  const [status, setStatus] = useState(false)
+
   const { loading, error, data, refetch } = useQuery(AllProductsByCompany)
+
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null
+  )
+
+  const [deleteProduct] = useMutation(DeleteProduct, {
+    refetchQueries: ['AllProductsByCompany']
+  })
+
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onOpenChange: onDeleteOpenChange
+  } = useDisclosure()
+
+  const {
+    loading: loadingGet,
+    error: errorGet,
+    data: dataGet,
+    refetch: refGet
+  } = useQuery(GetProductId, {
+    variables: { getProductId: Number(selectedProductId) }
+  })
+
+  const [inputValue, setInputValue] = useState('')
 
   const [page, setPage] = useState(1)
   const rowsPerPage = 10
@@ -52,6 +93,26 @@ export default function Productos() {
     return data?.allProductsByCompany.slice(start, end)
   }, [page, data])
 
+  function onSubmitDelete(e: FormEvent) {
+    e.preventDefault()
+    setStatus(true)
+    toast
+      .promise(
+        deleteProduct({ variables: { id: Number(selectedProductId) } }),
+        {
+          loading: `Borrando categoría ${dataGet?.getProduct?.name}...`,
+          success: `Categoría ${dataGet?.getProduct?.name} borrada exitosamente.`,
+          error: (err) => `Error: ${err.message}`
+        }
+      )
+      .then(() => {
+        setStatus(false)
+      })
+      .catch(() => {
+        console.log('Hubo error')
+      })
+  }
+
   const renderCell = useCallback(
     (
       product: AllProductsByCompanyQuery['allProductsByCompany'][number],
@@ -65,7 +126,7 @@ export default function Productos() {
         case 'visible':
           return (
             <Chip
-              className='capitalize'
+              className='capitalize select-none'
               color={
                 cellValue ? statusColorMap['true'] : statusColorMap['false']
               }
@@ -107,9 +168,9 @@ export default function Productos() {
                   variant='light'
                   size='sm'
                   onPress={() => {
-                    // onDeleteOpen()
-                    // setSelectedCategoryId(category.id)
-                    // setInputValue('')
+                    onDeleteOpen()
+                    setSelectedProductId(product.id)
+                    setInputValue('')
                   }}
                 >
                   <span className='text-lg text-danger cursor-pointer active:opacity-50'>
@@ -215,6 +276,102 @@ export default function Productos() {
           )}
         </TableBody>
       </Table>
+      <Modal
+        placement='center'
+        isOpen={isDeleteOpen}
+        onOpenChange={onDeleteOpenChange}
+        backdrop='opaque'
+      >
+        <form onSubmit={onSubmitDelete}>
+          <ModalContent>
+            {(onClose) => (
+              <>
+                {errorGet ? (
+                  'Error'
+                ) : loadingGet ? (
+                  <section className='flex h-72 justify-center items-center'>
+                    <Spinner />
+                  </section>
+                ) : (
+                  <>
+                    <ModalHeader className='flex flex-col gap-1 text-light-error select-none'>
+                      Eliminar categoría: {dataGet?.getProduct?.name}
+                    </ModalHeader>
+                    <ModalBody>
+                      <p className='text-sm select-none'>
+                        Escriba{' '}
+                        <span className='italic font-medium'>
+                          Borrar {dataGet?.getProduct?.name}
+                        </span>
+                      </p>
+                      <Input
+                        isRequired
+                        className='max-w-xs'
+                        label={
+                          <>
+                            Escriba{' '}
+                            <span className='italic font-medium'>
+                              &#34;Borrar {dataGet?.getProduct?.name}
+                              &#34;
+                            </span>
+                          </>
+                        }
+                        value={inputValue}
+                        labelPlacement='inside'
+                        size='sm'
+                        onChange={(e) => setInputValue(e.target.value)}
+                      />
+                      <Chip
+                        startContent={
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='18'
+                            height='18'
+                            viewBox='0 0 20 20'
+                          >
+                            <path
+                              fill='currentColor'
+                              d='M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07m12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32M9 5h2v6H9zm0 8h2v2H9z'
+                            />
+                          </svg>
+                        }
+                        className='bg-light-error text-light-onError select-none'
+                      >
+                        Esta accion es irreversible
+                      </Chip>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        className='bg-light-primary/10 text-light-primary font-semibold'
+                        onPress={() => {
+                          onClose()
+                          setInputValue('')
+                        }}
+                      >
+                        Cerrar
+                      </Button>
+                      <Button
+                        className='bg-light-error text-light-onError font-semibold'
+                        type='submit'
+                        onPress={() => {
+                          onClose()
+                          setInputValue('')
+                        }}
+                        isDisabled={
+                          inputValue !==
+                            `Borrar ${dataGet?.getProduct?.name}` || status
+                        }
+                      >
+                        {status ? <Spinner /> : 'Borrar'}
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </>
+            )}
+          </ModalContent>
+        </form>
+      </Modal>
     </>
   )
 }

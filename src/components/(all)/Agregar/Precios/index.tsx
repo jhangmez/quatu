@@ -75,8 +75,7 @@ export default function Precios({
       ) : (
         <Card>
           <CardHeader className='text-2xl'>
-            {id && `Editar precio`}
-            {productId && `Agregar Precio`}
+            {id ? 'Editar precio' : 'Agregar Precio'}
           </CardHeader>
           <CardBody>
             <Switch
@@ -84,6 +83,9 @@ export default function Precios({
               onChange={(e) => updateFields({ visible: e.target.checked })}
               defaultSelected
               size='md'
+              classNames={{
+                wrapper: 'bg-light-secondary/50'
+              }}
             >
               Visible
             </Switch>
@@ -136,7 +138,7 @@ export default function Precios({
                 }
                 startContent={
                   <div className='pointer-events-none flex items-center'>
-                    <span className='text-default-400 text-small'>$</span>
+                    <span className='text-default-400 text-small'>S/</span>
                   </div>
                 }
                 className='max-w-full'
@@ -149,7 +151,13 @@ export default function Precios({
           </CardBody>
           <CardFooter>
             {' '}
-            <Button type='submit'>Enviar</Button>
+            <Button
+              type='submit'
+              color='primary'
+              className='text-light-onPrimary'
+            >
+              Enviar
+            </Button>
           </CardFooter>
         </Card>
       )}
