@@ -108,7 +108,7 @@ export default function Producto({ slug }: { slug?: number }) {
               }
             })
             .then((result) => {
-              console.log('Datos actualizados:', result.data)
+              // console.log('Datos actualizados:', result.data)
             })
         })
       })
@@ -127,7 +127,7 @@ export default function Producto({ slug }: { slug?: number }) {
         </p>
       ) : (
         <form onSubmit={onSubmit}>
-          <section className='w-full grid gap-y-3'>
+          <section className='w-full grid gap-y-3 pb-10'>
             <Card>
               <CardHeader className='text-xl'>Producto visible</CardHeader>
               <CardFooter>

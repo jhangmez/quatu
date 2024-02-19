@@ -42,21 +42,33 @@ export default function ListarPrecios({
             prices.map((price, index) => (
               <div
                 key={index}
-                className='bg-light-surface p-3 w-60 border-light-outline/10 rounded-xl border-2'
+                className='bg-light-surface p-3 w-60 border-light-outline/10 rounded-xl border-2 space-y-1'
               >
                 <p>Moneda: {price?.currency?.name}</p>
                 <p>
-                  Al por mayor: {price?.currency?.abbreviation}{' '}
-                  {price?.bulkPrice}
-                </p>
-                <p>
-                  Al por menor: {price?.currency?.abbreviation}{' '}
-                  {price?.bulkQuantity}
+                  Al por mayor:{' '}
+                  {price?.bulkPrice
+                    ? `${price?.currency?.abbreviation} ${price?.bulkPrice}`
+                    : ''}
                 </p>
                 <p>
                   Unitario: {price?.currency?.abbreviation} {price?.unitPrice}
                 </p>
-                <p>Oferta: {price?.onSale ? 'Si' : 'No'}</p>
+                <p>
+                  Oferta:{' '}
+                  <Chip
+                    className='capitalize select-none'
+                    color={
+                      price?.onSale
+                        ? statusColorMap['true']
+                        : statusColorMap['false']
+                    }
+                    size='sm'
+                    variant='flat'
+                  >
+                    {price?.onSale ? 'SI' : 'NO'}
+                  </Chip>
+                </p>
                 <p>
                   Visible:{' '}
                   <Chip
@@ -73,7 +85,7 @@ export default function ListarPrecios({
                   </Chip>
                 </p>
                 <Button
-                  className='bg-light-secondary text-light-onSecondary'
+                  className='bg-light-tertiary text-light-onSecondary'
                   as={Link}
                   href={`/precio/editar/${price?.id}`}
                 >

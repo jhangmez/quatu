@@ -64,8 +64,8 @@ mutation CreateOrUpdateProduct($id: Int, $name: String!, $sku: String, $upc: Str
 }`)
 
 export const CreateorUpdatePrice = gql(`
-mutation CreateOrUpdatePrice($unitPrice: Float!, $currencyId: Int!, $createOrUpdatePriceId: Int, $bulkPrice: Float, $bulkQuantity: Int, $onSale: Boolean, $visible: Boolean) {
-  createOrUpdatePrice(unitPrice: $unitPrice, currencyId: $currencyId, id: $createOrUpdatePriceId, bulkPrice: $bulkPrice, bulkQuantity: $bulkQuantity, onSale: $onSale, visible: $visible) {
+mutation CreateOrUpdatePrice($unitPrice: Float!, $currencyId: Int!, $id: Int, $bulkPrice: Float, $bulkQuantity: Int, $onSale: Boolean, $visible: Boolean) {
+  createOrUpdatePrice(unitPrice: $unitPrice, currencyId: $currencyId, id: $id, bulkPrice: $bulkPrice, bulkQuantity: $bulkQuantity, onSale: $onSale, visible: $visible) {
     id
   }
 }

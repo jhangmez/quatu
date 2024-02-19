@@ -7,8 +7,7 @@ import { useRouter } from 'next/navigation'
 export default function Precio({ params }: { params: { slug: number } }) {
   const router = useRouter()
   return (
-    <section className='container mx-auto py-5 lg:px-8 md:px-5 px-3'>
-      <p>SOY Precio</p>
+    <section className='container mx-auto py-5 lg:px-8 md:px-5 px-3 space-y-5'>
       <Button
         onPress={() => {
           router.back()

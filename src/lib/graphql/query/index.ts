@@ -54,6 +54,7 @@ query GetProduct($getProductId: Int!) {
       onSale
       visible
       currency {
+        id
         abbreviation
         name
       }
@@ -69,6 +70,7 @@ query GetPrice($getPriceId: Int!) {
     bulkPrice
     bulkQuantity
     currency {
+      id
       name
       abbreviation
     }
@@ -109,6 +111,24 @@ export const AllTypeUsers = gql(`
 query AllTypeUser {
   allTypeUser {
     id
+    name
+  }
+}`)
+
+export const AllCurrency = gql(`
+query AllCurrency {
+  allCurrency {
+    abbreviation
+    id
+    name
+  }
+}`)
+
+export const getCurrency = gql(`
+query GetCurrency($id: Int!) {
+  getCurrency(id: $id) {
+    id
+    abbreviation
     name
   }
 }`)
