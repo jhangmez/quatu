@@ -20,7 +20,7 @@ export default function RootLayout({
       >
         <Providers>
           <Toaster />
-          <noscript>Página realizada por @jhangmez de HarkaySoft</noscript>
+          <noscript>Página realizada por @jhangmez de HarkaySoft s</noscript>
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <Analytics />
         </Providers>
