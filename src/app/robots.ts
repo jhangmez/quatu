@@ -5,7 +5,17 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/(protected)', '/api/']
+      disallow: [
+        '/categoria',
+        '/funcionamiento',
+        '/home',
+        '/listado',
+        '/precio',
+        '/producto',
+        '/settings',
+        '/subcategoria',
+        '/api/'
+      ]
     },
     sitemap: 'https://quatu.vercel.app/sitemap.xml'
   }
