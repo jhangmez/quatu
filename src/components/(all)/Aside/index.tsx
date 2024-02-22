@@ -13,11 +13,9 @@ import { listadomenu, dropdownItems } from '@utils/listMenu'
 import { Skeleton } from '@nextui-org/skeleton'
 import { User } from '@nextui-org/user'
 import { Listbox, ListboxItem } from '@nextui-org/listbox'
-import { useQuery } from '@apollo/client'
-import { Myself } from '@lib/graphql/query'
 
 export default function Aside() {
-  const { loading, error, data, refetch } = useQuery(Myself)
+  const { loading, error, data, refetch } = useContext(UserContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
     <aside className='flex h-screen lg:w-2/12 md:w-4/12 w-1/12 flex-col items-center border-r border-gray-200 bg-light-surface dark:bg-dark-surface text-light-onSurface dark:text-dark-onSurface lg:flex md:flex hidden'>

@@ -3,8 +3,12 @@
 import { Link } from '@nextui-org/link'
 import { useSession } from 'next-auth/react'
 import { Spinner } from '@nextui-org/react'
+import { useQuery } from '@apollo/client'
+import { Myself } from '@lib/graphql/query'
+import { UserContext } from '@utils/userContext'
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const { loading, error, data, refetch } = useQuery(Myself)
   const { status } = useSession()
 
   if (status === 'loading') {
@@ -62,5 +66,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
       </div>
     )
   }
-  return <>{children}</>
+  // Asegúrate de que error y data sean null si son undefined
+  const providerValue = {
+    loading,
+    error: error ?? null,
+    data: data ?? null,
+    refetch
+  }
+
+  return (
+    <UserContext.Provider value={providerValue}>
+      {children}
+    </UserContext.Provider>
+  )
 }

@@ -11,8 +11,6 @@ import {
 } from '@nextui-org/navbar'
 import { Avatar } from '@nextui-org/avatar'
 import { Link } from '@nextui-org/link'
-import { useQuery } from '@apollo/client'
-import { Myself } from '@lib/graphql/query'
 import { Skeleton } from '@nextui-org/skeleton'
 import {
   Dropdown,
@@ -24,7 +22,7 @@ import { listadomenu, dropdownItems } from '@utils/listMenu'
 import { Listbox, ListboxItem } from '@nextui-org/listbox'
 
 export default function Footer() {
-  const { loading, error, data, refetch } = useQuery(Myself)
+  const { loading, error, data, refetch } = useContext(UserContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
     <Navbar
