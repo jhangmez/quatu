@@ -97,8 +97,11 @@ export default function Precios({
   function onSubmit(e: FormEvent) {
     e.preventDefault()
     setStatus(true)
+    const dataToSend = { ...dataINITIAL, productId: Number(productId) }
+    console.log(dataToSend)
+
     toast
-      .promise(createorUpdatePrice({ variables: dataINITIAL }), {
+      .promise(createorUpdatePrice({ variables: dataToSend }), {
         loading: id ? 'Modificando precio...' : 'Creando precio...',
         success: id
           ? 'Precio modificado exitosamente.'
@@ -110,25 +113,32 @@ export default function Precios({
         setDataINITIAL(INITIAL_DATA)
         router.back()
         apolloClient.resetStore().then(() => {
-          // Realizar una nueva consulta para obtener los datos actualizados
-          apolloClient
-            .query({
-              query: GetProductId,
-              variables: {
-                getProductId: Number(id)
-                /* tus variables aquí */
-              }
-            })
-            .then((result) => {
-              console.log('Datos actualizados:', result.data)
-            })
-            .catch((error) => {
-              toast.error(`Error: ${error.message}`)
-            })
+          // Verificar si productId está presente antes de ejecutar la consulta
+          if (productId) {
+            // Realizar una nueva consulta para obtener los datos actualizados
+            apolloClient
+              .query({
+                query: GetProductId,
+                variables: {
+                  getProductId: Number(productId)
+                  /* tus variables aquí */
+                }
+              })
+              .then((result) => {
+                console.log('Datos actualizados:', result.data)
+              })
+              .catch((error) => {
+                toast.error(`Error: ${error.message} aki hay un errorv2`)
+              })
+          } else {
+            // Manejar el caso cuando productId no está presente
+            // Por ejemplo, puedes mostrar un mensaje de error o simplemente omitir la consulta
+            console.log('productId no está presente, omitiendo la consulta.')
+          }
         })
       })
       .catch((error) => {
-        toast.error(`Error: ${error.message}`)
+        toast.error(`Error: ${error.message}  aki hay un error`)
       })
   }
 
