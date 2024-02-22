@@ -16,21 +16,21 @@ export const listadomenu = [
     label: 'Categorías',
     href: '/categoria'
   },
-  {
-    key: 'addcategory',
-    label: 'Subcategorías',
-    href: '/subcategoria'
-  },
-  {
-    key: 'addlist',
-    label: 'Listados',
-    href: '/listado'
-  },
-  {
-    key: 'addprice',
-    label: 'Precios',
-    href: '/precio'
-  },
+  // {
+  //   key: 'addcategory',
+  //   label: 'Subcategorías',
+  //   href: '/subcategoria'
+  // },
+  // {
+  //   key: 'addlist',
+  //   label: 'Listados',
+  //   href: '/listado'
+  // },
+  // {
+  //   key: 'addprice',
+  //   label: 'Precios',
+  //   href: '/precio'
+  // },
   {
     key: 'ayuda',
     label: 'Como funciona',
