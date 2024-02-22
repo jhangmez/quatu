@@ -2,8 +2,8 @@
 
 import { Link } from '@nextui-org/link'
 import { Button } from '@nextui-org/button'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import Header from '@components/(public)/Header'
+import Footer from '@components/(public)/Footer'
 
 const partTitle = 'No encontrado 🤔'
 const description = 'Bienvenidos a quatu'

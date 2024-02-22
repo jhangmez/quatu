@@ -20,7 +20,6 @@
     ],
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@Buttons/*": ["./src/components/Buttons/*"],
       "@public/*": ["./public/*"],
       "@routes": ["./src/routes/index.tsx"],
       "@typescustom/*": ["./src/types/*"],

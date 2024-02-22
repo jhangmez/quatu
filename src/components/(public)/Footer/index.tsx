@@ -1,13 +1,12 @@
 'use client'
 
 import { GithubJhan, LinkedinJhan, VercelHarkaysoft } from '@routes'
-import localFont from 'next/font/local'
-import { Link } from '@nextui-org/link'
 import { Divider } from '@nextui-org/divider'
-
+import { Link } from '@nextui-org/link'
+import localFont from 'next/font/local'
 const myFont = localFont({ src: './Poppins-SemiBold.ttf' })
 
-export default function FooterWithSocialMediaIcons() {
+export default function Footer() {
   return (
     <footer className='bg-light-surface dark:bg-dark-surface'>
       <div className='container mx-auto py-6 px-[20px] '>
