@@ -10,7 +10,6 @@ import ListarSubcategorias from '@components/(all)/Subcategorias'
 import { Input } from '@nextui-org/input'
 import { Button } from '@nextui-org/button'
 import { Switch } from '@nextui-org/switch'
-import { MutationCreateOrUpdateProductArgs } from '@lib/gql/graphql'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
 import { toast } from 'react-hot-toast'
 import { CreateorUpdateProduct } from '@lib/graphql/mutation'
@@ -18,35 +17,7 @@ import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client'
 import { AllProductsByCompany } from '@lib/graphql/query'
-
-type ProductFields = Partial<ProductType>
-
-type ProductType = MutationCreateOrUpdateProductArgs
-
-const INITIAL_DATA: ProductType = {
-  id: 0,
-  name: '',
-  SKU: '',
-  UPC: '',
-  visible: false
-  // category: [],
-  // image: [],
-  // price: [
-  //   {
-  //     id: 0,
-  //     unitPrice: 0,
-  //     bulkPrice: 0,
-  //     bulkQuantity: 0,
-  //     onSale: false,
-  //     visible: false,
-  //     currency: {
-  //       name: '',
-  //       abbreviation: ''
-  //     }
-  //   }
-  // ]
-}
-
+import { ProductFields, INITIAL_DATA } from '@typescustom/INITIALDATA/product'
 export default function Producto({ slug }: { slug?: number }) {
   const router = useRouter()
   const apolloClient = useApolloClient()
@@ -128,6 +99,12 @@ export default function Producto({ slug }: { slug?: number }) {
       ) : (
         <form onSubmit={onSubmit}>
           <section className='w-full grid gap-y-3 pb-10'>
+            <Card>
+              <CardHeader className='text-2xl'>
+                {slug ? 'Detalle de producto' : 'Crear producto'}
+                {!slug ? ' ||| Se enviará producto vacío' : ''}
+              </CardHeader>
+            </Card>
             <Card>
               <CardHeader className='text-xl'>Producto visible</CardHeader>
               <CardFooter>

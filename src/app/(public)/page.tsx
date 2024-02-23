@@ -4,7 +4,7 @@ import Pricing from '@components/(public)/pricing'
 const partTitle = 'Página principal'
 const description = 'Bienvenidos a quatu'
 const url = 'https://quatu.vercel.app/'
-const title = `${partTitle}| quatu`
+const title = `${partTitle} | quatu`
 const imageUrl = `${url}api/og?title=${partTitle}&description=${description}`
 
 export const metadata = {

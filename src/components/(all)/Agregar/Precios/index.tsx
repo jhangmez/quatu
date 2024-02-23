@@ -3,7 +3,6 @@
 import { Button } from '@nextui-org/button'
 import { Input } from '@nextui-org/input'
 import { toast } from 'react-hot-toast'
-import { MutationCreateOrUpdatePriceArgs } from '@lib/gql/graphql'
 import { FormEvent, useState, useCallback, useEffect } from 'react'
 import { CreateorUpdatePrice } from '@lib/graphql/mutation'
 import { AllCurrency, getCurrency } from '@lib/graphql/query'
@@ -12,25 +11,12 @@ import { GetPrice } from '@lib/graphql/query'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
 import Loading from '../loading'
 import { Switch } from '@nextui-org/switch'
-import { Select, SelectSection, SelectItem } from '@nextui-org/select'
+import { Select, SelectItem } from '@nextui-org/select'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client'
 import { GetProductId } from '@lib/graphql/query'
-
-type PriceFields = Partial<PriceType>
-
-type PriceType = MutationCreateOrUpdatePriceArgs
-
-const INITIAL_DATA: PriceType = {
-  id: 0,
-  unitPrice: 0,
-  bulkPrice: 0,
-  bulkQuantity: 0,
-  onSale: false,
-  visible: false,
-  currencyId: 0
-}
+import { PriceFields, INITIAL_DATA } from '@typescustom/INITIALDATA/price'
 
 export default function Precios({
   id,
@@ -153,6 +139,7 @@ export default function Precios({
           <Card>
             <CardHeader className='text-2xl'>
               {id ? 'Editar precio' : 'Agregar Precio'}
+              {!id && !productId ? ' ||| Se enviará producto vacío' : ''}
             </CardHeader>
             <CardBody>
               <Switch
