@@ -1,4 +1,3 @@
-import React from 'react'
 import { Suspense } from 'react'
 import Loading from './loading'
 import Footer from '@components/(public)/Footer'

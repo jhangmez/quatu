@@ -65,7 +65,11 @@ export default function Producto({ slug }: { slug?: number }) {
           : 'Producto creado exitosamente.',
         error: (err) => `Error: ${err.message}`
       })
-      .then(() => {
+      .then((result) => {
+        console.log(
+          'Este es el productoId resultante',
+          result.data?.createOrUpdateProduct?.id
+        )
         setStatus(false)
         setDataINITIAL(INITIAL_DATA)
         router.back()
