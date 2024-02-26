@@ -31,6 +31,11 @@ export const listadomenu = [
   //   label: 'Precios',
   //   href: '/precio'
   // },
+  // {
+  //   key: 'addasesor',
+  //   label: 'Asesor',
+  //   href: '/asesor'
+  // },
   {
     key: 'ayuda',
     label: 'Como funciona',

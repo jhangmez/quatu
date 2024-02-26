@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client'
 import { AllProductsByCompany } from '@lib/graphql/query'
 import { ProductFields, INITIAL_DATA } from '@typescustom/INITIALDATA/product'
+
 export default function Producto({ slug }: { slug?: number }) {
   const router = useRouter()
   const apolloClient = useApolloClient()
@@ -66,15 +67,15 @@ export default function Producto({ slug }: { slug?: number }) {
         error: (err) => `Error: ${err.message}`
       })
       .then((result) => {
-        console.log(
-          'Este es el productoId resultante',
-          result.data?.createOrUpdateProduct?.id
-        )
+        // console.log(
+        //   'Este es el productoId resultante: ',
+        //   result.data?.createOrUpdateProduct?.id
+        // )
         setStatus(false)
         setDataINITIAL(INITIAL_DATA)
         router.back()
         apolloClient.resetStore().then(() => {
-          // Realizar una nueva consulta para obtener los datos actualizados
+          // Realizar una nueva consulta para obtener todos los productos
           apolloClient
             .query({
               query: AllProductsByCompany,
@@ -83,7 +84,10 @@ export default function Producto({ slug }: { slug?: number }) {
               }
             })
             .then((result) => {
-              // console.log('Datos actualizados:', result.data)
+              // console.log('Datos actualizados de todos los productos:', result.data)
+            })
+            .catch((error) => {
+              toast.error(`Error: ${error.message}`)
             })
         })
       })

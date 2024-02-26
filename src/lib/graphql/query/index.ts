@@ -33,6 +33,32 @@ export const GetCategoryId = gql(`query GetCategory($getCategoryId: Int!) {
 }
 `)
 
+export const AllProductsByCompanyOnlyVisible = gql(`
+query AllProductsByCompanyOnlyVisible($companyId: Int!) {
+  allProductsByCompanyOnlyVisible(companyId: $companyId) {
+name
+    SKU
+    UPC
+    id
+    image {
+      link
+      id
+    }
+    price {
+      unitPrice
+      onSale
+      visible
+      currency {
+        abbreviation
+        name
+      }
+      id
+      bulkQuantity
+      bulkPrice
+    }
+  }
+}`)
+
 export const GetProductId = gql(`
 query GetProduct($getProductId: Int!) {
   getProduct(id: $getProductId) {

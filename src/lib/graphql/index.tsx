@@ -14,6 +14,8 @@ function makeClient() {
 
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
+    name: 'QuatuServer',
+    version: '0.5',
     link:
       typeof window === 'undefined'
         ? ApolloLink.from([

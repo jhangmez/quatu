@@ -24,6 +24,7 @@ const documents = {
     "\nmutation DeleteCategory($id: Int!) {\n  deleteCategory(id: $id) {\n    id\n  }\n}\n": types.DeleteCategoryDocument,
     "\n  query Me {\n    me {\n      id\n      name\n      username\n      company {\n        id\n        name\n        suscription {\n          name\n        }\n      }\n      typeuser {\n        id\n        name\n      }\n    }\n  }\n": types.MeDocument,
     "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.GetCategoryDocument,
+    "\nquery AllProductsByCompanyOnlyVisible($companyId: Int!) {\n  allProductsByCompanyOnlyVisible(companyId: $companyId) {\nname\n    SKU\n    UPC\n    id\n    image {\n      link\n      id\n    }\n    price {\n      unitPrice\n      onSale\n      visible\n      currency {\n        abbreviation\n        name\n      }\n      id\n      bulkQuantity\n      bulkPrice\n    }\n  }\n}": types.AllProductsByCompanyOnlyVisibleDocument,
     "\nquery GetProduct($getProductId: Int!) {\n  getProduct(id: $getProductId) {\n    SKU\n    UPC\n    category {\n      name\n    }\n    id\n    image {\n      link\n    }\n    name\n    price {\n      id\n      bulkPrice\n      bulkQuantity\n      unitPrice\n      onSale\n      visible\n      currency {\n        id\n        abbreviation\n        name\n      }\n    }\n    visible\n  }\n}\n": types.GetProductDocument,
     "\nquery GetPrice($getPriceId: Int!) {\n  getPrice(id: $getPriceId) {\n    bulkPrice\n    bulkQuantity\n    currency {\n      id\n      name\n      abbreviation\n    }\n    id\n    onSale\n    unitPrice\n    visible\n  }\n}": types.GetPriceDocument,
     "query AllSubcategoriesByCategory($categoryId: Int!) {\n  allSubcategoriesByCategory(categoryId: $categoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n": types.AllSubcategoriesByCategoryDocument,
@@ -94,6 +95,10 @@ export function gql(source: "\n  query Me {\n    me {\n      id\n      name\n   
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"): (typeof documents)["query GetCategory($getCategoryId: Int!) {\n  getCategory(id: $getCategoryId) {\n    id\n    name\n    visible\n    linkImageCategory {\n      link\n    }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery AllProductsByCompanyOnlyVisible($companyId: Int!) {\n  allProductsByCompanyOnlyVisible(companyId: $companyId) {\nname\n    SKU\n    UPC\n    id\n    image {\n      link\n      id\n    }\n    price {\n      unitPrice\n      onSale\n      visible\n      currency {\n        abbreviation\n        name\n      }\n      id\n      bulkQuantity\n      bulkPrice\n    }\n  }\n}"): (typeof documents)["\nquery AllProductsByCompanyOnlyVisible($companyId: Int!) {\n  allProductsByCompanyOnlyVisible(companyId: $companyId) {\nname\n    SKU\n    UPC\n    id\n    image {\n      link\n      id\n    }\n    price {\n      unitPrice\n      onSale\n      visible\n      currency {\n        abbreviation\n        name\n      }\n      id\n      bulkQuantity\n      bulkPrice\n    }\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

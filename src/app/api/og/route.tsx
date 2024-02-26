@@ -61,7 +61,7 @@ export async function GET(request: Request) {
                 fontSize: 48
               }}
             >
-              quatu
+              quaTu
             </span>
           </div>
           <div
@@ -109,7 +109,7 @@ export async function GET(request: Request) {
       }
     )
   } catch (e: any) {
-    return new Response(`Failed to generate the image`, {
+    return new Response(`Error al generar la imagen`, {
       status: 500
     })
   }

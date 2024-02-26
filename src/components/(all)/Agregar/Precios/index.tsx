@@ -156,12 +156,20 @@ export default function Precios({
               <Select
                 label='Moneda'
                 placeholder='Selecciona una moneda'
+                isRequired
                 selectedKeys={
                   dataINITIAL.currencyId === 0
                     ? []
                     : [String(dataINITIAL.currencyId)]
                 }
                 variant='bordered'
+                errorMessage={
+                  (dataINITIAL.bulkPrice !== 0 &&
+                    dataINITIAL.bulkQuantity !== 0) ||
+                  dataINITIAL.unitPrice !== 0
+                    ? 'Debe escoger una moneda'
+                    : ''
+                }
                 onChange={(e) =>
                   updateFields({ currencyId: Number(e.target.value) })
                 }
@@ -187,19 +195,31 @@ export default function Precios({
                   autoFocus
                   label='Precio por unidad'
                   isRequired
+                  errorMessage={
+                    (dataINITIAL.bulkPrice && dataINITIAL.bulkQuantity) !== 0
+                      ? `El valor es ${
+                          logetCurrency || ergetCurrency
+                            ? '-'
+                            : dagetCurrency?.getCurrency?.abbreviation || '-'
+                        }  0`
+                      : ''
+                  }
                   type='number'
                   placeholder='0.00'
                   value={String(dataINITIAL.unitPrice)}
                   variant='bordered'
-                  onChange={(e) =>
-                    updateFields({ unitPrice: Number(e.target.value) })
-                  }
+                  onChange={(e) => {
+                    const value = Number(e.target.value)
+                    if (value >= 0) {
+                      updateFields({ unitPrice: value })
+                    }
+                  }}
                   startContent={
                     <div className='pointer-events-none flex items-center'>
                       <span className='text-default-400 text-small'>
                         {logetCurrency || ergetCurrency
                           ? '-'
-                          : dagetCurrency?.getCurrency?.abbreviation}
+                          : dagetCurrency?.getCurrency?.abbreviation || '-'}
                       </span>
                     </div>
                   }
@@ -224,15 +244,18 @@ export default function Precios({
                     placeholder='0.00'
                     value={String(dataINITIAL.bulkPrice)}
                     variant='bordered'
-                    onChange={(e) =>
-                      updateFields({ bulkPrice: Number(e.target.value) })
-                    }
+                    onChange={(e) => {
+                      const value = Number(e.target.value)
+                      if (value >= 0) {
+                        updateFields({ bulkPrice: value })
+                      }
+                    }}
                     startContent={
                       <div className='pointer-events-none flex items-center'>
                         <span className='text-default-400 text-small'>
                           {logetCurrency || ergetCurrency
                             ? '-'
-                            : dagetCurrency?.getCurrency?.abbreviation}
+                            : dagetCurrency?.getCurrency?.abbreviation || '-'}
                         </span>
                       </div>
                     }
@@ -296,7 +319,6 @@ export default function Precios({
                 color='primary'
                 className='text-light-onPrimary'
                 isDisabled={
-                  !dataINITIAL.unitPrice ||
                   !dataINITIAL.currencyId ||
                   (dataINITIAL.bulkPrice !== null &&
                     dataINITIAL.bulkPrice !== undefined &&
