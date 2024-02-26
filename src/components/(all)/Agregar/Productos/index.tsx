@@ -110,7 +110,7 @@ export default function Producto({ slug }: { slug?: number }) {
             <Card>
               <CardHeader className='text-2xl'>
                 {slug ? 'Detalle de producto' : 'Crear producto'}
-                {!slug ? ' ||| Se enviará producto vacío' : ''}
+                {/* {!slug ? ' ||| Se enviará producto vacío' : ''} */}
               </CardHeader>
             </Card>
             <Card>

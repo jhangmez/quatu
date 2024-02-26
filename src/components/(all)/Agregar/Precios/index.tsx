@@ -157,6 +157,7 @@ export default function Precios({
               <Select
                 label='Moneda'
                 placeholder='Selecciona una moneda'
+                autoFocus
                 isRequired
                 selectedKeys={
                   dataINITIAL.currencyId === 0
@@ -193,7 +194,6 @@ export default function Precios({
                 <Input
                   id='unitPrice'
                   name='unitPrice'
-                  autoFocus
                   label='Precio por unidad'
                   isRequired
                   errorMessage={
@@ -239,7 +239,6 @@ export default function Precios({
                   <Input
                     id='bulkPrice'
                     name='bulkPrice'
-                    autoFocus
                     label='Precio por mayor'
                     type='number'
                     placeholder='0.00'
@@ -274,7 +273,6 @@ export default function Precios({
                   <Input
                     id='bulkQuantity'
                     name='bulkQuantity'
-                    autoFocus
                     label='Cantidad a por mayor'
                     type='number'
                     placeholder='0'
