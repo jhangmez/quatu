@@ -1,7 +1,7 @@
 'use client'
 
-import { Myself } from '@lib/graphql/query'
-import { useQuery } from '@apollo/client'
+import { useContext } from 'react'
+import { UserContext } from '@utils/userContext'
 import { Skeleton } from '@nextui-org/skeleton'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
 
@@ -11,7 +11,7 @@ export default function Home() {
     error: errorMe,
     data: dataMe,
     refetch: refetchMe
-  } = useQuery(Myself)
+  } = useContext(UserContext)
 
   const storeStatus: number = 1
 

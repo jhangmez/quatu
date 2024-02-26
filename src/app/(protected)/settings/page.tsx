@@ -1,17 +1,17 @@
 'use client'
 
+import { useContext } from 'react'
+import { UserContext } from '@utils/userContext'
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card'
 import { Button, Spinner } from '@nextui-org/react'
 import { Skeleton } from '@nextui-org/skeleton'
 import { Divider } from '@nextui-org/divider'
-import { useQuery } from '@apollo/client'
-import { Myself } from '@lib/graphql/query'
 import ChangePassword from '@components/(all)/ChangePassword'
 import RootChangePassword from '@components/(root)/ChangePassword'
 import DangerZone from '@components/(admin)/DangerZone'
 
 export default function Settings() {
-  const { loading, error, data, refetch } = useQuery(Myself)
+  const { loading, error, data, refetch } = useContext(UserContext)
 
   return (
     <div className='container mx-auto py-5 lg:px-8 md:px-5 px-3'>
