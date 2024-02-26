@@ -139,7 +139,7 @@ export default function Precios({
           <Card>
             <CardHeader className='text-2xl'>
               {id ? 'Editar precio' : 'Agregar Precio'}
-              {!id && !productId ? ' ||| Se enviará producto vacío' : ''}
+              {/* {!id && !productId ? ' ||| Se enviará producto vacío' : ''} */}
             </CardHeader>
             <CardBody>
               <Switch
@@ -147,6 +147,7 @@ export default function Precios({
                 onChange={(e) => updateFields({ visible: e.target.checked })}
                 defaultSelected
                 size='md'
+                className='pb-3'
                 classNames={{
                   wrapper: 'bg-light-secondary/50'
                 }}
@@ -304,6 +305,7 @@ export default function Precios({
                 isSelected={dataINITIAL.onSale ?? false}
                 onChange={(e) => updateFields({ onSale: e.target.checked })}
                 defaultSelected
+                className='pt-3'
                 size='md'
                 classNames={{
                   wrapper: 'bg-light-secondary/50'
