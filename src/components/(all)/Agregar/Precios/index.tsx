@@ -159,6 +159,7 @@ export default function Precios({
                 placeholder='Selecciona una moneda'
                 autoFocus
                 isRequired
+                description='Se debe escoger una moneda.'
                 selectedKeys={
                   dataINITIAL.currencyId === 0
                     ? []
@@ -169,7 +170,9 @@ export default function Precios({
                   (dataINITIAL.bulkPrice !== 0 &&
                     dataINITIAL.bulkQuantity !== 0) ||
                   dataINITIAL.unitPrice !== 0
-                    ? 'Debe escoger una moneda'
+                    ? dataINITIAL.currencyId !== 0
+                      ? null
+                      : 'Debe escoger una moneda'
                     : ''
                 }
                 onChange={(e) =>
@@ -196,6 +199,7 @@ export default function Precios({
                   name='unitPrice'
                   label='Precio por unidad'
                   isRequired
+                  description='Puedes NO enviar valor unitario, este no aparecerá en tu tienda.'
                   errorMessage={
                     (dataINITIAL.bulkPrice && dataINITIAL.bulkQuantity) !== 0
                       ? `El valor es ${
@@ -231,6 +235,7 @@ export default function Precios({
                   }}
                 />
               </div>
+
               <div className='space-y-3 flex flex-col md:space-y-0 md:flex-row md:space-x-6'>
                 <div className='w-full'>
                   <CardHeader className='text-light-onSurface select-none'>
