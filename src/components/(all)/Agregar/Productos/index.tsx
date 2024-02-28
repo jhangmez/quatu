@@ -18,12 +18,23 @@ import { useRouter } from 'next/navigation'
 import { useApolloClient } from '@apollo/client'
 import { AllProductsByCompany } from '@lib/graphql/query'
 import { ProductFields, INITIAL_DATA } from '@typescustom/INITIALDATA/product'
+import { Price } from '@lib/gql/graphql'
+import {
+  PriceFields,
+  INITIAL_DATA as PRICE_INITIAL_DATA
+} from '@typescustom/INITIALDATA/price'
+import { CreateorUpdatePrice } from '@lib/graphql/mutation'
 
 export default function Producto({ slug }: { slug?: number }) {
   const router = useRouter()
   const apolloClient = useApolloClient()
 
   const [createorUpdateProduct] = useMutation(CreateorUpdateProduct)
+  const [createorUpdatePrice] = useMutation(CreateorUpdatePrice, {
+    refetchQueries: ['GetProduct']
+  })
+
+  const prices: Price[] = JSON.parse(localStorage.getItem('prices') || '[]')
 
   const productQuery = useQuery(GetProductId, {
     variables: { getProductId: slug !== undefined ? Number(slug) : 0 },
@@ -94,6 +105,15 @@ export default function Producto({ slug }: { slug?: number }) {
       .catch((error) => {
         toast.error(`Error: ${error.message}`)
       })
+  }
+
+  function handleShowPrices() {
+    console.log(prices)
+  }
+
+  function handleClearPrices() {
+    localStorage.removeItem('prices')
+    console.log('Precios borrados del localStorage')
   }
 
   return (
@@ -184,7 +204,7 @@ export default function Producto({ slug }: { slug?: number }) {
             />
             <ListarImagenes images={dataGet?.getProduct?.image ?? []} />
             <ListarPrecios
-              prices={dataGet?.getProduct?.price ?? []}
+              prices={dataGet?.getProduct?.price ?? prices}
               productId={dataGet?.getProduct?.id}
             />
             <Button
@@ -194,6 +214,20 @@ export default function Producto({ slug }: { slug?: number }) {
               className='text-light-onPrimary'
             >
               Enviar
+            </Button>
+            <Button
+              color='secondary'
+              className='text-light-onPrimary'
+              onClick={handleShowPrices}
+            >
+              Mostrar precios
+            </Button>
+            <Button
+              color='danger'
+              className='text-light-onPrimary'
+              onClick={handleClearPrices}
+            >
+              Borrar precios
             </Button>
           </section>
         </form>

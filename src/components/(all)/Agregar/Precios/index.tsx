@@ -64,7 +64,7 @@ export default function Precios({
     if (dataPrice?.getPrice && dataPrice.getPrice.currency?.id) {
       setDataINITIAL((prev) => ({
         ...prev,
-        currencyId: dataPrice.getPrice.currency?.id || prev.currencyId,
+        // currencyId: dataPrice.getPrice.currency?.id || prev.currencyId,
         ...dataPrice.getPrice
       }))
     }
@@ -128,6 +128,17 @@ export default function Precios({
       })
   }
 
+  function handleNoSlugSubmit(e: FormEvent) {
+    e.preventDefault()
+    // Guardar el precio en localStorage
+    const existingPrices = JSON.parse(localStorage.getItem('prices') || '[]')
+    existingPrices.push(dataINITIAL) // Asume que dataINITIAL contiene los datos del precio
+    localStorage.setItem('prices', JSON.stringify(existingPrices))
+
+    console.log('Precio guardado localmente')
+    router.back()
+  }
+
   return (
     <>
       {loadPrice ? (
@@ -135,7 +146,7 @@ export default function Precios({
       ) : errorPrice ? (
         <p className='text-light-onSurface'>No existe el precio seleccionado</p>
       ) : (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={!id && !productId ? handleNoSlugSubmit : onSubmit}>
           <Card>
             <CardHeader className='text-2xl'>
               {id ? 'Editar precio' : 'Agregar Precio'}
@@ -175,9 +186,18 @@ export default function Precios({
                       : 'Debe escoger una moneda'
                     : ''
                 }
-                onChange={(e) =>
-                  updateFields({ currencyId: Number(e.target.value) })
-                }
+                // onChange={(e) =>
+                //   updateFields({ currency: Number(e.target.value) })
+                // }
+                onChange={(e) => {
+                  const currencyId = Number(e.target.value)
+                  const selectedCurrency = daCurrency?.allCurrency?.find(
+                    (currency) => currency?.id === currencyId
+                  )
+                  if (selectedCurrency) {
+                    updateFields({ currencyId: currencyId })
+                  }
+                }}
                 className='max-w-xs'
                 classNames={{
                   value: ['sm:text-xl text-normal'],

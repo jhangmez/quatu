@@ -21,14 +21,15 @@ export default function ListarPrecios({
     <Card className='max-w-full'>
       <CardHeader className='text-xl'>Precios</CardHeader>
       <CardBody>
-        <section className='flex flex-wrap gap-5'>
+        <ul className='flex flex-wrap grid-1-4 grid-1-3-m grid-1-2-s grid-1-1-xs pt-2 gap-2'>
           <Link
+            as={'li'}
             href={
               productId ? `/precio/agregar/${productId}` : '/precio/agregar'
             }
-            className='h-[150px] w-[150px] flex flex-col gap-2 items-center justify-center border-dashed border-2 border-light-outline rounded-xl bg-light-surface text-light-onSurface select-none'
+            className='h-60 w-60 flex flex-col gap-2 items-center justify-center border-dashed border-2 border-light-outline rounded-xl bg-light-surface text-light-onSurface select-none'
           >
-            <p className='text-sm sm:text-normal'>Crear precio</p>
+            <p className='text-base sm:text-lg'>Crear precio</p>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='24'
@@ -40,7 +41,7 @@ export default function ListarPrecios({
           </Link>
           {prices.length > 0 &&
             prices.map((price, index) => (
-              <div
+              <li
                 key={index}
                 className='bg-light-surface p-3 w-60 border-light-outline/10 rounded-xl border-2 space-y-1'
               >
@@ -91,9 +92,9 @@ export default function ListarPrecios({
                 >
                   Editar
                 </Button>
-              </div>
+              </li>
             ))}
-        </section>
+        </ul>
       </CardBody>
     </Card>
   )

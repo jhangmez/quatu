@@ -67,6 +67,16 @@ export const CreateorUpdatePrice = gql(`
 mutation CreateOrUpdatePrice($unitPrice: Float!, $currencyId: Int!, $id: Int, $bulkPrice: Float, $bulkQuantity: Int, $onSale: Boolean, $visible: Boolean, $productId: Int) {
   createOrUpdatePrice(unitPrice: $unitPrice, currencyId: $currencyId, id: $id, bulkPrice: $bulkPrice, bulkQuantity: $bulkQuantity, onSale: $onSale, visible: $visible, productId: $productId) {
     id
+    bulkPrice
+    bulkQuantity
+    onSale
+    unitPrice
+    visible
+    currency {
+      id
+      name
+      abbreviation
+    }
   }
 }
 `)
